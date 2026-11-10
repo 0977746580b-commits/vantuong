@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 420" width="100%" height="100%">
+  <defs>
+    <radialGradient id="vaseAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f5a823" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="#88301b" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#3e1812" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ceramicGlaze" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8e0d0"/>
+      <stop offset="35%" stop-color="#fffbf3"/>
+      <stop offset="70%" stop-color="#ded4c0"/>
+      <stop offset="100%" stop-color="#baa890"/>
+    </linearGradient>
+    <linearGradient id="vasePedestal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a2218"/>
+      <stop offset="50%" stop-color="#3e1812"/>
+      <stop offset="100%" stop-color="#1f0c08"/>
+    </linearGradient>
+    <filter id="vaseGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Hào quang ấm áp -->
+  <circle cx="160" cy="180" r="130" fill="url(#vaseAura)"/>
+
+  <!-- Bục đế gỗ trắc chạm hoa sen -->
+  <g id="pedestalVase">
+    <path d="M 60,370 L 260,370 L 280,395 L 40,395 Z" fill="url(#vasePedestal)" stroke="#e06d28" stroke-width="1.5"/>
+    <path d="M 40,395 L 280,395 L 280,405 L 40,405 Z" fill="#1f0c08" stroke="#88301b" stroke-width="1"/>
+    <!-- Chân quỳ dạ cá chạm khắc -->
+    <rect x="110" y="325" width="100" height="45" fill="url(#vasePedestal)" stroke="#f5a823" stroke-width="1.2"/>
+    <circle cx="160" cy="347" r="12" fill="#88301b" stroke="#f5a823" stroke-width="1"/>
+    <!-- Thớt tròn đỡ đáy bình -->
+    <ellipse cx="160" cy="325" rx="55" ry="12" fill="#5a2218" stroke="#f5a823" stroke-width="1.5"/>
+  </g>
+
+  <!-- BÌNH GỐM MEN RẠN THẾ KỶ XVII -->
+  <g id="ceramicBody" filter="url(#vaseGlow)">
+    <!-- Thân bình dáng củ tỏi (Garlic-headed vase) -->
+    <!-- Đáy -->
+    <path d="M 125,322 C 85,290 75,200 115,160 C 130,145 138,125 138,95 C 130,90 130,80 145,75 L 175,75 C 190,80 190,90 182,95 C 182,125 190,145 205,160 C 245,200 235,290 195,322 Z"
+          fill="url(#ceramicGlaze)" stroke="#3e1812" stroke-width="2.5"/>
+
+    <!-- Miệng bình loe đắp nổi vàng kim -->
+    <ellipse cx="160" cy="75" rx="20" ry="7" fill="#88301b" stroke="#f5a823" stroke-width="1.5"/>
+    <ellipse cx="160" cy="74" rx="14" ry="4" fill="#3e1812"/>
+
+    <!-- Gờ cổ bình quấn chuỗi hạt châu -->
+    <path d="M 140,115 Q 160,122 180,115" stroke="#f5a823" stroke-width="3" fill="none"/>
+    <path d="M 135,135 Q 160,145 185,135" stroke="#a81c22" stroke-width="2" fill="none"/>
+
+    <!-- Họa tiết Rồng Cuộn Mây Men Lam & Hổ Phách (Dragon motif) -->
+    <!-- Thân rồng cuộn -->
+    <path d="M 130,240 Q 145,190 170,210 Q 195,230 185,270 Q 165,290 140,270 Z"
+          fill="none" stroke="#253e66" stroke-width="4" stroke-linecap="round"/>
+    <!-- Vảy rồng mạ vàng -->
+    <path d="M 140,225 Q 160,215 175,235" stroke="#f5a823" stroke-width="2" fill="none"/>
+    <path d="M 155,245 Q 170,235 180,255" stroke="#f5a823" stroke-width="2" fill="none"/>
+    <circle cx="178" cy="205" r="5" fill="#a81c22" stroke="#f5a823" stroke-width="1"/> <!-- Đầu rồng ngậm ngọc -->
+
+    <!-- Mạng lưới MEN RẠN tự nhiên (Crackle glaze net) -->
+    <g stroke="#6e5843" stroke-width="0.75" stroke-opacity="0.65" fill="none">
+      <path d="M 115,180 L 135,195 L 125,220 L 140,245 L 130,275 L 145,305"/>
+      <path d="M 135,195 L 160,185 L 175,200 L 165,225 L 180,240 L 195,220 L 215,235"/>
+      <path d="M 160,185 L 155,160 L 170,145"/>
+      <path d="M 175,200 L 190,180 L 210,190"/>
+      <path d="M 165,225 L 155,255 L 170,280 L 160,310"/>
+      <path d="M 180,240 L 205,260 L 195,290 L 180,315"/>
+    </g>
+
+    <!-- Đài sen phù điêu dưới chân bình -->
+    <path d="M 125,305 Q 135,290 145,305 Q 155,290 165,305 Q 175,290 185,305 Q 195,290 200,305"
+          stroke="#88301b" stroke-width="2" fill="none"/>
+  </g>
+</svg>

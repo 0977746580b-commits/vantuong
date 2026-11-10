@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" width="100%" height="100%" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="mtnMidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3D5F61" stop-opacity="0.98"/>
+      <stop offset="50%" stop-color="#2D494A" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#1E3334" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="goldRimMid" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCD55C" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#C6A052" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#FCD55C" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#C6A052" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+  <path d="M 0 600 L 0 380
+           C 160 360, 260 270, 420 280
+           C 560 290, 680 230, 820 260
+           C 960 290, 1080 340, 1220 290
+           C 1360 240, 1460 280, 1600 250
+           C 1740 220, 1840 310, 1920 300
+           L 1920 600 Z"
+        fill="url(#mtnMidGrad)" stroke="url(#goldRimMid)" stroke-width="3"/>
+  <!-- Mountain contours and gold texture lines -->
+  <path d="M 420 280 Q 560 420 740 500" fill="none" stroke="#C6A052" stroke-width="1.2" opacity="0.6"/>
+  <path d="M 820 260 Q 940 380 1120 460" fill="none" stroke="#C6A052" stroke-width="1.2" opacity="0.6"/>
+  <path d="M 1600 250 Q 1700 370 1840 480" fill="none" stroke="#C6A052" stroke-width="1.2" opacity="0.6"/>
+</svg>

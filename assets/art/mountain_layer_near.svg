@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" width="100%" height="100%" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="mtnNearGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#263E3F" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#1A2D2E" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#0E191A" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="goldRimNear" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCD55C" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#E5B942" stop-opacity="0.85"/>
+      <stop offset="80%" stop-color="#FCD55C" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#C6A052" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <path d="M 0 600 L 0 460
+           C 140 440, 240 360, 420 380
+           C 580 400, 720 340, 920 390
+           C 1100 430, 1280 370, 1460 410
+           C 1640 450, 1780 390, 1920 440
+           L 1920 600 Z"
+        fill="url(#mtnNearGrad)" stroke="url(#goldRimNear)" stroke-width="3.5"/>
+  <!-- Front ripples and wave folds in gold -->
+  <path d="M 120 480 C 260 420, 360 480, 500 450" fill="none" stroke="url(#goldRimNear)" stroke-width="1.8"/>
+  <path d="M 680 410 C 820 460, 980 420, 1140 460" fill="none" stroke="url(#goldRimNear)" stroke-width="1.8"/>
+  <path d="M 1320 430 C 1460 480, 1620 440, 1780 470" fill="none" stroke="url(#goldRimNear)" stroke-width="1.8"/>
+</svg>

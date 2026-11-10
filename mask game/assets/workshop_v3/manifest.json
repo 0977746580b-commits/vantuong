@@ -1,0 +1,830 @@
+{
+  "room": "Xưởng phục chế - nhà rường miền Trung",
+  "canvas": {
+    "width": 773,
+    "height": 250,
+    "orientation": "2d_front_side_view"
+  },
+  "background": {
+    "file": "layer1_background/background_empty_no_border.png",
+    "border": false,
+    "doorway": "dark behind separate closed door sprite"
+  },
+  "notes": [
+    "No main tuong mask asset generated.",
+    "Each object individual PNG RGBA; PNG canvases also supplied for preview.",
+    "Incense pouch and betel dish hidden in drawer at start.",
+    "Door on right is a separate interactive closed sprite.",
+    "For 16:9 camera do not stretch panoramic room: crop or pan.",
+    "Small extracted sprites are provisional and require outline cleanup before shipping."
+  ],
+  "assets": [
+    {
+      "file": "layer2_decor_individual/01_ke_treo_tuong.png",
+      "name": "ke_treo_tuong",
+      "layer": 2,
+      "pixel_size": [
+        122,
+        35
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 550,
+        "y": 103,
+        "width": 123,
+        "height": 35,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/08_ong_cam_co.png",
+      "name": "ong_cam_co",
+      "layer": 2,
+      "pixel_size": [
+        53,
+        64
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 601,
+        "y": 169,
+        "width": 28,
+        "height": 34,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/06_ruong_go.png",
+      "name": "ruong_go",
+      "layer": 2,
+      "pixel_size": [
+        106,
+        52
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 564,
+        "y": 110,
+        "width": 48,
+        "height": 24,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/10_ghe_dau.png",
+      "name": "ghe_dau",
+      "layer": 2,
+      "pixel_size": [
+        61,
+        56
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 519,
+        "y": 203,
+        "width": 42,
+        "height": 39,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/03_sach_cu.png",
+      "name": "sach_cu",
+      "layer": 2,
+      "pixel_size": [
+        94,
+        62
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 288,
+        "y": 104,
+        "width": 45,
+        "height": 30,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/07_hop_dung_cu.png",
+      "name": "hop_dung_cu",
+      "layer": 2,
+      "pixel_size": [
+        95,
+        46
+      ],
+      "interactive": false
+    },
+    {
+      "file": "layer2_decor_individual/02_lo_gom_thuy_tinh.png",
+      "name": "lo_gom_thuy_tinh",
+      "layer": 2,
+      "pixel_size": [
+        102,
+        60
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 617,
+        "y": 109,
+        "width": 42,
+        "height": 25,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/04_hop_go.png",
+      "name": "hop_go",
+      "layer": 2,
+      "pixel_size": [
+        94,
+        57
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 405,
+        "y": 153,
+        "width": 30,
+        "height": 18,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer2_decor_individual/05_cuon_giay.png",
+      "name": "cuon_giay",
+      "layer": 2,
+      "pixel_size": [
+        98,
+        55
+      ],
+      "interactive": false,
+      "placement": {
+        "x": 590,
+        "y": 177,
+        "width": 38,
+        "height": 21,
+        "visible_on_initial_map": true,
+        "layer": 2
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/can_tieu_ly.png",
+      "name": "can_tieu_ly",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        108,
+        85
+      ],
+      "placement": {
+        "x": 286,
+        "y": 150,
+        "width": 51,
+        "height": 40,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "weigh_mask",
+        "result": "600 g",
+        "thought": "Gỗ mít sấy khô thế kỷ 19 chỉ tầm 300 g... Vì sao hiện vật nặng gấp đôi?",
+        "clue": "possible_inner_cavity"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/den_dau_dong.png",
+      "name": "den_dau_dong",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        41,
+        91
+      ],
+      "placement": {
+        "x": 379,
+        "y": 142,
+        "width": 22,
+        "height": 49,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "pick_up",
+        "inventory": true,
+        "uses": [
+          "light_dark_rooms",
+          "warm_beeswax_plug"
+        ]
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/khan_xo_ruou_gung.png",
+      "name": "khan_xo_ruou_gung",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        90,
+        55
+      ],
+      "placement": {
+        "x": 255,
+        "y": 166,
+        "width": 37,
+        "height": 23,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "drag_clean",
+        "reveal": "jackfruit_wood_grain"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/dao_tro_cao_vecni.png",
+      "name": "dao_tro_cao_vecni",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        49,
+        57
+      ],
+      "placement": {
+        "x": 341,
+        "y": 160,
+        "width": 25,
+        "height": 29,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "scrape_eye_corner",
+        "reveal": "original_red_cinnabar_under_white_paint"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/kinh_lup_can_dong.png",
+      "name": "kinh_lup_can_dong",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        72,
+        90
+      ],
+      "placement": {
+        "x": 542,
+        "y": 158,
+        "width": 23,
+        "height": 29,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "zoom_rear_strap_holes",
+        "reveal": "yellow_beeswax_sealing_inner_latch"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/khay_mau_truyen_thong.png",
+      "name": "khay_mau_truyen_thong",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        160,
+        48
+      ],
+      "placement": {
+        "x": 588,
+        "y": 170,
+        "width": 60,
+        "height": 18,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "inspect",
+        "contains": [
+          "cinnabar_red",
+          "shell_white",
+          "son_ta_lacquer"
+        ]
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/bien_ban_ban_giao_rach.png",
+      "name": "bien_ban_ban_giao_rach",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        117,
+        106
+      ],
+      "placement": {
+        "x": 563,
+        "y": 161,
+        "width": 26,
+        "height": 24,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "read",
+        "quest_direction": "go_to_archive_floor_2_compare_edict"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/bang_quy_uoc_hoa_trang_tuong.png",
+      "name": "bang_quy_uoc_hoa_trang_tuong",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        212,
+        133
+      ],
+      "placement": {
+        "x": 456,
+        "y": 91,
+        "width": 72,
+        "height": 45,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "inspect",
+        "meaning": [
+          "red_loyalty",
+          "white_villainy",
+          "mace_brows_courage",
+          "furrowed_brows_remorse"
+        ]
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/bao_huong_tram.png",
+      "name": "bao_huong_tram",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        97,
+        111
+      ],
+      "placement": {
+        "x": 572,
+        "y": 174,
+        "width": 24,
+        "height": 27,
+        "visible_on_initial_map": false,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "collect",
+        "inventory": true,
+        "quest": "offering_at_ancestor_shrine"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/dia_trau_cau_kho.png",
+      "name": "dia_trau_cau_kho",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        114,
+        51
+      ],
+      "placement": {
+        "x": 600,
+        "y": 187,
+        "width": 32,
+        "height": 14,
+        "visible_on_initial_map": false,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "collect",
+        "inventory": true,
+        "quest": "offering_at_ancestor_shrine"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/ban_phuc_che.png",
+      "name": "ban_phuc_che",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        232,
+        79
+      ],
+      "placement": {
+        "x": 246,
+        "y": 185,
+        "width": 176,
+        "height": 60,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "start_restoration",
+        "stage": "act_3"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/ban_tu_lieu.png",
+      "name": "ban_tu_lieu",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        179,
+        70
+      ],
+      "placement": {
+        "x": 529,
+        "y": 191,
+        "width": 136,
+        "height": 53,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "examine_case_file",
+        "stage": "act_1"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/be_trung_bay.png",
+      "name": "be_trung_bay",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        93,
+        111
+      ],
+      "placement": {
+        "x": 437,
+        "y": 158,
+        "width": 74,
+        "height": 88,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "place_artifact",
+        "stage": "act_3"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/tu_luu_tru.png",
+      "name": "tu_luu_tru",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        171,
+        114
+      ],
+      "placement": {
+        "x": 622,
+        "y": 181,
+        "width": 55,
+        "height": 61,
+        "visible_on_initial_map": false,
+        "layer": 3
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/cua_go_dong.png",
+      "name": "cua_go_dong",
+      "layer": 3,
+      "interactive": true,
+      "pixel_size": [
+        147,
+        341
+      ],
+      "event": "transition_to_gian_tho_to",
+      "placement": {
+        "x": 684,
+        "y": 85,
+        "width": 69,
+        "height": 160,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "enter",
+        "destination": "Gian Thờ Tổ",
+        "animation": "closed_to_open",
+        "gameplay": "keep as independent clickable sprite"
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/hoc_keo_dong.png",
+      "name": "hoc_keo_dong",
+      "layer": 3,
+      "interactive": true,
+      "event": "open_drawer_reveal_quest_items",
+      "placement": {
+        "x": 558,
+        "y": 197,
+        "width": 38,
+        "height": 15,
+        "visible_on_initial_map": true,
+        "layer": 3
+      },
+      "gameplay": {
+        "action": "open",
+        "reveals": [
+          "bao_huong_tram",
+          "dia_trau_cau_kho"
+        ]
+      }
+    },
+    {
+      "file": "layer3_interactive_individual/hoc_keo_mo.png",
+      "name": "hoc_keo_mo",
+      "layer": 3,
+      "interactive": true,
+      "state": "drawer_open"
+    }
+  ],
+  "placements": {
+    "ke_treo_tuong": {
+      "x": 550,
+      "y": 103,
+      "width": 123,
+      "height": 35,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "sach_cu": {
+      "x": 288,
+      "y": 104,
+      "width": 45,
+      "height": 30,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "lo_gom_thuy_tinh": {
+      "x": 617,
+      "y": 109,
+      "width": 42,
+      "height": 25,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "ruong_go": {
+      "x": 564,
+      "y": 110,
+      "width": 48,
+      "height": 24,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "ghe_dau": {
+      "x": 519,
+      "y": 203,
+      "width": 42,
+      "height": 39,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "cuon_giay": {
+      "x": 590,
+      "y": 177,
+      "width": 38,
+      "height": 21,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "ong_cam_co": {
+      "x": 601,
+      "y": 169,
+      "width": 28,
+      "height": 34,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "hop_go": {
+      "x": 405,
+      "y": 153,
+      "width": 30,
+      "height": 18,
+      "visible_on_initial_map": true,
+      "layer": 2
+    },
+    "ban_phuc_che": {
+      "x": 246,
+      "y": 185,
+      "width": 176,
+      "height": 60,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "ban_tu_lieu": {
+      "x": 529,
+      "y": 191,
+      "width": 136,
+      "height": 53,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "be_trung_bay": {
+      "x": 437,
+      "y": 158,
+      "width": 74,
+      "height": 88,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "can_tieu_ly": {
+      "x": 286,
+      "y": 150,
+      "width": 51,
+      "height": 40,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "den_dau_dong": {
+      "x": 379,
+      "y": 142,
+      "width": 22,
+      "height": 49,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "khan_xo_ruou_gung": {
+      "x": 255,
+      "y": 166,
+      "width": 37,
+      "height": 23,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "dao_tro_cao_vecni": {
+      "x": 341,
+      "y": 160,
+      "width": 25,
+      "height": 29,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "kinh_lup_can_dong": {
+      "x": 542,
+      "y": 158,
+      "width": 23,
+      "height": 29,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "khay_mau_truyen_thong": {
+      "x": 588,
+      "y": 170,
+      "width": 60,
+      "height": 18,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "bien_ban_ban_giao_rach": {
+      "x": 563,
+      "y": 161,
+      "width": 26,
+      "height": 24,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "bang_quy_uoc_hoa_trang_tuong": {
+      "x": 456,
+      "y": 91,
+      "width": 72,
+      "height": 45,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "hoc_keo_dong": {
+      "x": 558,
+      "y": 197,
+      "width": 38,
+      "height": 15,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "cua_go_dong": {
+      "x": 684,
+      "y": 85,
+      "width": 69,
+      "height": 160,
+      "visible_on_initial_map": true,
+      "layer": 3
+    },
+    "bao_huong_tram": {
+      "x": 572,
+      "y": 174,
+      "width": 24,
+      "height": 27,
+      "visible_on_initial_map": false,
+      "layer": 3
+    },
+    "dia_trau_cau_kho": {
+      "x": 600,
+      "y": 187,
+      "width": 32,
+      "height": 14,
+      "visible_on_initial_map": false,
+      "layer": 3
+    },
+    "tu_luu_tru": {
+      "x": 622,
+      "y": 181,
+      "width": 55,
+      "height": 61,
+      "visible_on_initial_map": false,
+      "layer": 3
+    }
+  },
+  "interactions": {
+    "can_tieu_ly": {
+      "action": "weigh_mask",
+      "result": "600 g",
+      "thought": "Gỗ mít sấy khô thế kỷ 19 chỉ tầm 300 g... Vì sao hiện vật nặng gấp đôi?",
+      "clue": "possible_inner_cavity"
+    },
+    "den_dau_dong": {
+      "action": "pick_up",
+      "inventory": true,
+      "uses": [
+        "light_dark_rooms",
+        "warm_beeswax_plug"
+      ]
+    },
+    "khan_xo_ruou_gung": {
+      "action": "drag_clean",
+      "reveal": "jackfruit_wood_grain"
+    },
+    "dao_tro_cao_vecni": {
+      "action": "scrape_eye_corner",
+      "reveal": "original_red_cinnabar_under_white_paint"
+    },
+    "kinh_lup_can_dong": {
+      "action": "zoom_rear_strap_holes",
+      "reveal": "yellow_beeswax_sealing_inner_latch"
+    },
+    "khay_mau_truyen_thong": {
+      "action": "inspect",
+      "contains": [
+        "cinnabar_red",
+        "shell_white",
+        "son_ta_lacquer"
+      ]
+    },
+    "bien_ban_ban_giao_rach": {
+      "action": "read",
+      "quest_direction": "go_to_archive_floor_2_compare_edict"
+    },
+    "bang_quy_uoc_hoa_trang_tuong": {
+      "action": "inspect",
+      "meaning": [
+        "red_loyalty",
+        "white_villainy",
+        "mace_brows_courage",
+        "furrowed_brows_remorse"
+      ]
+    },
+    "hoc_keo_dong": {
+      "action": "open",
+      "reveals": [
+        "bao_huong_tram",
+        "dia_trau_cau_kho"
+      ]
+    },
+    "bao_huong_tram": {
+      "action": "collect",
+      "inventory": true,
+      "quest": "offering_at_ancestor_shrine"
+    },
+    "dia_trau_cau_kho": {
+      "action": "collect",
+      "inventory": true,
+      "quest": "offering_at_ancestor_shrine"
+    },
+    "cua_go_dong": {
+      "action": "enter",
+      "destination": "Gian Thờ Tổ",
+      "animation": "closed_to_open",
+      "gameplay": "keep as independent clickable sprite"
+    },
+    "ban_phuc_che": {
+      "action": "start_restoration",
+      "stage": "act_3"
+    },
+    "ban_tu_lieu": {
+      "action": "examine_case_file",
+      "stage": "act_1"
+    },
+    "be_trung_bay": {
+      "action": "place_artifact",
+      "stage": "act_3"
+    }
+  }
+}

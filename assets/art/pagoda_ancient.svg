@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pagodaStone" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2D4849"/>
+      <stop offset="30%" stop-color="#557B7D"/>
+      <stop offset="70%" stop-color="#416163"/>
+      <stop offset="100%" stop-color="#1E3335"/>
+    </linearGradient>
+    <linearGradient id="pagodaGoldTrim" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#88301B"/>
+      <stop offset="50%" stop-color="#FCD55C"/>
+      <stop offset="100%" stop-color="#C6A052"/>
+    </linearGradient>
+    <filter id="goldSpireGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Spire / Stupa Top (Đỉnh Kim Tháp Ngũ Luân) -->
+  <g class="pagoda-spire" filter="url(#goldSpireGlow)">
+    <line x1="80" y1="10" x2="80" y2="60" stroke="url(#pagodaGoldTrim)" stroke-width="3"/>
+    <circle cx="80" cy="12" r="6" fill="#FCD55C" stroke="#C6A052" stroke-width="1.5"/>
+    <ellipse cx="80" cy="26" rx="8" ry="4" fill="#FCD55C"/>
+    <ellipse cx="80" cy="38" rx="11" ry="5" fill="#FCD55C"/>
+    <ellipse cx="80" cy="50" rx="14" ry="6" fill="#C6A052"/>
+    <!-- Lotus Petal Calyx -->
+    <path d="M 62 60 Q 80 52 98 60 L 92 68 Q 80 64 68 68 Z" fill="#88301B" stroke="#FCD55C" stroke-width="1"/>
+  </g>
+
+  <!-- Tier 1 (Top Tier - Smallest) -->
+  <g class="pagoda-tier" transform="translate(0, 70)">
+    <!-- Roof with Curved Eaves (Mái Đao Cổ) -->
+    <path d="M 52 18 Q 80 8 108 18 Q 116 12 122 8 Q 116 20 106 24 L 54 24 Q 44 20 38 8 Q 44 12 52 18 Z"
+          fill="#1C2E2F" stroke="url(#pagodaGoldTrim)" stroke-width="1.5"/>
+    <!-- Floor Body -->
+    <rect x="58" y="24" width="44" height="26" fill="url(#pagodaStone)" stroke="#1A2829" stroke-width="1"/>
+    <!-- Arched Door / Window -->
+    <path d="M 73 50 L 73 35 Q 80 30 87 35 L 87 50 Z" fill="#0E191A" stroke="#C6A052" stroke-width="0.8"/>
+  </g>
+
+  <!-- Tier 2 -->
+  <g class="pagoda-tier" transform="translate(0, 118)">
+    <path d="M 46 20 Q 80 10 114 20 Q 124 14 130 9 Q 124 22 112 26 L 48 26 Q 36 22 30 9 Q 36 14 46 20 Z"
+          fill="#1C2E2F" stroke="url(#pagodaGoldTrim)" stroke-width="1.5"/>
+    <rect x="54" y="26" width="52" height="28" fill="url(#pagodaStone)" stroke="#1A2829" stroke-width="1"/>
+    <path d="M 72 54 L 72 38 Q 80 32 88 38 L 88 54 Z" fill="#0E191A" stroke="#C6A052" stroke-width="0.8"/>
+  </g>
+
+  <!-- Tier 3 -->
+  <g class="pagoda-tier" transform="translate(0, 170)">
+    <path d="M 40 22 Q 80 12 120 22 Q 132 16 138 10 Q 132 24 118 28 L 42 28 Q 28 24 22 10 Q 28 16 40 22 Z"
+          fill="#1C2E2F" stroke="url(#pagodaGoldTrim)" stroke-width="1.6"/>
+    <rect x="50" y="28" width="60" height="32" fill="url(#pagodaStone)" stroke="#1A2829" stroke-width="1"/>
+    <path d="M 71 60 L 71 42 Q 80 35 89 42 L 89 60 Z" fill="#0E191A" stroke="#C6A052" stroke-width="0.8"/>
+    <!-- Balustrade railing -->
+    <line x1="48" y1="58" x2="112" y2="58" stroke="#FCD55C" stroke-width="1.2"/>
+  </g>
+
+  <!-- Tier 4 -->
+  <g class="pagoda-tier" transform="translate(0, 228)">
+    <path d="M 34 24 Q 80 14 126 24 Q 140 18 146 12 Q 140 26 124 30 L 36 30 Q 20 26 14 12 Q 20 18 34 24 Z"
+          fill="#1C2E2F" stroke="url(#pagodaGoldTrim)" stroke-width="1.8"/>
+    <rect x="46" y="30" width="68" height="36" fill="url(#pagodaStone)" stroke="#1A2829" stroke-width="1"/>
+    <path d="M 70 66 L 70 46 Q 80 38 90 46 L 90 66 Z" fill="#0E191A" stroke="#C6A052" stroke-width="1"/>
+    <line x1="44" y1="64" x2="116" y2="64" stroke="#FCD55C" stroke-width="1.5"/>
+  </g>
+
+  <!-- Tier 5 (Base Tier - Largest) -->
+  <g class="pagoda-tier" transform="translate(0, 292)">
+    <path d="M 28 26 Q 80 16 132 26 Q 148 20 154 13 Q 148 28 130 34 L 30 34 Q 12 28 6 13 Q 12 20 28 26 Z"
+          fill="#1C2E2F" stroke="url(#pagodaGoldTrim)" stroke-width="2"/>
+    <rect x="40" y="34" width="80" height="42" fill="url(#pagodaStone)" stroke="#1A2829" stroke-width="1"/>
+    <!-- Grand Double Door arched -->
+    <path d="M 68 76 L 68 50 Q 80 40 92 50 L 92 76 Z" fill="#0E191A" stroke="#FCD55C" stroke-width="1.2"/>
+    <line x1="80" y1="44" x2="80" y2="76" stroke="#C6A052" stroke-width="1"/>
+    <line x1="38" y1="74" x2="122" y2="74" stroke="#FCD55C" stroke-width="1.8"/>
+  </g>
+
+  <!-- Stone Foundation Pedestal (Đế Sen Đá Thần) -->
+  <g class="pagoda-base" transform="translate(0, 368)">
+    <polygon points="36,0 124,0 134,25 26,25" fill="#1C2E2F" stroke="#C6A052" stroke-width="1.5"/>
+    <!-- Lotus Petal Relief on Base -->
+    <path d="M 30 25 C 45 15, 60 25, 80 18 C 100 25, 115 15, 130 25 L 140 50 L 20 50 Z"
+          fill="#142223" stroke="url(#pagodaGoldTrim)" stroke-width="2"/>
+    <rect x="16" y="50" width="128" height="35" fill="#0E191A" stroke="#C6A052" stroke-width="2"/>
+  </g>
+</svg>

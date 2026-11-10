@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="40" viewBox="0 0 600 40">
+  <defs>
+    <linearGradient id="waveGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#88301b" stop-opacity="0.2"/>
+      <stop offset="15%" stop-color="#f5a823" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#e06d28" stop-opacity="1"/>
+      <stop offset="85%" stop-color="#f5a823" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#88301b" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <!-- Dải chỉ vàng trên cùng -->
+  <line x1="0" y1="4" x2="600" y2="4" stroke="url(#waveGold)" stroke-width="1.5"/>
+  <!-- Sóng thủy ba dập dềnh lặp 5 nhịp -->
+  <path d="M0,24 C30,12 60,32 90,20 C120,8 150,28 180,18 C210,8 240,28 270,18 C300,8 330,28 360,18 C390,8 420,28 450,18 C480,8 510,28 540,18 C570,8 600,24 600,24" stroke="url(#waveGold)" stroke-width="2" fill="none"/>
+  <path d="M0,32 C30,22 60,38 90,28 C120,18 150,36 180,26 C210,18 240,36 270,26 C300,18 330,36 360,26 C390,18 420,36 450,26 C480,18 510,36 540,26 C570,18 600,32 600,32" stroke="url(#waveGold)" stroke-width="1.2" stroke-opacity="0.6" fill="none"/>
+  <!-- Dải đáy -->
+  <line x1="0" y1="38" x2="600" y2="38" stroke="url(#waveGold)" stroke-width="0.8" stroke-dasharray="4,4"/>
+</svg>

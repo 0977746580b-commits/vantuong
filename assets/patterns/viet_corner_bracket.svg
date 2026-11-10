@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <path d="M 4 76 L 4 16 C 4 9.37 9.37 4 16 4 L 76 4" fill="none" stroke="#D4AF37" stroke-width="2" />
+  <path d="M 12 76 L 12 22 C 12 16.48 16.48 12 22 12 L 76 12" fill="none" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.6" />
+  <!-- Corner cloud blossom -->
+  <path d="M 8 8 Q 20 8 20 20 Q 8 20 8 8 Z" fill="#9E2A2B" stroke="#F5D77F" stroke-width="1" />
+  <circle cx="14" cy="14" r="2.5" fill="#F5D77F" />
+  <circle cx="32" cy="8" r="1.5" fill="#D4AF37" />
+  <circle cx="8" cy="32" r="1.5" fill="#D4AF37" />
+</svg>

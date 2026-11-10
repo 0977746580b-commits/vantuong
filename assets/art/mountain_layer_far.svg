@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" width="100%" height="100%" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="mtnFarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4B6B6D" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#3D5A5C" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#2D4849" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="goldRimFar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C6A052" stop-opacity="0.4"/>
+      <stop offset="25%" stop-color="#FCD55C" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#C6A052" stop-opacity="0.6"/>
+      <stop offset="75%" stop-color="#FCD55C" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#88301B" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <path d="M 0 600 L 0 320
+           C 120 280, 240 210, 380 230
+           C 520 250, 620 180, 760 160
+           C 880 145, 960 210, 1080 190
+           C 1220 170, 1340 110, 1480 130
+           C 1620 150, 1750 240, 1920 220
+           L 1920 600 Z"
+        fill="url(#mtnFarGrad)" stroke="url(#goldRimFar)" stroke-width="2.5"/>
+  <!-- Secondary ridge fold -->
+  <path d="M 280 600 C 420 380, 680 320, 840 380 C 1020 440, 1260 330, 1520 400 L 1920 600 Z"
+        fill="#263E3F" opacity="0.35"/>
+</svg>

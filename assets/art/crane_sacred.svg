@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="craneFeather" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#F7EBD2"/>
+      <stop offset="100%" stop-color="#E2D0B0"/>
+    </linearGradient>
+    <linearGradient id="craneGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD55C"/>
+      <stop offset="50%" stop-color="#C6A052"/>
+      <stop offset="100%" stop-color="#88301B"/>
+    </linearGradient>
+    <filter id="craneGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Wing Left (Back Wing) -->
+  <g class="crane-back-wing">
+    <path d="M 180 150 Q 150 90 90 40 Q 110 70 120 100 Q 130 80 100 55 Q 125 85 135 115 Q 145 95 115 70 Q 140 105 150 130 Q 165 140 180 150 Z"
+          fill="url(#craneFeather)" stroke="url(#craneGold)" stroke-width="1.5" filter="url(#craneGlow)"/>
+    <!-- Black wingtips -->
+    <path d="M 90 40 Q 110 70 120 100 Q 105 75 90 40 Z" fill="#1C1412"/>
+    <path d="M 100 55 Q 125 85 135 115 Q 120 90 100 55 Z" fill="#2A1B17"/>
+  </g>
+
+  <!-- Legs Extended in Flight -->
+  <g class="crane-legs" stroke="url(#craneGold)" stroke-width="2.2" stroke-linecap="round" fill="none">
+    <path d="M 195 175 Q 260 215 330 250 Q 350 262 370 270"/>
+    <path d="M 190 178 Q 255 225 320 265 Q 340 278 360 288"/>
+    <!-- Feet / Claws -->
+    <path d="M 370 270 L 382 272 M 370 270 L 380 278 M 370 270 L 378 265"/>
+    <path d="M 360 288 L 372 290 M 360 288 L 370 296 M 360 288 L 368 283"/>
+  </g>
+
+  <!-- Tail Feathers -->
+  <g class="crane-tail">
+    <path d="M 190 160 Q 230 170 265 185 Q 240 180 205 175 Q 245 190 275 205 Q 240 195 195 180 Z"
+          fill="#1C1412" stroke="url(#craneGold)" stroke-width="1.2"/>
+    <path d="M 200 165 Q 240 178 280 195 Q 245 188 205 175 Z" fill="#842C2D" opacity="0.8"/>
+  </g>
+
+  <!-- Main Body -->
+  <path d="M 140 145 C 160 135 195 145 205 170 C 200 185 175 190 150 175 C 135 165 130 150 140 145 Z"
+        fill="url(#craneFeather)" stroke="url(#craneGold)" stroke-width="1.5"/>
+
+  <!-- Neck & Graceful Head -->
+  <path d="M 145 150 C 130 135 110 110 95 85 C 85 70 75 55 60 50 C 50 46 42 52 45 60 C 50 68 62 82 75 105 C 90 130 110 160 135 165 Z"
+        fill="url(#craneFeather)" stroke="url(#craneGold)" stroke-width="1.2"/>
+
+  <!-- Vermilion Crown (Mào Đỏ Son Chu Sa) -->
+  <ellipse cx="48" cy="50" rx="8" ry="4" transform="rotate(-25 48 50)" fill="#A93D2E" stroke="#FCD55C" stroke-width="1"/>
+  <!-- Beak (Mỏ Vàng Hạc) -->
+  <polygon points="40,56 15,62 38,62" fill="url(#craneGold)" stroke="#88301B" stroke-width="0.8"/>
+  <!-- Eye -->
+  <circle cx="45" cy="56" r="2" fill="#1C1412"/>
+  <circle cx="44.5" cy="55.5" r="0.6" fill="#FFFFFF"/>
+
+  <!-- Fore Wing (Wingspan Front) -->
+  <g class="crane-front-wing">
+    <path d="M 155 155 Q 120 70 40 15 Q 70 50 85 85 Q 95 60 65 30 Q 95 65 105 100 Q 115 75 85 45 Q 115 85 125 120 Q 140 140 155 155 Z"
+          fill="url(#craneFeather)" stroke="url(#craneGold)" stroke-width="1.8" filter="url(#craneGlow)"/>
+    <!-- Black and vermilion feather accents -->
+    <path d="M 40 15 Q 70 50 85 85 Q 65 50 40 15 Z" fill="#1C1412"/>
+    <path d="M 65 30 Q 95 65 105 100 Q 85 65 65 30 Z" fill="#2A1B17"/>
+    <path d="M 85 45 Q 115 85 125 120 Q 105 85 85 45 Z" fill="#842C2D" opacity="0.6"/>
+  </g>
+</svg>

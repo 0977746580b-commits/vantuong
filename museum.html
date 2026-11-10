@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BẢO TÀNG VẠN TƯỢNG 3D • Sảnh Vòm Rotunda Đại Việt</title>
+
+  <!-- Google Fonts: Nghệ thuật Thư pháp, Hoàng Gia Triều Nguyễn & Bản mộc Dân gian chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Supabase JS Client v2 CDN -->
+
+  <!-- BẢNG MÃ ĐỊNH KIỂU TOÀN DIỆN VẠN TƯỢNG (CSS TRÍCH XUẤT) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- THƯ VIỆN THREE.JS & GSAP (CHUYÊN BIỆT CHO BẢO TÀNG 3D) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- SUPABASE & DỊCH VỤ DÙNG CHUNG -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-service.js"></script>
+  <script src="audio-engine.js"></script>
+  <script src="ink-vortex.js"></script>
+
+  <!-- ĐỘNG CƠ BẢO TÀNG 3D ROTUNDA (NẠP GLB THEO NHU CẦU / ON-DEMAND) -->
+  <script src="museum-3d.js?v=6"></script>
+</head>
+<body>
+  <!-- Viền kim chỉ hoàng cung trên đầu -->
+  <div class="border-ornament-top"></div>
+
+  <!-- Lớp phủ sớ giấy dó tự nhiên -->
+  <div class="paper-texture-overlay"></div>
+
+  <!-- Nền Canvas hạt mực tương tác & bụi vàng -->
+  <!-- Nền Canvas Duy Nhất: Trầm Tích Sơn Then & Hạt Bụi Vàng Hoàng Gia -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- ===================================================================
+       HỆ THỐNG CHUYỂN CẢNH MỰC TÀU THE BOAT (CINEMATIC INK BLEED & DISSOLVE)
+       =================================================================== -->
+  <div id="theBoatTransition" class="the-boat-transition">
+    <div class="ink-core-bloom"></div>
+    <div class="ink-brush-slash"></div>
+    <div class="ink-mist-layer"></div>
+    <div class="ink-seal-banner">
+      <div class="seal-symbol">象</div>
+      <div class="seal-subtext">VẠN TƯỢNG • CÕI MỰC</div>
+    </div>
+  </div>
+  <div id="screenTransitionOverlay" class="screen-transition-overlay"></div>
+  <div id="flashOverlay"></div>
+
+  <!-- ===================================================================
+       MÀN HÌNH 1: TRANG CHỦ CUỘN TOÀN DIỆN (SCROLLABLE LANDING PAGE)
+       =================================================================== -->
+<section id="viewMuseum3D" class="app-view active">
+    <!-- WebGL Canvas Container -->
+    <div id="museum3DCanvasWrap" class="museum-3d-canvas-wrap"></div>
+
+    <!-- HUD Thanh Điều Hướng Trên Cùng -->
+    <header class="museum-hud-header">
+      <div style="display:flex; align-items:center; gap:0.6rem;">
+        <button id="museumBackHomeBtn" class="hud-pill-btn" title="Trở về Trang Chủ">
+          <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="pill-text">Trang Chủ</span>
+        </button>
+        <div class="hud-brand" style="margin-left: 0.2rem;">
+          <div class="hud-seal">象</div>
+          <div class="hud-title-text">
+            <h1 class="main-game-title" style="font-size:1.15rem;">BẢO TÀNG VẠN TƯỢNG</h1>
+            <span class="sub-game-title" style="font-size:0.68rem;">Không Gian Trưng Bày 3D • Đại Việt Cổ Phong</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Đường Ray Điều Hướng (Rail Navigation) -->
+      <nav class="museum-rail-nav">
+        <button class="rail-nav-btn active" data-station="entrance" title="Tiền Sảnh Bảo Tàng">
+          <span>🏛️</span>
+          <span class="rail-text">Tiền Sảnh</span>
+        </button>
+        <button class="rail-nav-btn" data-station="mask" title="Mặt Nạ Tuồng Tam Diện">
+          <span>🎭</span>
+          <span class="rail-text">Mặt Nạ</span>
+        </button>
+        <button class="rail-nav-btn" data-station="ceramic" title="Bình Gốm Men Rạn Bát Tràng">
+          <span>🏺</span>
+          <span class="rail-text">Bình Gốm</span>
+        </button>
+        <button class="rail-nav-btn" data-station="flute" title="Tiêu Trúc Mục Đồng Kinh Bắc">
+          <span>🎋</span>
+          <span class="rail-text">Tiêu Trúc</span>
+        </button>
+        <button class="rail-nav-btn" data-station="brush" title="Án Thư Hậu Cung">
+          <span>🖌️</span>
+          <span class="rail-text">Án Thư</span>
+        </button>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <button id="museumQualityToggleBtn" class="hud-pill-btn" title="Cài đặt chất lượng đồ họa (Tự Động / Cao / Vừa / Tiết Kiệm)">
+          <span>⚡</span>
+          <span id="museumQualityLabel" class="pill-text">Đồ Họa: Vừa</span>
+        </button>
+        <button id="museumMapBtn" class="hud-pill-btn" title="Mở Cổ Đồ Vạn Tượng">
+          <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          <span class="pill-text">Cổ Đồ</span>
+        </button>
+        <button id="museumAudioToggleBtn" class="hud-icon-btn" title="Bật/Tắt Âm Lượng">🔊</button>
+      </div>
+    </header>
+
+    <!-- Thẻ Giám Định Hiện Vật Nổi Khi Tiếp Cận Trạm Trưng Bày -->
+    <div id="museumInspectionCard" class="museum-inspection-card hidden">
+      <div class="card-control-btns">
+        <button id="toggleCollapseCardBtn" class="collapse-card-btn" title="Thu gọn bảng">⚊</button>
+        <button id="closeInspectionCardBtn" class="close-card-btn" title="Đóng bảng">&times;</button>
+      </div>
+      <div class="inspection-card-inner">
+        <div class="inspection-card-header" id="inspectionCardHeader" title="Nhấp để mở rộng khi thu gọn">
+          <span id="inspectArtifactIcon" class="artifact-badge-icon">🎭</span>
+          <div class="artifact-card-titles">
+            <h3 id="inspectArtifactTitle">MẶT NẠ TUỒNG TAM DIỆN</h3>
+            <span id="inspectArtifactDynasty" class="artifact-dynasty-badge">CHIẾU TUỒNG ĐẶNG GIA • THẾ KỶ XVIII</span>
+          </div>
+        </div>
+
+        <div id="inspectionCardBody" class="inspection-card-body">
+          <!-- Mô tả ngắn hiện vật -->
+          <p id="inspectArtifactDesc" class="artifact-card-desc">
+            Chiếc mặt nạ gỗ mít bồi giấy bản, ba khuôn mặt khóc - cười - phẫn nộ đan xen. Tương truyền khi đào kép nhập vai, linh hồn tiền nhân sẽ mượn nét vẽ chu sa mà bày tỏ nỗi oan khuất ngàn năm.
+          </p>
+
+          <!-- Bảng điều khiển góc nhìn & xoay 360 độ (Hiển thị ngay trên cùng) -->
+          <div class="artifact-rotate-toolbar">
+            <button id="btnRotateLeft" class="btn-rotate-tool" title="Xoay sang trái 45°">↺ Xoay Trái</button>
+            <button id="btnToggleAutoRotate" class="btn-rotate-tool active" title="Bật/Tắt tự động xoay">⚡ Tự Xoay: BẬT</button>
+            <button id="btnRotateRight" class="btn-rotate-tool" title="Xoay sang phải 45°">↻ Xoay Phải</button>
+            <button id="btnResetView" class="btn-rotate-tool" title="Đặt lại góc nhìn chuẩn">🎯 Góc Chuẩn</button>
+          </div>
+
+          <div class="inspection-card-actions">
+            <button id="btnEnterRelicWorld" class="btn-enter-world">
+              <span>BƯỚC VÀO THẾ GIỚI NÀY</span>
+              <svg style="width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2.5;" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button id="btnReturnEntrance" class="btn-return-entrance">
+              <span>⤺ Rời Bệ Ngắm</span>
+            </button>
+          </div>
+
+          <div class="artifact-controls-hint">
+            <span>🔄 Kéo chuột / vuốt để xoay 360° • Cuộn chuột phóng to/thu nhỏ • Bấm điểm nhãn ✦</span>
+          </div>
+
+          <!-- Thông tin chi tiết & khảo cứu lịch sử độc lập -->
+          <div class="artifact-detail-box">
+            <div class="detail-box-title">
+              <span>📜 KHẢO CỨU DI SẢN & KỸ THUẬT CHẾ TÁC</span>
+            </div>
+            <p id="inspectArtifactDetails" class="detail-box-content">
+              Quy ước mặt đỏ chu sa trong nghệ thuật Tuồng biểu trưng cho bậc trung thần tiết liệt. Nghệ nhân Đặng gia đục đẽo từ lõi mít già, quét lớp sơn ta cầm nước bảo vệ cốt gỗ qua trăm năm biến loạn.
+            </p>
+          </div>
+
+          <!-- Hộp thông tin Điểm Nhãn 3D khi bấm vào chi tiết trên hiện vật -->
+          <div id="inspectHotspotBox" class="artifact-hotspot-box hidden">
+            <div class="hotspot-box-header">
+              <span class="hotspot-pin-icon">✦</span>
+              <strong id="hotspotBoxTitle">Điểm Nhãn Chi Tiết</strong>
+            </div>
+            <p id="hotspotBoxDesc">Bấm vào các điểm nhãn phát sáng trên hiện vật để soi chiếu bí mật ẩn giấu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanh Hướng Dẫn Tương Tác Dưới Đáy -->
+    <div class="museum-hint-bar">
+      <span>✦ Kéo chuột để ngắm nhìn kiến trúc • Bấm vào hiện vật trên bệ để tiếp cận & giám định xoay 360° ✦</span>
+    </div>
+  </section>
+<div id="ancientMapModal" class="ancient-map-modal hidden">
+    <div class="ancient-map-frame">
+      <!-- 4 Góc Đồng Chạm Trổ Triều Đại -->
+      <div class="map-corner-brass tl"></div>
+      <div class="map-corner-brass tr"></div>
+      <div class="map-corner-brass bl"></div>
+      <div class="map-corner-brass br"></div>
+
+      <!-- Tiêu Đề Cổ Đồ & Nút Đóng -->
+      <div class="ancient-map-header">
+        <div class="map-header-title-box">
+          <h2><span>🗺️</span> CỔ ĐỒ VẠN TƯỢNG • ĐẠI NAM DỊ VẬT CHÍ</h2>
+          <p>Tấm bản đồ giấy Dó vẽ bằng mực chu sa và khoáng thạch, dẫn lối qua 4 vùng di sản để tìm bức tranh thất truyền</p>
+        </div>
+        <button id="closeAncientMapBtn" class="map-close-btn">
+          <span>✕</span> ĐÓNG CỔ ĐỒ
+        </button>
+      </div>
+
+      <!-- Thanh Tiến Trình Thu Thập Cổ Vật -->
+      <div class="map-progress-banner">
+        <div class="map-progress-text">
+          <span>TIẾN ĐỘ THU THẬP DI KHÍ: </span>
+          <strong id="mapProgressCount" style="color:var(--gold-bright);">0 / 4</strong>
+        </div>
+        <div class="map-relics-strip">
+          <div class="map-relic-badge" id="mapBadgeMask">
+            <span>🎭</span> Mặt Nạ Tuồng
+          </div>
+          <div class="map-relic-badge" id="mapBadgeVase">
+            <span>🏺</span> Bình Men Rạn
+          </div>
+          <div class="map-relic-badge" id="mapBadgeFlute">
+            <span>🪈</span> Tiêu Trúc
+          </div>
+          <div class="map-relic-badge" id="mapBadgeBrush">
+            <span>🖌️</span> Bút Chu Sa
+          </div>
+        </div>
+      </div>
+
+      <!-- Không Gian Tọa Độ Bản Đồ Cổ & Tuyến Mực Chu Sa -->
+      <div class="ancient-map-canvas-wrap">
+        <!-- SVG Vẽ Tuyến Đường Nối Mực Tàu & Chu Sa -->
+        <svg class="map-svg-routes" viewBox="0 0 1000 420" preserveAspectRatio="none">
+          <!-- Đường nét đứt nền -->
+          <path id="routeTlToMask" class="map-route-line" d="M 180,210 Q 320,120 440,110" />
+          <path id="routeTlToFlute" class="map-route-line" d="M 180,210 Q 300,310 440,320" />
+          <path id="routeMaskToVase" class="map-route-line" d="M 440,110 Q 600,80 760,130" />
+          <path id="routeFluteToBrush" class="map-route-line" d="M 440,320 Q 580,350 760,310" />
+          <path id="routeVaseToCenter" class="map-route-line" d="M 760,130 Q 860,170 910,210" />
+          <path id="routeBrushToCenter" class="map-route-line" d="M 760,310 Q 860,260 910,210" />
+        </svg>
+
+        <!-- Hoa Gió / La Bàn Bát Quái Cổ Phong -->
+        <div class="map-compass-rose">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="3,3" />
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#d4af37" stroke-width="1" />
+            <path d="M 50,4 L 54,46 L 96,50 L 54,54 L 50,96 L 46,54 L 4,50 L 46,46 Z" fill="rgba(212,175,55,0.25)" stroke="#d4af37" stroke-width="1.2" />
+            <text x="50" y="16" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle" font-weight="bold">BẮC</text>
+            <text x="50" y="90" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">NAM</text>
+            <text x="88" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">ĐÔNG</text>
+            <text x="14" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">TÂY</text>
+          </svg>
+        </div>
+
+        <!-- 6 Địa Danh Cổ Trên Bản Đồ -->
+        <!-- 1. Thăng Long Cổ Phố -->
+        <div class="map-node active-current" id="mapNodeTL" style="left: 18%; top: 50%;" data-chamber="prologue" title="Thăng Long Cổ Phố - Khởi đầu hành trình">
+          <div class="map-node-icon">🏛️</div>
+          <div class="map-node-label">Thăng Long Cổ Phố</div>
+        </div>
+
+        <!-- 2. Chiếu Tuồng Đặng Gia -->
+        <div class="map-node" id="mapNodeMask" style="left: 44%; top: 26%;" data-chamber="tuong" title="Màn 1: Chiếu Tuồng Đặng Gia">
+          <div class="map-node-icon">🎭</div>
+          <div class="map-node-label">Chiếu Tuồng Đặng Gia</div>
+        </div>
+
+        <!-- 3. Lò Bầu Bát Tràng -->
+        <div class="map-node" id="mapNodeVase" style="left: 76%; top: 31%;" data-chamber="bat-trang" title="Màn 2: Lò Bầu Bát Tràng">
+          <div class="map-node-icon">🏺</div>
+          <div class="map-node-label">Lò Bầu Bát Tràng</div>
+        </div>
+
+        <!-- 4. Sông Đuống Kinh Bắc -->
+        <div class="map-node" id="mapNodeFlute" style="left: 44%; top: 76%;" data-chamber="song-duong" title="Màn 3: Bến Sông Đuống">
+          <div class="map-node-icon">🪈</div>
+          <div class="map-node-label">Sông Đuống Kinh Bắc</div>
+        </div>
+
+        <!-- 5. Điện Thờ Tiền Nhân -->
+        <div class="map-node" id="mapNodeBrush" style="left: 76%; top: 74%;" data-chamber="dien-tho" title="Màn 4: Điện Thờ Tiền Nhân">
+          <div class="map-node-icon">🖌️</div>
+          <div class="map-node-label">Điện Thờ Tiền Nhân</div>
+        </div>
+
+        <!-- 6. Bức Tranh Trung Tâm -->
+        <div class="map-node" id="mapNodeCenter" style="left: 91%; top: 50%;" data-chamber="final" title="Đại Mật Khải - Bức Tranh Vạn Tượng">
+          <div class="map-node-icon">📜</div>
+          <div class="map-node-label">Bức Tranh Trung Tâm</div>
+        </div>
+      </div>
+
+      <!-- Chỉ Dẫn Phía Dưới Bản Đồ -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem; font-size:0.82rem; color:var(--paper-dim);">
+        <div>💡 <em>Nhấn vào một địa danh đã mở để phiêu lưu tới cõi ấy hoặc mở lại ký ức di vật</em></div>
+        <div style="display:flex; gap:1.2rem;">
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--gold-bright);">●</span> Vị trí hiện tại</span>
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--jade-glow);">●</span> Đã thu phục</span>
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--paper-dim);">○</span> Mật tích niêm phong</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameToast" class="hidden"></div>
+
+  <!-- ===================================================================
+       JAVASCRIPT TÍCH HỢP HOÀN TOÀN
+       =================================================================== -->
+
+  <script>
+    // Khởi tạo Audio Engine dùng chung
+    window.audio = new AudioEngine();
+
+    // Hàm thông báo Toast hoàng gia
+    function showToast(msg) {
+      const t = document.getElementById('gameToast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.add('hidden'), 2800);
+    }
+
+    // Đường ống chuyển cảnh mực tàu xuyên trang (Two-Phase Ink Transition)
+    function navigateWithInk(targetUrl) {
+      if (window.audio && typeof window.audio.playInkSwoosh === 'function') {
+        try { window.audio.playInkSwoosh(); } catch(e) {}
+      }
+      let navigated = false;
+      const doNav = () => {
+        if (!navigated) {
+          navigated = true;
+          window.location.href = targetUrl;
+        }
+      };
+      const safetyTimer = setTimeout(doNav, 750);
+
+      const ink = window.vtInkVortex || window.inkVortex;
+      if (ink && typeof ink.start === 'function') {
+        try {
+          ink.start(() => {
+            clearTimeout(safetyTimer);
+            doNav();
+          });
+        } catch(err) {
+          clearTimeout(safetyTimer);
+          doNav();
+        }
+      } else {
+        clearTimeout(safetyTimer);
+        doNav();
+      }
+    }
+
+    class MuseumPageApp {
+      constructor() {
+        this.dom = {
+          museumBackHomeBtn: document.getElementById('museumBackHomeBtn'),
+          museumMapBtn: document.getElementById('museumMapBtn'),
+          museumAudioToggleBtn: document.getElementById('museumAudioToggleBtn'),
+
+          museumInspectionCard: document.getElementById('museumInspectionCard'),
+          toggleCollapseCardBtn: document.getElementById('toggleCollapseCardBtn'),
+          inspectionCardBody: document.getElementById('inspectionCardBody'),
+          inspectArtifactIcon: document.getElementById('inspectArtifactIcon'),
+          inspectArtifactTitle: document.getElementById('inspectArtifactTitle'),
+          inspectArtifactDynasty: document.getElementById('inspectArtifactDynasty'),
+          inspectArtifactDesc: document.getElementById('inspectArtifactDesc'),
+          inspectArtifactDetails: document.getElementById('inspectArtifactDetails'),
+
+          btnRotateLeft: document.getElementById('btnRotateLeft'),
+          btnToggleAutoRotate: document.getElementById('btnToggleAutoRotate'),
+          btnRotateRight: document.getElementById('btnRotateRight'),
+          btnResetStandard: document.getElementById('btnResetView'),
+          btnEnterRelicWorld: document.getElementById('btnEnterRelicWorld'),
+          btnReturnEntrance: document.getElementById('btnReturnEntrance'),
+
+          ancientMapModal: document.getElementById('ancientMapModal'),
+          closeAncientMapBtn: document.getElementById('closeAncientMapBtn'),
+          mapProgressCount: document.getElementById('mapProgressCount'),
+          gameToast: document.getElementById('gameToast')
+        };
+
+        this.currentRelicStation = 'entrance';
+        this.init3DExperience();
+        this.initEvents();
+        this.initAncientMap();
+      }
+
+      getGameState() {
+        try {
+          const backup = localStorage.getItem('VT_LOCAL_SAVE_BACKUP');
+          if (backup) {
+            const parsed = JSON.parse(backup);
+            return parsed || {};
+          }
+        } catch(e) {}
+        return {};
+      }
+
+      init3DExperience() {
+        const wrap = document.getElementById('museum3DCanvasWrap');
+        if (!wrap) return;
+
+        if (!window.vtMuseum3D) window.vtMuseum3D = new (window.VanTuongMuseum3D || window.Museum3DExperience)();
+        const ok = window.vtMuseum3D.init(wrap);
+        if (!ok) {
+          window.vtMuseum3D.initFallback2D(wrap);
+          return;
+        }
+
+        // Lắng nghe sự kiện chuyển đổi trạm quan sát
+        window.vtMuseum3D.onStationChanged = (stationId, wp) => {
+          this.currentRelicStation = stationId;
+
+          // Cập nhật nút rail nav
+          document.querySelectorAll('.rail-nav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.station === stationId);
+          });
+
+          // Phát âm thanh chủ đề cổ vật
+          if (window.audio) {
+            if (stationId === 'mask') window.audio.playMaskTheme();
+            else if (stationId === 'ceramic') window.audio.playCeramicTheme();
+            else if (stationId === 'flute') window.audio.playFluteTheme();
+            else if (stationId === 'brush') window.audio.playBrushTheme();
+          }
+
+          const card = this.dom.museumInspectionCard;
+          if (!card) return;
+
+          if (stationId === 'entrance') {
+            card.classList.add('hidden');
+          } else {
+            card.classList.remove('hidden');
+            this.updateInspectionCardInfo(stationId);
+          }
+        };
+
+        // Đọc tham số URL để điều hướng ban đầu
+        const params = new URLSearchParams(window.location.search);
+        const restoreParam = params.get('restore');
+        const stationParam = params.get('station') || window.location.hash.replace('#', '');
+
+        const shouldRestore = restoreParam === 'true';
+        if (!shouldRestore && window.vtMuseum3D.clearMuseumSnapshot) {
+          window.vtMuseum3D.clearMuseumSnapshot();
+        }
+
+        // Khởi động vòng lặp render 60 FPS (mặc định luôn là toàn cảnh tiền sảnh entrance)
+        window.vtMuseum3D.start(shouldRestore);
+
+        if (shouldRestore) {
+          // Đã được khôi phục tự động trong start(true)
+        } else if (stationParam && stationParam !== 'entrance') {
+          // Điều hướng trực tiếp đến trạm được yêu cầu
+          setTimeout(() => {
+            window.vtMuseum3D.navigateToStation(stationParam);
+          }, 150);
+        } else {
+          // Mặc định góc nhìn tiền sảnh vòm cong Rotunda bao quát 4 lồng kính
+          window.vtMuseum3D.navigateToStation('entrance');
+        }
+      }
+
+      updateInspectionCardInfo(stationId) {
+        const artifactInfo = {
+          mask: {
+            icon: '🎭',
+            title: 'MẶT NẠ TUỒNG TAM DIỆN',
+            dynasty: 'CHIẾU TUỒNG ĐẶNG GIA • THẾ KỶ XVIII',
+            desc: 'Chiếc mặt nạ gỗ mít bồi giấy bản, phối ba sắc diện biểu trưng lòng trung trinh, nỗi oan khiên và chí khí quật cường của vị tướng soái thời loạn.',
+            details: 'Tạo tác từ cốt gỗ mít lõi bền chắc không nứt vỡ, bồi 5 lớp giấy bản giã mịn ngâm phèn đen. Sắc diện sơn son chu sa truyền thống kết hợp nét mực nho than lá dừa. Râu tơ tằm ba chòm đặc trưng lối vẽ mặt kép tuồng cổ Đặng gia thế kỷ XVIII.'
+          },
+          ceramic: {
+            icon: '🏺',
+            title: 'BÌNH GỐM MEN RẠN THẾ KỶ XVI',
+            dynasty: 'LÒ BẦU BÁT TRÀNG • NGHỆ NHÂN VŨ ĐỖ',
+            desc: 'Tác phẩm gốm men rạn đỉnh cao thời Mạc (thế kỷ XVI), kết tinh giữa xương đất sét phù sa sông Hồng và lớp men tro trấu nếp cái hoa vàng.',
+            details: 'Cốt gốm sa mốt nung củi gỗ trên 1200°C. Kỹ thuật tạo rạn do độ co ngót chênh lệch giữa xương gốm và men tro vỏ trấu nếp, xoa nước gừng hoặc mực tàu nhuộm nổi rõ lưới rạn mai rùa. Tai quai mây đao mác đắp nổi thủ công trứ danh nghệ nhân Đặng Huyền Thông.'
+          },
+          flute: {
+            icon: '🎋',
+            title: 'TIÊU TRÚC MỤC ĐỒNG KINH BẮC',
+            dynasty: 'BẾN SÔNG ĐUỐNG • DÂN GIAN ĐÔNG HỒ',
+            desc: 'Ống tiêu trúc bảy đốt vót từ tre già ngâm bùn ao chuôm, ngân vang âm sắc đồng dao làng quan họ và tiếng vọng thanh bình bên sông Đuống.',
+            details: 'Đốt trúc ngà tự nhiên bảy lóng chọn lọc kỹ lưỡng, ngâm bùn 12 tháng chống mối mọt và ổn định thớ sợi. Miệng thổi vát chữ V bán nguyệt cho âm bội trầm sâu u tịch. Kết chuỗi ngọc bích và tua tơ chu sa phỏng theo nguyên bản tranh Đông Hồ thế kỷ XVII.'
+          },
+          brush: {
+            icon: '🖌️',
+            title: 'ÁN THƯ TIỀN NHÂN & NGỌN BÚT LÔNG',
+            dynasty: 'ĐIỆN THỜ TIỀN NHÂN • THẾ KỶ XVIII',
+            desc: 'Chiếc án thư gỗ mun khảm xà cừ, lưu giữ bút lông đuôi chồn và nghiên mực đá chu sa. Nơi khởi sinh linh khí điểm nhãn mở khóa bí mật ngàn năm.',
+            details: 'Bàn án thư gỗ mun đen tuyền thế kỷ XVIII chạm hoa sen. Nghiên mực tạc từ đá núi Yên Tử chứa mực son chu sa không bao giờ đông kết. Ngọn bút lông đuôi chồn cán trúc ngà khâu đồng nạm vàng, bảo vật định hình đại kết cục Vạn Tượng Quy Nhất.'
+          }
+        };
+
+        const info = artifactInfo[stationId] || artifactInfo.mask;
+        const state = this.getGameState();
+        const solved = state.solvedChambers || [];
+        const required = ['mask', 'ceramic', 'flute'];
+        const solvedCount = required.filter(c => solved.includes(c)).length;
+        const isBrushUnlocked = solvedCount === 3;
+
+        if (stationId === 'brush') {
+          if (!isBrushUnlocked) {
+            info.title = 'HẬU CUNG • ĐIỆN THỜ TIỀN NHÂN [ĐANG PHONG ẤN]';
+            info.desc = `Điện Thờ Tiền Nhân được niêm phong bởi cấm chú của Tiền Nhân. Hãy giải mã cả 3 di vật thất truyền ở Tiền Sảnh (Tiến độ: ${solvedCount}/3) để khai mở phong ấn Hậu Cung, bước vào diện kiến Cụ Tổ Nghề Tranh và đón nhận Bút Lông Điểm Nhãn!`;
+            if (this.dom.btnEnterRelicWorld) {
+              this.dom.btnEnterRelicWorld.innerHTML = `<span>🔒 PHONG ẤN HẬU CUNG (CẦN GIẢI ${solvedCount}/3)</span>`;
+              this.dom.btnEnterRelicWorld.style.borderColor = '#e74c3c';
+              this.dom.btnEnterRelicWorld.style.background = 'rgba(231, 76, 60, 0.25)';
+            }
+          } else {
+            info.title = 'HẬU CUNG • ĐIỆN THỜ TIỀN NHÂN [ĐÃ KHAI MỞ]';
+            info.desc = `Ba di vật thất truyền đã tề tựu! Phong ấn Hậu Cung đã khai quang rực rỡ. Hãy bước vào Hậu Cung diện kiến Cụ Tổ Nghề Tranh để tiếp nhận y bát và ngọn Bút Lông Đuôi Chồn!`;
+            if (this.dom.btnEnterRelicWorld) {
+              this.dom.btnEnterRelicWorld.innerHTML = `<span>✨ BƯỚC VÀO ĐIỆN THỜ TIỀN NHÂN ➔</span>`;
+              this.dom.btnEnterRelicWorld.style.borderColor = '#f1c40f';
+              this.dom.btnEnterRelicWorld.style.background = 'linear-gradient(135deg, rgba(241, 196, 15, 0.35), rgba(192, 57, 43, 0.35))';
+            }
+          }
+        } else {
+          if (this.dom.btnEnterRelicWorld) {
+            this.dom.btnEnterRelicWorld.innerHTML = `<span>BƯỚC VÀO THẾ GIỚI NÀY ➔</span>`;
+            this.dom.btnEnterRelicWorld.style.borderColor = '';
+            this.dom.btnEnterRelicWorld.style.background = '';
+          }
+        }
+
+        if (this.dom.inspectArtifactIcon) this.dom.inspectArtifactIcon.textContent = info.icon;
+        if (this.dom.inspectArtifactTitle) this.dom.inspectArtifactTitle.textContent = info.title;
+        if (this.dom.inspectArtifactDynasty) this.dom.inspectArtifactDynasty.textContent = info.dynasty;
+        if (this.dom.inspectArtifactDesc) this.dom.inspectArtifactDesc.textContent = info.desc;
+        if (this.dom.inspectArtifactDetails) this.dom.inspectArtifactDetails.textContent = info.details;
+      }
+
+      initEvents() {
+        // 1. Trở về Trang Chủ
+        if (this.dom.museumBackHomeBtn) {
+          this.dom.museumBackHomeBtn.addEventListener('click', () => {
+            if (window.audio) window.audio.playPaper();
+            if (window.vtMuseum3D) window.vtMuseum3D.dispose();
+            navigateWithInk('index.html');
+          });
+        }
+
+        // 2. Nút Đường Ray Rail Navigation
+        document.querySelectorAll('.rail-nav-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const station = btn.dataset.station;
+            if (station && window.vtMuseum3D) {
+              if (window.audio) window.audio.playPaper();
+              window.vtMuseum3D.navigateToStation(station);
+            }
+          });
+        });
+
+        // 3. Nút trở về tiền sảnh trên thẻ giám định
+        if (this.dom.btnReturnEntrance) {
+          this.dom.btnReturnEntrance.addEventListener('click', () => {
+            if (window.vtMuseum3D) {
+              if (window.audio) window.audio.playPaper();
+              window.vtMuseum3D.navigateToStation('entrance');
+            }
+          });
+        }
+
+        // 4. Các nút xoay 360 độ trên thẻ giám định
+        if (this.dom.btnRotateLeft) {
+          this.dom.btnRotateLeft.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.vtMuseum3D) {
+              if (window.audio) window.audio.playInk();
+              window.vtMuseum3D.rotateArtifact(-Math.PI / 4);
+            }
+          });
+        }
+
+        if (this.dom.btnRotateRight) {
+          this.dom.btnRotateRight.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.vtMuseum3D) {
+              if (window.audio) window.audio.playInk();
+              window.vtMuseum3D.rotateArtifact(Math.PI / 4);
+            }
+          });
+        }
+
+        if (this.dom.btnToggleAutoRotate) {
+          this.dom.btnToggleAutoRotate.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.vtMuseum3D) {
+              if (window.audio) window.audio.playPaper();
+              const isSpinning = window.vtMuseum3D.toggleAutoRotate();
+              this.dom.btnToggleAutoRotate.innerHTML = isSpinning
+                ? '<span>⚡ TỰ XOAY: BẬT</span>'
+                : '<span>⏸ TỰ XOAY: TẮT</span>';
+              this.dom.btnToggleAutoRotate.classList.toggle('active', isSpinning);
+              this.dom.btnToggleAutoRotate.style.borderColor = isSpinning ? 'var(--gold-bright)' : '#666';
+            }
+          });
+        }
+
+        const resetBtn = this.dom.btnResetStandard || document.getElementById('btnResetView');
+        if (resetBtn) {
+          resetBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (window.vtMuseum3D) {
+              if (window.audio) window.audio.playPaper();
+              window.vtMuseum3D.resetArtifactView();
+              if (this.dom.btnToggleAutoRotate) {
+                this.dom.btnToggleAutoRotate.innerHTML = '<span>⚡ TỰ XOAY: BẬT</span>';
+                this.dom.btnToggleAutoRotate.classList.add('active');
+                this.dom.btnToggleAutoRotate.style.borderColor = 'var(--gold-bright)';
+              }
+            }
+          });
+        }
+
+        // 5. Nút Thu gọn / Mở rộng Thẻ Giám Định
+        if (this.dom.toggleCollapseCardBtn) {
+          this.dom.toggleCollapseCardBtn.addEventListener('click', () => {
+            const card = this.dom.museumInspectionCard;
+            if (!card) return;
+            const isCollapsed = card.classList.toggle('collapsed');
+            this.dom.toggleCollapseCardBtn.textContent = isCollapsed ? '▲' : '▼';
+            this.dom.toggleCollapseCardBtn.title = isCollapsed ? 'Mở rộng thẻ giám định' : 'Thu gọn thẻ giám định';
+            if (window.audio) window.audio.playPaper();
+          });
+        }
+
+        // 6. Nút Bước Vào Thế Giới Di Vật (Chamber Storyline)
+        if (this.dom.btnEnterRelicWorld) {
+          this.dom.btnEnterRelicWorld.addEventListener('click', () => {
+            const st = this.currentRelicStation || 'mask';
+            const state = this.getGameState();
+            const solved = state.solvedChambers || [];
+            const required = ['mask', 'ceramic', 'flute'];
+            const solvedCount = required.filter(c => solved.includes(c)).length;
+
+            if (st === 'brush' && solvedCount < 3) {
+              if (window.audio) {
+                window.audio.init();
+                window.audio.playDrum();
+              }
+              showToast(`🔒 Điện Thờ Tiền Nhân còn phong ấn! Cần giải mã cả 3 di vật ở Tiền Sảnh (${solvedCount}/3) trước khi bước vào Hậu Cung.`);
+              return;
+            }
+
+            if (window.audio) window.audio.init();
+
+            // Lưu snapshot quan sát của Bảo Tàng vào sessionStorage
+            if (window.vtMuseum3D) {
+              window.vtMuseum3D.saveMuseumSnapshot();
+            }
+
+            // Hoạt ảnh GSAP zoom xuyên lồng kính rồi chuyển trang
+            if (window.vtMuseum3D && typeof window.vtMuseum3D.zoomIntoArtifact === 'function') {
+              window.vtMuseum3D.zoomIntoArtifact(st, () => {
+                if (window.vtMuseum3D) window.vtMuseum3D.dispose();
+                navigateWithInk('game.html?chamber=' + st);
+              });
+            } else {
+              if (window.vtMuseum3D) window.vtMuseum3D.dispose();
+              navigateWithInk('game.html?chamber=' + st);
+            }
+          });
+        }
+
+        // 7. Bật/Tắt âm thanh trong Bảo Tàng 3D
+        if (this.dom.museumAudioToggleBtn) {
+          this.dom.museumAudioToggleBtn.addEventListener('click', () => {
+            if (window.audio) {
+              const muted = window.audio.toggleMute();
+              this.dom.museumAudioToggleBtn.textContent = muted ? '🔇' : '🔊';
+            }
+          });
+        }
+
+        // Kích hoạt âm thanh khi tương tác
+        const unlockAudio = () => {
+          if (window.audio) {
+            window.audio.init();
+            window.audio.resume();
+          }
+          document.removeEventListener('click', unlockAudio);
+          document.removeEventListener('keydown', unlockAudio);
+        };
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('keydown', unlockAudio);
+      }
+
+      initAncientMap() {
+        const modal = this.dom.ancientMapModal;
+        const closeBtn = this.dom.closeAncientMapBtn;
+        if (!modal) return;
+
+        const openMap = () => {
+          if (window.audio) {
+            window.audio.init();
+            window.audio.playPaper();
+            window.audio.playBell();
+          }
+          modal.classList.remove('hidden');
+          this.updateMapProgress();
+        };
+
+        const closeMap = () => {
+          if (window.audio) window.audio.playPaper();
+          modal.classList.add('hidden');
+        };
+
+        if (this.dom.museumMapBtn) this.dom.museumMapBtn.addEventListener('click', openMap);
+        if (closeBtn) closeBtn.addEventListener('click', closeMap);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeMap();
+        });
+
+        const mapNodes = modal.querySelectorAll('.ancient-map-node');
+        mapNodes.forEach(node => {
+          node.addEventListener('click', () => {
+            const station = node.getAttribute('data-station');
+            const chamber = node.getAttribute('data-chamber');
+            closeMap();
+            if (station && window.vtMuseum3D) {
+              window.vtMuseum3D.navigateToStation(station);
+            } else if (chamber) {
+              if (window.vtMuseum3D) {
+                window.vtMuseum3D.saveMuseumSnapshot();
+                window.vtMuseum3D.dispose();
+              }
+              navigateWithInk('game.html?chamber=' + chamber);
+            }
+          });
+        });
+      }
+
+      updateMapProgress() {
+        const state = this.getGameState();
+        const solved = state.solvedChambers || [];
+
+        if (this.dom.mapProgressCount) {
+          this.dom.mapProgressCount.textContent = solved.length + '/4';
+        }
+
+        const mapBadgeMask = document.getElementById('mapBadgeMask');
+        const mapBadgeVase = document.getElementById('mapBadgeVase');
+        const mapBadgeFlute = document.getElementById('mapBadgeFlute');
+        const mapBadgeBrush = document.getElementById('mapBadgeBrush');
+
+        if (mapBadgeMask && solved.includes('mask')) mapBadgeMask.style.display = 'block';
+        if (mapBadgeVase && solved.includes('ceramic')) mapBadgeVase.style.display = 'block';
+        if (mapBadgeFlute && solved.includes('flute')) mapBadgeFlute.style.display = 'block';
+        if (mapBadgeBrush && solved.includes('brush')) mapBadgeBrush.style.display = 'block';
+      }
+    }
+
+    // Khởi động trang Bảo Tàng 3D
+    window.addEventListener('DOMContentLoaded', () => {
+      window.museumPage = new MuseumPageApp();
+
+      // Hiệu ứng mực tan loang mở đầu trang
+      const inkDissolve = window.vtInkVortex || window.inkVortex;
+      if (inkDissolve && typeof inkDissolve.startDissolve === 'function') {
+        inkDissolve.startDissolve();
+      }
+
+      setTimeout(() => {
+        const inkCanvas = document.getElementById('inkVortexCanvas') || document.getElementById('inkCanvas');
+        if (inkCanvas) inkCanvas.style.opacity = '0';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

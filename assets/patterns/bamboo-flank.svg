@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="600" viewBox="0 0 160 600">
+  <defs>
+    <linearGradient id="bambooGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5a823"/>
+      <stop offset="50%" stop-color="#e06d28"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+  </defs>
+  <!-- Thân trúc 1 vươn thẳng -->
+  <line x1="30" y1="600" x2="30" y2="30" stroke="url(#bambooGold)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Đốt trúc 1 -->
+  <circle cx="30" cy="520" r="3.5" fill="#f5a823"/>
+  <circle cx="30" cy="430" r="3.5" fill="#f5a823"/>
+  <circle cx="30" cy="330" r="3.5" fill="#f5a823"/>
+  <circle cx="30" cy="220" r="3.5" fill="#f5a823"/>
+  <circle cx="30" cy="110" r="3.5" fill="#f5a823"/>
+
+  <!-- Thân trúc 2 uốn nhẹ -->
+  <path d="M75,600 Q70,400 80,200 T75,10" stroke="url(#bambooGold)" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+  <!-- Đốt trúc 2 -->
+  <circle cx="73" cy="480" r="3" fill="#f5a823"/>
+  <circle cx="75" cy="360" r="3" fill="#f5a823"/>
+  <circle cx="79" cy="240" r="3" fill="#f5a823"/>
+  <circle cx="76" cy="120" r="3" fill="#f5a823"/>
+
+  <!-- Cụm lá trúc thanh thoát xòe tán -->
+  <!-- Cụm tầng thấp -->
+  <g fill="url(#bambooGold)" opacity="0.9">
+    <path d="M30,520 Q55,505 85,515 Q55,520 30,520 Z"/>
+    <path d="M30,520 Q60,525 95,540 Q65,535 30,520 Z"/>
+    <path d="M30,520 Q45,490 70,480 Q50,505 30,520 Z"/>
+  </g>
+  <!-- Cụm tầng trung -->
+  <g fill="url(#bambooGold)" opacity="0.95">
+    <path d="M75,360 Q105,340 140,350 Q105,355 75,360 Z"/>
+    <path d="M75,360 Q110,365 145,385 Q110,375 75,360 Z"/>
+    <path d="M75,360 Q95,325 125,315 Q100,340 75,360 Z"/>
+    <path d="M30,330 Q10,310 0,295 Q15,320 30,330 Z"/>
+    <path d="M30,330 Q55,315 85,320 Q55,328 30,330 Z"/>
+  </g>
+  <!-- Cụm tầng cao -->
+  <g fill="url(#bambooGold)">
+    <path d="M79,240 Q110,215 150,225 Q110,230 79,240 Z"/>
+    <path d="M79,240 Q115,245 155,260 Q115,250 79,240 Z"/>
+    <path d="M30,220 Q55,195 90,195 Q60,210 30,220 Z"/>
+    <path d="M30,110 Q60,85 105,90 Q65,100 30,110 Z"/>
+    <path d="M30,110 Q55,115 95,130 Q60,120 30,110 Z"/>
+  </g>
+  <!-- Ngọn trúc vút lên -->
+  <g fill="url(#bambooGold)">
+    <path d="M75,120 Q100,95 135,100 Q100,108 75,120 Z"/>
+    <path d="M75,10 Q100,0 125,5 Q95,10 75,10 Z"/>
+    <path d="M30,30 Q50,15 80,18 Q50,25 30,30 Z"/>
+  </g>
+</svg>

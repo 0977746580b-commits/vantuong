@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THẾ GIỚI CỐT TRUYỆN 3D • Vạn Tượng Nét Mực Thất Truyền</title>
+
+  <!-- Google Fonts: Nghệ thuật Thư pháp, Hoàng Gia Triều Nguyễn & Bản mộc Dân gian chuẩn tiếng Việt 100% -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Supabase JS Client v2 CDN -->
+
+  <!-- BẢNG MÃ ĐỊNH KIỂU TOÀN DIỆN VẠN TƯỢNG (CSS TRÍCH XUẤT) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- THƯ VIỆN THREE.JS CHO THẾ GIỚI CÁCH ĐIỆU (KHÔNG TẢI GLTF LOADER NẶNG) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- SUPABASE & DỊCH VỤ DÙNG CHUNG -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-service.js"></script>
+  <script src="audio-engine.js"></script>
+  <script src="ink-vortex.js"></script>
+
+  <!-- CỐT TRUYỆN DÂN GIAN & THẾ GIỚI 3D CÁCH ĐIỆU -->
+  <script src="story-data.js"></script>
+  <script src="stylized-worlds.js"></script>
+</head>
+<body>
+  <!-- Viền kim chỉ hoàng cung trên đầu -->
+  <div class="border-ornament-top"></div>
+
+  <!-- Lớp phủ sớ giấy dó tự nhiên -->
+  <div class="paper-texture-overlay"></div>
+
+  <!-- Nền Canvas Duy Nhất: Trầm Tích Sơn Then & Hạt Bụi Vàng Hoàng Gia -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- ===================================================================
+       HỆ THỐNG CHUYỂN CẢNH MỰC TÀU THE BOAT (CINEMATIC INK BLEED & DISSOLVE)
+       =================================================================== -->
+  <div id="theBoatTransition" class="the-boat-transition">
+    <div class="ink-core-bloom"></div>
+    <div class="ink-brush-slash"></div>
+    <div class="ink-mist-layer"></div>
+    <div class="ink-seal-banner">
+      <div class="seal-symbol">象</div>
+      <div class="seal-subtext">VẠN TƯỢNG • CÕI MỰC</div>
+    </div>
+  </div>
+  <div id="screenTransitionOverlay" class="screen-transition-overlay"></div>
+  <div id="flashOverlay"></div>
+
+  <!-- ===================================================================
+       MÀN HÌNH 1: TRANG CHỦ CUỘN TOÀN DIỆN (SCROLLABLE LANDING PAGE)
+       =================================================================== -->
+<section id="viewGame" class="app-view active">
+    <!-- Header / HUD Status Bar -->
+    <header id="gameHeader">
+      <div class="hud-brand">
+        <div id="gameSealIcon" class="hud-seal" title="Quay về Trang Chủ">象</div>
+        <div class="hud-title-text">
+          <h1 class="main-game-title">VẠN TƯỢNG</h1>
+          <span class="sub-game-title">Kỳ Án Nét Mực Thất Truyền</span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="sanity-wrapper" title="Định lực tâm trí. Cạn kiệt về 0% sẽ bị nuốt chửng!">
+          <div class="sanity-label-row">
+            <span>ĐỊNH LỰC</span>
+            <span id="sanityValue" class="sanity-num">100%</span>
+          </div>
+          <div class="sanity-track">
+            <div id="sanityBar" class="sanity-fill"></div>
+          </div>
+        </div>
+        <div class="phase-pill">
+          <span id="phaseTag">LỜI DẪN MỞ ĐẦU</span>
+        </div>
+      </div>
+
+      <div class="hud-right-actions">
+        <!-- Nút Lưu Mây & Hồ Sơ Lữ Khách trong Gameplay HUD (Tạm thời ẩn) -->
+        <button id="hudCloudSaveBtn" class="hud-cloud-btn" style="display:none !important;" title="Đồng bộ tiến trình lên mây Supabase">
+          <span id="hudCloudIcon">☁️</span>
+          <span id="hudCloudText">Lưu Mây</span>
+        </button>
+        <button id="hudAuthBtn" class="hud-action-btn" style="display:none !important;" title="Hồ sơ Lữ Khách">
+          <span id="hudAuthSeal" style="color:var(--vermilion-glow); font-weight:800;">象</span>
+          <span id="hudAuthName">Lữ Khách</span>
+        </button>
+        <button id="soundToggleBtn" class="hud-action-btn" title="Bật/Tắt âm thanh">
+          <span id="soundIcon">🔊</span>
+          <span>Âm Thanh</span>
+        </button>
+        <button id="openGuideBtn" class="hud-action-btn" title="Mở Hướng dẫn">
+          <span>📖</span>
+          <span>Hướng Dẫn</span>
+        </button>
+        <button id="hudQualityBtn" class="hud-action-btn" title="Cài đặt chất lượng đồ họa (Tự Động / Cao / Vừa / Tiết Kiệm)">
+          <span>⚡</span>
+          <span id="hudQualityLabel">Đồ Họa</span>
+        </button>
+        <button id="hudMuseumBtn" class="hud-action-btn hud-museum-btn" title="Quay Lại Bảo Tàng 3D (Bảo lưu nguyên vẹn tiến trình)">
+          <span>🏛️</span>
+          <span>Bảo Tàng</span>
+        </button>
+        <button id="ancientMapBtn" class="hud-action-btn hud-map-btn" title="Mở Cổ Đồ Vạn Tượng (Tiến độ hành trình)">
+          <span>🗺️</span>
+          <span>Cổ Đồ</span>
+          <span id="mapProgressBadge" class="badge-num">0/4</span>
+        </button>
+        <button id="journalModalBtn" class="hud-action-btn" title="Mở Sổ tay & Cổ vật">
+          <span>📜</span>
+          <span>Cổ Vật</span>
+          <span id="journalCount" class="badge-num">0</span>
+        </button>
+        <button id="backHomeBtn" class="hud-action-btn" title="Trở về Trang Chủ">
+          <span>🏠</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Khung cảnh chính (Split Screen Graphic Novel) -->
+    <main id="mainLayout">
+      <!-- Visual Stage -->
+      <section id="visualStage">
+        <div class="art-display-frame">
+          <div class="art-canvas-box" id="artFrame">
+            <img id="stageImg" class="art-artwork-img" src="" alt="Minh họa tranh dân gian">
+            <svg id="proceduralSvg" class="art-vector-svg" viewBox="0 0 600 400" preserveAspectRatio="none"></svg>
+            <div class="art-shadow-vignette"></div>
+            <!-- ĐIỂM NHÃN TƯƠNG TÁC KHÔNG GIAN (SPATIAL SCENE HOTSPOTS) -->
+            <div id="sceneHotspotLayer" class="scene-hotspot-layer"></div>
+            <!-- HỘP THOẠI / KHÁM PHÁ NỞ TỪ ĐIỂM NHÃN (HOTSPOT DIALOG BUBBLE) -->
+            <div id="hotspotDialogBubble" class="hotspot-dialog-bubble hidden">
+              <div class="bubble-header">
+                <div class="bubble-header-left">
+                  <span id="bubbleIcon" class="bubble-icon">💬</span>
+                  <span id="bubbleName" class="bubble-name">Nhân vật</span>
+                  <span id="bubbleDynastyTag" class="dynasty-badge ly">Đại Việt</span>
+                </div>
+                <button id="closeBubbleBtn" class="bubble-close-btn">&times;</button>
+              </div>
+              <div id="bubbleContent" class="bubble-content">...</div>
+              <div id="bubbleActions" class="bubble-actions"></div>
+            </div>
+            <div id="stageQuote" class="art-quote-caption"></div>
+          </div>
+          <div class="art-meta-ribbon">
+            <span id="locationTag" class="meta-highlight">TRIỂN LÃM VẠN TƯỢNG</span>
+            <span id="dateTag">HÀ NỘI • MÙA ĐÔNG</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Narrative Stage -->
+      <section id="narrativeStage">
+        <div class="narrative-inner-flow">
+          <div id="storyContent" class="story-typography"></div>
+          <div id="chamberGridContainer" class="chamber-portal-grid" style="display: none;"></div>
+          <div id="choiceContainer" class="choices-action-block"></div>
+        </div>
+      </section>
+    </main>
+  </section>
+<div id="journalModal" class="journal-modal-bg hidden">
+    <div class="journal-card-modal">
+      <div class="popup-header-bar">
+        <h2><span>📜</span> DI VẬT & MANH MỐI ĐÃ THU THẬP</h2>
+        <button id="closeJournalX" class="popup-close-x">&times;</button>
+      </div>
+      <div class="journal-tab-strip">
+        <button class="tab-item-nav active" data-tab="viewArtifacts">Cổ Vật (<span id="countArtifacts">0</span>)</button>
+        <button class="tab-item-nav" data-tab="viewClues">Manh Mối (<span id="countClues">0</span>)</button>
+        <button class="tab-item-nav" data-tab="viewLog">Dấu Vết Đã Đi Qua</button>
+      </div>
+      <div class="journal-content-pane">
+        <div id="viewArtifacts" class="tab-view active">
+          <div id="artifactGrid" class="inventory-cards-grid">
+            <p style="color:var(--paper-dim); font-style:italic; text-align:center; grid-column:1/-1;">Chưa thu thập được cổ vật nào...</p>
+          </div>
+        </div>
+        <div id="viewClues" class="tab-view" style="display:none;">
+          <ul id="clueList" style="list-style:none; display:flex; flex-direction:column; gap:0.75rem;">
+            <li style="color:var(--paper-dim); font-style:italic;">Chưa có manh mối nào được ghi nhận...</li>
+          </ul>
+        </div>
+        <div id="viewLog" class="tab-view" style="display:none;">
+          <div id="historyLog" style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.9rem; color:var(--paper-aged);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       CỔ ĐỒ VẠN TƯỢNG (INTERACTIVE ANCIENT QUEST MAP & ATLAS MODAL)
+       =================================================================== -->
+  <div id="ancientMapModal" class="ancient-map-modal hidden">
+    <div class="ancient-map-frame">
+      <!-- 4 Góc Đồng Chạm Trổ Triều Đại -->
+      <div class="map-corner-brass tl"></div>
+      <div class="map-corner-brass tr"></div>
+      <div class="map-corner-brass bl"></div>
+      <div class="map-corner-brass br"></div>
+
+      <!-- Tiêu Đề Cổ Đồ & Nút Đóng -->
+      <div class="ancient-map-header">
+        <div class="map-header-title-box">
+          <h2><span>🗺️</span> CỔ ĐỒ VẠN TƯỢNG • ĐẠI NAM DỊ VẬT CHÍ</h2>
+          <p>Tấm bản đồ giấy Dó vẽ bằng mực chu sa và khoáng thạch, dẫn lối qua 4 vùng di sản để tìm bức tranh thất truyền</p>
+        </div>
+        <button id="closeAncientMapBtn" class="map-close-btn">
+          <span>✕</span> ĐÓNG CỔ ĐỒ
+        </button>
+      </div>
+
+      <!-- Thanh Tiến Trình Thu Thập Cổ Vật -->
+      <div class="map-progress-banner">
+        <div class="map-progress-text">
+          <span>TIẾN ĐỘ THU THẬP DI KHÍ: </span>
+          <strong id="mapProgressCount" style="color:var(--gold-bright);">0 / 4</strong>
+        </div>
+        <div class="map-relics-strip">
+          <div class="map-relic-badge" id="mapBadgeMask">
+            <span>🎭</span> Mặt Nạ Tuồng
+          </div>
+          <div class="map-relic-badge" id="mapBadgeVase">
+            <span>🏺</span> Bình Men Rạn
+          </div>
+          <div class="map-relic-badge" id="mapBadgeFlute">
+            <span>🪈</span> Tiêu Trúc
+          </div>
+          <div class="map-relic-badge" id="mapBadgeBrush">
+            <span>🖌️</span> Bút Chu Sa
+          </div>
+        </div>
+      </div>
+
+      <!-- Không Gian Tọa Độ Bản Đồ Cổ & Tuyến Mực Chu Sa -->
+      <div class="ancient-map-canvas-wrap">
+        <!-- SVG Vẽ Tuyến Đường Nối Mực Tàu & Chu Sa -->
+        <svg class="map-svg-routes" viewBox="0 0 1000 420" preserveAspectRatio="none">
+          <!-- Đường nét đứt nền -->
+          <path id="routeTlToMask" class="map-route-line" d="M 180,210 Q 320,120 440,110" />
+          <path id="routeTlToFlute" class="map-route-line" d="M 180,210 Q 300,310 440,320" />
+          <path id="routeMaskToVase" class="map-route-line" d="M 440,110 Q 600,80 760,130" />
+          <path id="routeFluteToBrush" class="map-route-line" d="M 440,320 Q 580,350 760,310" />
+          <path id="routeVaseToCenter" class="map-route-line" d="M 760,130 Q 860,170 910,210" />
+          <path id="routeBrushToCenter" class="map-route-line" d="M 760,310 Q 860,260 910,210" />
+        </svg>
+
+        <!-- Hoa Gió / La Bàn Bát Quái Cổ Phong -->
+        <div class="map-compass-rose">
+          <svg viewBox="0 0 100 100" width="100%" height="100%">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="3,3" />
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#d4af37" stroke-width="1" />
+            <path d="M 50,4 L 54,46 L 96,50 L 54,54 L 50,96 L 46,54 L 4,50 L 46,46 Z" fill="rgba(212,175,55,0.25)" stroke="#d4af37" stroke-width="1.2" />
+            <text x="50" y="16" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle" font-weight="bold">BẮC</text>
+            <text x="50" y="90" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">NAM</text>
+            <text x="88" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">ĐÔNG</text>
+            <text x="14" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">TÂY</text>
+          </svg>
+        </div>
+
+        <!-- 6 Địa Danh Cổ Trên Bản Đồ -->
+        <!-- 1. Thăng Long Cổ Phố -->
+        <div class="map-node active-current" id="mapNodeTL" style="left: 18%; top: 50%;" data-chamber="prologue" title="Thăng Long Cổ Phố - Khởi đầu hành trình">
+          <div class="map-node-icon">🏛️</div>
+          <div class="map-node-label">Thăng Long Cổ Phố</div>
+        </div>
+
+        <!-- 2. Chiếu Tuồng Đặng Gia -->
+        <div class="map-node" id="mapNodeMask" style="left: 44%; top: 26%;" data-chamber="tuong" title="Màn 1: Chiếu Tuồng Đặng Gia">
+          <div class="map-node-icon">🎭</div>
+          <div class="map-node-label">Chiếu Tuồng Đặng Gia</div>
+        </div>
+
+        <!-- 3. Lò Bầu Bát Tràng -->
+        <div class="map-node" id="mapNodeVase" style="left: 76%; top: 31%;" data-chamber="bat-trang" title="Màn 2: Lò Bầu Bát Tràng">
+          <div class="map-node-icon">🏺</div>
+          <div class="map-node-label">Lò Bầu Bát Tràng</div>
+        </div>
+
+        <!-- 4. Sông Đuống Kinh Bắc -->
+        <div class="map-node" id="mapNodeFlute" style="left: 44%; top: 76%;" data-chamber="song-duong" title="Màn 3: Bến Sông Đuống">
+          <div class="map-node-icon">🪈</div>
+          <div class="map-node-label">Sông Đuống Kinh Bắc</div>
+        </div>
+
+        <!-- 5. Điện Thờ Tiền Nhân -->
+        <div class="map-node" id="mapNodeBrush" style="left: 76%; top: 74%;" data-chamber="dien-tho" title="Màn 4: Điện Thờ Tiền Nhân">
+          <div class="map-node-icon">🖌️</div>
+          <div class="map-node-label">Điện Thờ Tiền Nhân</div>
+        </div>
+
+        <!-- 6. Bức Tranh Trung Tâm -->
+        <div class="map-node" id="mapNodeCenter" style="left: 91%; top: 50%;" data-chamber="final" title="Đại Mật Khải - Bức Tranh Vạn Tượng">
+          <div class="map-node-icon">📜</div>
+          <div class="map-node-label">Bức Tranh Trung Tâm</div>
+        </div>
+      </div>
+
+      <!-- Chỉ Dẫn Phía Dưới Bản Đồ -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem; font-size:0.82rem; color:var(--paper-dim);">
+        <div>💡 <em>Nhấn vào một địa danh đã mở để phiêu lưu tới cõi ấy hoặc mở lại ký ức di vật</em></div>
+        <div style="display:flex; gap:1.2rem;">
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--gold-bright);">●</span> Vị trí hiện tại</span>
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--jade-glow);">●</span> Đã thu phục</span>
+          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--paper-dim);">○</span> Mật tích niêm phong</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="gameToast" class="hidden"></div>
+
+  <!-- ===================================================================
+       JAVASCRIPT TÍCH HỢP HOÀN TOÀN
+       =================================================================== -->
+
+  <script>
+    // Khởi tạo Audio Engine dùng chung
+    window.audio = new AudioEngine();
+
+    // Hàm thông báo Toast hoàng gia
+    function showToast(msg) {
+      const t = document.getElementById('gameToast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.add('hidden'), 2800);
+    }
+
+    // Đường ống chuyển cảnh mực tàu xuyên trang (Two-Phase Ink Transition)
+    function navigateWithInk(targetUrl) {
+      if (window.audio && typeof window.audio.playInkSwoosh === 'function') {
+        try { window.audio.playInkSwoosh(); } catch(e) {}
+      }
+      let navigated = false;
+      const doNav = () => {
+        if (!navigated) {
+          navigated = true;
+          window.location.href = targetUrl;
+        }
+      };
+      const safetyTimer = setTimeout(doNav, 750);
+
+      const ink = window.vtInkVortex || window.inkVortex;
+      if (ink && typeof ink.start === 'function') {
+        try {
+          ink.start(() => {
+            clearTimeout(safetyTimer);
+            doNav();
+          });
+        } catch(err) {
+          clearTimeout(safetyTimer);
+          doNav();
+        }
+      } else {
+        clearTimeout(safetyTimer);
+        doNav();
+      }
+    }
+
+    class GameChamberApp {
+      constructor() {
+        this.dom = {
+          gameSealIcon: document.getElementById('gameSealIcon'),
+          sanityValue: document.getElementById('sanityValue'),
+          sanityBar: document.getElementById('sanityBar'),
+          phaseTag: document.getElementById('phaseTag'),
+          soundToggleBtn: document.getElementById('soundToggleBtn'),
+          soundIcon: document.getElementById('soundIcon'),
+          openGuideBtn: document.getElementById('openGuideBtn'),
+          hudQualityBtn: document.getElementById('hudQualityBtn'),
+          hudQualityLabel: document.getElementById('hudQualityLabel'),
+          hudMuseumBtn: document.getElementById('hudMuseumBtn'),
+          ancientMapBtn: document.getElementById('ancientMapBtn'),
+          mapProgressBadge: document.getElementById('mapProgressBadge'),
+          journalModalBtn: document.getElementById('journalModalBtn'),
+          journalCount: document.getElementById('journalCount'),
+          backHomeBtn: document.getElementById('backHomeBtn'),
+
+          artFrame: document.getElementById('artFrame'),
+          stageImg: document.getElementById('stageImg'),
+          proceduralSvg: document.getElementById('proceduralSvg'),
+          stageQuote: document.getElementById('stageQuote'),
+          locationTag: document.getElementById('locationTag'),
+          dateTag: document.getElementById('dateTag'),
+          storyContent: document.getElementById('storyContent'),
+          narrativeStage: document.getElementById('narrativeStage'),
+          choiceContainer: document.getElementById('choiceContainer'),
+          chamberGridContainer: document.getElementById('chamberGridContainer'),
+
+          sceneHotspotLayer: document.getElementById('sceneHotspotLayer'),
+          hotspotDialogBubble: document.getElementById('hotspotDialogBubble'),
+          closeBubbleBtn: document.getElementById('closeBubbleBtn'),
+          bubbleIcon: document.getElementById('bubbleIcon'),
+          bubbleName: document.getElementById('bubbleName'),
+          bubbleDynastyTag: document.getElementById('bubbleDynastyTag'),
+          bubbleContent: document.getElementById('bubbleContent'),
+          bubbleActions: document.getElementById('bubbleActions'),
+
+          journalModal: document.getElementById('journalModal'),
+          closeJournalX: document.getElementById('closeJournalX'),
+          artifactGrid: document.getElementById('artifactGrid'),
+          clueList: document.getElementById('clueList'),
+          historyLog: document.getElementById('historyLog'),
+          countArtifacts: document.getElementById('countArtifacts'),
+          countClues: document.getElementById('countClues'),
+
+          ancientMapModal: document.getElementById('ancientMapModal'),
+          closeAncientMapBtn: document.getElementById('closeAncientMapBtn'),
+          mapProgressCount: document.getElementById('mapProgressCount'),
+          gameToast: document.getElementById('gameToast')
+        };
+
+        this.initState();
+        this.initWorldEngine();
+        this.initEvents();
+        this.initJournal();
+        this.initAncientMap();
+        this.startChamberFlow();
+      }
+
+      initState() {
+        this.state = {
+          currentScene: 'chamber_mask_intro',
+          sanity: 100,
+          inventory: [],
+          clues: [],
+          solvedChambers: [],
+          history: []
+        };
+
+        // Nạp tiến trình từ localStorage
+        try {
+          const backup = localStorage.getItem('VT_LOCAL_SAVE_BACKUP');
+          if (backup) {
+            const parsed = JSON.parse(backup);
+            if (parsed) {
+              if (Array.isArray(parsed.inventory)) this.state.inventory = parsed.inventory;
+              if (Array.isArray(parsed.clues)) this.state.clues = parsed.clues;
+              if (Array.isArray(parsed.solvedChambers)) this.state.solvedChambers = parsed.solvedChambers;
+              if (Array.isArray(parsed.history)) this.state.history = parsed.history;
+              if (typeof parsed.sanity === 'number') this.state.sanity = parsed.sanity;
+              if (parsed.currentScene) this.state.currentScene = parsed.currentScene;
+            }
+          }
+        } catch(e) {}
+      }
+
+      saveState() {
+        try {
+          localStorage.setItem('VT_LOCAL_SAVE_BACKUP', JSON.stringify(this.state));
+        } catch(e) {}
+        if (window.vtSupabase) {
+          try {
+            window.vtSupabase.saveGameProgress(this.state);
+          } catch(e) {}
+        }
+      }
+
+      initWorldEngine() {
+        if (!window.StylizedWorldEngine) return;
+        window.vtStylizedWorld = new StylizedWorldEngine();
+        if (this.dom.artFrame) {
+          window.vtStylizedWorld.mount(this.dom.artFrame);
+        }
+      }
+
+      startChamberFlow() {
+        const params = new URLSearchParams(window.location.search);
+        const chamberParam = params.get('chamber');
+        const sceneParam = params.get('scene');
+        const resumeParam = params.get('resume');
+
+        let targetScene = this.state.currentScene || 'chamber_mask_intro';
+
+        if (chamberParam) {
+          const chamberMap = {
+            mask: 'chamber_mask_intro',
+            ceramic: 'chamber_ceramic_intro',
+            flute: 'chamber_flute_intro',
+            brush: 'chamber_brush_intro'
+          };
+          targetScene = chamberMap[chamberParam] || 'chamber_mask_intro';
+        } else if (sceneParam) {
+          targetScene = sceneParam;
+        } else if (resumeParam === 'true') {
+          targetScene = this.state.currentScene || 'chamber_mask_intro';
+        }
+
+        // Nếu scene đích là hub hoặc home, đưa về bảo tàng
+        if (targetScene === 'hub_central' || targetScene === 'home_screen') {
+          targetScene = 'chamber_mask_intro';
+        }
+
+        this.loadScene(targetScene);
+      }
+
+      loadScene(sceneId) {
+        if (sceneId === 'home_screen') {
+          this.exitToPage('index.html');
+          return;
+        }
+
+        if (sceneId === 'hub_central') {
+          this.state.currentScene = 'hub_central';
+          this.saveState();
+          showToast('🏛️ Trở về Sảnh Trung Tâm Vạn Tượng • Bảo Tàng 3D');
+          this.exitToPage('museum.html?restore=true');
+          return;
+        }
+
+        const sc = GAME_DATA.scenes[sceneId];
+        if (!sc) {
+          console.warn('Scene không tồn tại:', sceneId);
+          return;
+        }
+
+        // Hiệu ứng mờ dần cho khung tranh
+        if (this.dom.artFrame) {
+          this.dom.artFrame.classList.remove('stage-fade-active');
+          void this.dom.artFrame.offsetWidth;
+          this.dom.artFrame.classList.add('stage-fade-active');
+        }
+        if (this.dom.storyContent) {
+          this.dom.storyContent.classList.remove('stage-fade-active');
+          void this.dom.storyContent.offsetWidth;
+          this.dom.storyContent.classList.add('stage-fade-active');
+        }
+
+        this.state.currentScene = sceneId;
+        this.state.history.push(sc.location || 'Triển Lãm Vạn Tượng');
+
+        // Thu thập cổ vật
+        if (sc.addArtifact && !this.state.inventory.includes(sc.addArtifact)) {
+          this.state.inventory.push(sc.addArtifact);
+          const art = GAME_DATA.artifacts[sc.addArtifact];
+          if (art) showToast(`Thu thập di vật: ${art.name}`);
+        }
+
+        // Thu thập manh mối
+        if (sc.addClue && !this.state.clues.includes(sc.addClue)) {
+          this.state.clues.push(sc.addClue);
+          showToast(`Manh mối mới: ${sc.addClue.substring(0, 32)}...`);
+        }
+
+        // Đánh dấu giải xong mật thất
+        if (sc.solveChamber && !this.state.solvedChambers.includes(sc.solveChamber)) {
+          this.state.solvedChambers.push(sc.solveChamber);
+        }
+
+        // Hiệu ứng rung camera
+        if (sc.fx === 'shake') {
+          document.body.classList.remove('camera-shake');
+          void document.body.offsetWidth;
+          document.body.classList.add('camera-shake');
+          setTimeout(() => document.body.classList.remove('camera-shake'), 650);
+          if (window.audio) window.audio.playDrum();
+        }
+
+        this.renderStageArt(sc);
+
+        // Cập nhật nhãn thông tin
+        if (this.dom.locationTag) this.dom.locationTag.textContent = sc.location || 'VẠN TƯỢNG';
+        if (this.dom.dateTag) this.dom.dateTag.textContent = sc.date || 'HÀ NỘI';
+        if (this.dom.stageQuote) this.dom.stageQuote.textContent = sc.quote || '';
+        if (this.dom.phaseTag) this.dom.phaseTag.textContent = sc.phase || 'VẠN TƯỢNG';
+
+        // Nội dung câu chuyện
+        if (this.dom.storyContent) this.dom.storyContent.innerHTML = sc.text;
+        if (this.dom.narrativeStage) this.dom.narrativeStage.scrollTop = 0;
+
+        // Lựa chọn rẽ nhánh & Hotspots
+        if (sc.isHub) {
+          if (this.dom.chamberGridContainer) this.dom.chamberGridContainer.style.display = 'grid';
+          this.renderChoices(sc.choices);
+        } else {
+          if (this.dom.chamberGridContainer) this.dom.chamberGridContainer.style.display = 'none';
+          this.renderChoices(sc.choices);
+          this.renderSceneHotspots(sc.hotspots);
+        }
+
+        this.updateHUD();
+        this.updateJournal();
+        this.updateMapProgress();
+        this.saveState();
+      }
+
+      renderStageArt(sc) {
+        // Tích hợp thế giới 3D cách điệu
+        if (window.vtStylizedWorld && this.dom.artFrame) {
+          window.vtStylizedWorld.mount(this.dom.artFrame);
+
+          let worldKey = null;
+          if (sc.svgType === 'mask' || (sc.id && sc.id.includes('mask'))) {
+            worldKey = 'tuong';
+          } else if (sc.svgType === 'ceramic' || (sc.id && sc.id.includes('ceramic'))) {
+            worldKey = 'ceramic';
+          } else if (sc.svgType === 'flute' || (sc.id && sc.id.includes('flute'))) {
+            worldKey = 'flute';
+          } else if (sc.svgType === 'brush' || (sc.id && sc.id.includes('brush'))) {
+            worldKey = 'brush';
+          }
+
+          if (worldKey) {
+            window.vtStylizedWorld.setWorld(worldKey);
+            if (this.dom.stageImg) this.dom.stageImg.style.display = 'none';
+            if (this.dom.proceduralSvg) this.dom.proceduralSvg.style.display = 'none';
+            return;
+          } else {
+            window.vtStylizedWorld.setWorld(null);
+          }
+        }
+
+        // Fallback 2D
+        if (this.dom.stageImg) {
+          this.dom.stageImg.style.display = 'block';
+          this.dom.stageImg.src = sc.image || '';
+        }
+        if (this.dom.proceduralSvg) {
+          this.dom.proceduralSvg.style.display = 'none';
+        }
+      }
+
+      renderChoices(choices) {
+        if (!this.dom.choiceContainer) return;
+        this.dom.choiceContainer.innerHTML = '';
+        if (!choices || choices.length === 0) return;
+
+        choices.forEach(ch => {
+          const btn = document.createElement('button');
+          btn.className = 'choice-branch-btn';
+          btn.innerHTML = `<span>${ch.text}</span>`;
+
+          btn.addEventListener('click', () => {
+            if (window.audio) {
+              if (ch.sound === 'drum') window.audio.playDrum();
+              else if (ch.sound === 'bell') window.audio.playBell();
+              else if (ch.sound === 'paper') window.audio.playPaper();
+              else window.audio.playInk();
+            }
+
+            if (ch.sanityEffect) {
+              this.alterSanity(ch.sanityEffect);
+            }
+
+            if (ch.next === 'hub_central') {
+              this.state.currentScene = 'hub_central';
+              this.saveState();
+              showToast('🏛️ Trở về Sảnh Trung Tâm Vạn Tượng • Bảo Tàng 3D');
+              this.exitToPage('museum.html?restore=true');
+              return;
+            }
+
+            if (ch.next === 'home_screen') {
+              this.state.currentScene = 'home_screen';
+              this.saveState();
+              this.exitToPage('index.html');
+              return;
+            }
+
+            // Chuyển cảnh nội bộ mực tàu
+            const ink = window.vtInkVortex || window.inkVortex;
+      if (ink && typeof ink.start === 'function') {
+              ink.start(() => {
+                this.loadScene(ch.next);
+                inkDissolve.startDissolve();
+              });
+            } else {
+              this.loadScene(ch.next);
+            }
+          });
+
+          this.dom.choiceContainer.appendChild(btn);
+        });
+      }
+
+      alterSanity(val) {
+        this.state.sanity = Math.max(0, Math.min(100, this.state.sanity + val));
+        this.updateHUD();
+        if (val < 0) showToast(`Định lực giảm ${Math.abs(val)}%!`);
+        else if (val > 0) showToast(`Định lực hồi phục +${val}%!`);
+
+        if (this.state.sanity <= 0 && this.state.currentScene !== 'ending_ink_trap') {
+          setTimeout(() => {
+            showToast('Định lực cạn kiệt! Bạn bị mực nuốt chửng vĩnh viễn!');
+            this.loadScene('ending_ink_trap');
+          }, 450);
+        }
+      }
+
+      updateHUD() {
+        if (this.dom.sanityValue) this.dom.sanityValue.textContent = `${this.state.sanity}%`;
+        if (this.dom.sanityBar) {
+          this.dom.sanityBar.style.width = `${this.state.sanity}%`;
+          if (this.state.sanity <= 25) {
+            this.dom.sanityBar.style.background = 'var(--vermilion-glow)';
+          } else {
+            this.dom.sanityBar.style.background = 'var(--gold-bright)';
+          }
+        }
+        if (this.dom.journalCount) {
+          this.dom.journalCount.textContent = this.state.inventory.length + this.state.clues.length;
+        }
+      }
+
+      renderSceneHotspots(hotspots) {
+        if (!this.dom.sceneHotspotLayer) return;
+        this.dom.sceneHotspotLayer.innerHTML = '';
+        this.resetHotspotFocus();
+
+        if (!hotspots || hotspots.length === 0) return;
+
+        hotspots.forEach(hp => {
+          const pin = document.createElement('div');
+          pin.className = 'scene-hotspot-pin';
+          pin.style.left = `${hp.x}%`;
+          pin.style.top = `${hp.y}%`;
+          pin.innerHTML = `
+            <div class="hotspot-pin-circle">
+              <span class="pin-icon">${hp.icon || '💬'}</span>
+            </div>
+            <span class="hotspot-pin-name">${hp.label}</span>
+          `;
+
+          pin.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.focusHotspot(hp, pin);
+          });
+
+          this.dom.sceneHotspotLayer.appendChild(pin);
+        });
+      }
+
+      focusHotspot(hp, pinEl) {
+        if (window.audio) {
+          window.audio.init();
+          window.audio.playPaper();
+        }
+
+        document.querySelectorAll('.scene-hotspot-pin').forEach(p => p.classList.remove('active-pin'));
+        if (pinEl) pinEl.classList.add('active-pin');
+
+        if (this.dom.artFrame) {
+          this.dom.artFrame.style.transformOrigin = `${hp.x}% ${hp.y}%`;
+          this.dom.artFrame.classList.add('focus-hotspot-active');
+        }
+
+        if (this.dom.bubbleIcon) this.dom.bubbleIcon.textContent = hp.icon || '💬';
+        if (this.dom.bubbleName) this.dom.bubbleName.textContent = hp.label;
+        if (this.dom.bubbleContent) this.dom.bubbleContent.innerHTML = hp.content;
+        if (this.dom.bubbleActions) {
+          this.dom.bubbleActions.innerHTML = '';
+          if (hp.actionText && hp.targetScene) {
+            const btn = document.createElement('button');
+            btn.className = 'bubble-action-btn';
+            btn.textContent = hp.actionText;
+            btn.addEventListener('click', () => {
+              this.resetHotspotFocus();
+              this.loadScene(hp.targetScene);
+            });
+            this.dom.bubbleActions.appendChild(btn);
+          }
+        }
+
+        if (this.dom.hotspotDialogBubble) {
+          this.dom.hotspotDialogBubble.classList.remove('hidden');
+        }
+      }
+
+      resetHotspotFocus() {
+        if (this.dom.artFrame) {
+          this.dom.artFrame.classList.remove('focus-hotspot-active');
+        }
+        document.querySelectorAll('.scene-hotspot-pin').forEach(p => p.classList.remove('active-pin'));
+        if (this.dom.hotspotDialogBubble) {
+          this.dom.hotspotDialogBubble.classList.add('hidden');
+        }
+      }
+
+      initJournal() {
+        const modal = this.dom.journalModal;
+        const btn = this.dom.journalModalBtn;
+        const closeBtn = this.dom.closeJournalX;
+        if (!modal) return;
+
+        const openJournal = () => {
+          if (window.audio) {
+            window.audio.init();
+            window.audio.playPaper();
+          }
+          modal.classList.remove('hidden');
+          this.updateJournal();
+        };
+
+        const closeJournal = () => {
+          if (window.audio) window.audio.playPaper();
+          modal.classList.add('hidden');
+        };
+
+        if (btn) btn.addEventListener('click', openJournal);
+        if (closeBtn) closeBtn.addEventListener('click', closeJournal);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeJournal();
+        });
+
+        // Tabs
+        const tabs = modal.querySelectorAll('.tab-item-nav');
+        tabs.forEach(t => {
+          t.addEventListener('click', () => {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            modal.querySelectorAll('.tab-view').forEach(v => {
+              v.style.display = 'none';
+              v.classList.remove('active');
+            });
+            t.classList.add('active');
+            const targetId = t.dataset.tab;
+            const targetView = document.getElementById(targetId);
+            if (targetView) {
+              targetView.style.display = 'block';
+              targetView.classList.add('active');
+            }
+          });
+        });
+      }
+
+      updateJournal() {
+        if (!this.dom.artifactGrid || !this.dom.clueList || !this.dom.historyLog) return;
+
+        if (this.state.inventory.length === 0) {
+          this.dom.artifactGrid.innerHTML = '<p style="color:var(--paper-dim); font-style:italic; text-align:center; grid-column:1/-1;">Chưa thu thập được cổ vật nào...</p>';
+        } else {
+          this.dom.artifactGrid.innerHTML = this.state.inventory.map(key => {
+            const a = GAME_DATA.artifacts[key];
+            if (!a) return '';
+            return `
+              <div class="inv-item-card">
+                <div class="inv-item-header">
+                  <span class="inv-item-icon">${a.icon}</span>
+                  <span class="inv-item-name">${a.name}</span>
+                </div>
+                <p class="inv-item-desc">${a.desc}</p>
+              </div>
+            `;
+          }).join('');
+        }
+
+        if (this.state.clues.length === 0) {
+          this.dom.clueList.innerHTML = '<li style="color:var(--paper-dim); font-style:italic;">Chưa có manh mối nào được ghi nhận...</li>';
+        } else {
+          this.dom.clueList.innerHTML = this.state.clues.map(c => `
+            <li style="background:rgba(26,32,48,0.7); border-left:3px solid var(--gold-bright); padding:0.8rem 1rem; border-radius:0 4px 4px 0; font-size:0.92rem;">🔍 ${c}</li>
+          `).join('');
+        }
+
+        this.dom.historyLog.innerHTML = this.state.history.map((h, i) => `
+          <div><strong>#${i + 1}:</strong> ${h}</div>
+        `).join('');
+
+        if (this.dom.countArtifacts) this.dom.countArtifacts.textContent = this.state.inventory.length;
+        if (this.dom.countClues) this.dom.countClues.textContent = this.state.clues.length;
+      }
+
+      initAncientMap() {
+        const modal = this.dom.ancientMapModal;
+        const btn = this.dom.ancientMapBtn;
+        const closeBtn = this.dom.closeAncientMapBtn;
+        if (!modal) return;
+
+        const openMap = () => {
+          if (window.audio) {
+            window.audio.init();
+            window.audio.playPaper();
+            window.audio.playBell();
+          }
+          modal.classList.remove('hidden');
+          this.updateMapProgress();
+        };
+
+        const closeMap = () => {
+          if (window.audio) window.audio.playPaper();
+          modal.classList.add('hidden');
+        };
+
+        if (btn) btn.addEventListener('click', openMap);
+        if (closeBtn) closeBtn.addEventListener('click', closeMap);
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeMap();
+        });
+
+        const mapNodes = modal.querySelectorAll('.ancient-map-node');
+        mapNodes.forEach(node => {
+          node.addEventListener('click', () => {
+            const station = node.getAttribute('data-station');
+            const chamber = node.getAttribute('data-chamber');
+            closeMap();
+            if (station) {
+              this.exitToPage('museum.html?station=' + station);
+            } else if (chamber) {
+              const chamberMap = {
+                mask: 'chamber_mask_intro',
+                ceramic: 'chamber_ceramic_intro',
+                flute: 'chamber_flute_intro',
+                brush: 'chamber_brush_intro'
+              };
+              const target = chamberMap[chamber] || 'chamber_mask_intro';
+              this.loadScene(target);
+            }
+          });
+        });
+      }
+
+      updateMapProgress() {
+        const solved = this.state.solvedChambers || [];
+        if (this.dom.mapProgressBadge) {
+          this.dom.mapProgressBadge.textContent = `${solved.length}/4`;
+        }
+        if (this.dom.mapProgressCount) {
+          this.dom.mapProgressCount.textContent = `${solved.length}/4`;
+        }
+
+        const mapBadgeMask = document.getElementById('mapBadgeMask');
+        const mapBadgeVase = document.getElementById('mapBadgeVase');
+        const mapBadgeFlute = document.getElementById('mapBadgeFlute');
+        const mapBadgeBrush = document.getElementById('mapBadgeBrush');
+
+        if (mapBadgeMask && solved.includes('mask')) mapBadgeMask.style.display = 'block';
+        if (mapBadgeVase && solved.includes('ceramic')) mapBadgeVase.style.display = 'block';
+        if (mapBadgeFlute && solved.includes('flute')) mapBadgeFlute.style.display = 'block';
+        if (mapBadgeBrush && solved.includes('brush')) mapBadgeBrush.style.display = 'block';
+      }
+
+      initEvents() {
+        // Nút Bảo Tàng (quay về bảo tàng với snapshot)
+        if (this.dom.hudMuseumBtn) {
+          this.dom.hudMuseumBtn.addEventListener('click', () => {
+            this.saveState();
+            this.exitToPage('museum.html?restore=true');
+          });
+        }
+
+        // Nút Trang Chủ
+        if (this.dom.backHomeBtn) {
+          this.dom.backHomeBtn.addEventListener('click', () => {
+            this.saveState();
+            this.exitToPage('index.html');
+          });
+        }
+        if (this.dom.gameSealIcon) {
+          this.dom.gameSealIcon.addEventListener('click', () => {
+            this.saveState();
+            this.exitToPage('index.html');
+          });
+        }
+
+        // Âm thanh
+        if (this.dom.soundToggleBtn) {
+          this.dom.soundToggleBtn.addEventListener('click', () => {
+            if (window.audio) {
+              const muted = window.audio.toggleMute();
+              if (this.dom.soundIcon) this.dom.soundIcon.textContent = muted ? '🔇' : '🔊';
+            }
+          });
+        }
+
+        // Đóng Bubble
+        if (this.dom.closeBubbleBtn) {
+          this.dom.closeBubbleBtn.addEventListener('click', () => this.resetHotspotFocus());
+        }
+
+        // Audio Unlock
+        const unlockAudio = () => {
+          if (window.audio) {
+            window.audio.init();
+            window.audio.resume();
+          }
+          document.removeEventListener('click', unlockAudio);
+          document.removeEventListener('keydown', unlockAudio);
+        };
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('keydown', unlockAudio);
+      }
+
+      exitToPage(targetUrl) {
+        // Thu hồi triệt để WebGL Engine trước khi chuyển trang
+        if (window.vtStylizedWorld) {
+          window.vtStylizedWorld.dispose();
+          window.vtStylizedWorld = null;
+        }
+        navigateWithInk(targetUrl);
+      }
+    }
+
+    // Khởi động trang cốt truyện
+    window.addEventListener('DOMContentLoaded', () => {
+      window.gameChamber = new GameChamberApp();
+
+      // Hiệu ứng mực tan loang mở đầu trang
+      const inkDissolve = window.vtInkVortex || window.inkVortex;
+      if (inkDissolve && typeof inkDissolve.startDissolve === 'function') {
+        inkDissolve.startDissolve();
+      }
+
+      setTimeout(() => {
+        const inkCanvas = document.getElementById('inkVortexCanvas') || document.getElementById('inkCanvas');
+        if (inkCanvas) inkCanvas.style.opacity = '0';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

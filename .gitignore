@@ -1,0 +1,30 @@
+# Hệ thống & IDE
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+.claude/
+mask game/.claude/
+
+# Python & Scripts phụ trợ
+__pycache__/
+*.py[cod]
+*.py
+
+# Bản sao lưu, file nén & thư mục nháp không dùng khi chạy web
+*.bak
+*.backup.*
+*.zip
+archive/
+backup_20261106_homepage/
+des_extracted/
+docs/
+mask game/_backup/
+mask game/extracted_workshop/
+
+# Node / Vercel
+node_modules/
+.vercel/
+.env
+.env.*

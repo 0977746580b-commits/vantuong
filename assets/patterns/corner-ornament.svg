@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="cornerGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5a823"/>
+      <stop offset="50%" stop-color="#e06d28"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+  </defs>
+  <!-- Viền ngoài kép giật cấp -->
+  <path d="M6,114 L6,6 L114,6" stroke="url(#cornerGold)" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+  <path d="M14,114 L14,14 L114,14" stroke="url(#cornerGold)" stroke-width="1.2" stroke-opacity="0.7" fill="none"/>
+  <path d="M20,114 L20,20 L114,20" stroke="url(#cornerGold)" stroke-width="0.8" stroke-dasharray="3,3" stroke-opacity="0.5" fill="none"/>
+
+  <!-- Khối hoa cúc sành sứ tâm điểm góc -->
+  <circle cx="34" cy="34" r="8" fill="#a81c22" stroke="url(#cornerGold)" stroke-width="1.8"/>
+  <circle cx="34" cy="34" r="3.5" fill="#f5a823"/>
+
+  <!-- 4 Cánh hoa cúc cách điệu -->
+  <path d="M34,18 Q38,24 34,26 Q30,24 34,18 Z" fill="url(#cornerGold)"/>
+  <path d="M34,50 Q38,44 34,42 Q30,44 34,50 Z" fill="url(#cornerGold)"/>
+  <path d="M18,34 Q24,38 26,34 Q24,30 18,34 Z" fill="url(#cornerGold)"/>
+  <path d="M50,34 Q44,38 42,34 Q44,30 50,34 Z" fill="url(#cornerGold)"/>
+
+  <!-- Mây lượn hồi văn lan tỏa -->
+  <path d="M14,65 Q25,48 42,54 Q55,42 65,14" stroke="url(#cornerGold)" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+  <path d="M14,85 Q35,70 54,78 T85,14" stroke="url(#cornerGold)" stroke-width="1.2" stroke-opacity="0.6" fill="none" stroke-linecap="round"/>
+</svg>
