@@ -20,27 +20,23 @@
     intro: [
       {
         speaker: 'LỜI DẪN • KHÔNG GIAN VẠN TƯỢNG',
-        text: 'Triển lãm Vạn Tượng được tổ chức tại một không gian nghệ thuật lâu đời ở trung tâm Hà Nội, thu hút sự chú ý của giới sưu tầm, các nhà nghiên cứu mỹ thuật, nghệ nhân và đông đảo công chúng. Sự kiện được giới thiệu là lần đầu tiên công chúng có cơ hội chiêm ngưỡng một bộ sưu tập tranh dân gian Việt Nam đặc biệt, bao gồm những tác phẩm được cho là đã thất truyền qua nhiều thế hệ.'
+        text: 'Triển lãm Vạn Tượng được tổ chức tại một không gian nghệ thuật lâu đời ở trung tâm Hà Nội, thu hút sự chú ý của đông đảo công chúng, giới sưu tầm và các nhà nghiên cứu mỹ thuật. Đây là lần đầu tiên một bộ sưu tập tranh dân gian Việt Nam đặc biệt, với nhiều tác phẩm được cho là đã thất truyền qua hàng trăm năm, được giới thiệu rộng rãi đến công chúng.'
       },
       {
         speaker: 'LỜI DẪN • NHÀ SƯU TẦM BÍ ẨN',
-        text: 'Người đứng sau triển lãm là một nhà sưu tầm kín tiếng, người tuyên bố đã dành gần như cả cuộc đời để lần theo dấu vết của những dòng tranh cổ. Theo lời ông, các tác phẩm được tập hợp từ nhiều nguồn khác nhau: những căn nhà cổ bị bỏ hoang, các bộ sưu tập tư nhân không còn người thừa kế, những kho lưu trữ thất lạc và cả những di vật chưa từng được giới nghiên cứu ghi nhận.'
+        text: 'Người đứng sau triển lãm là một nhà sưu tầm kín tiếng, người đã dành gần như cả cuộc đời để lần theo dấu vết của những dòng tranh cổ. Tuy nhiên, nguồn gốc của một số hiện vật vẫn chưa được xác minh rõ ràng. Đặc biệt, chiếc mặt nạ được đặt trang trọng trong tủ kính lại gắn liền với những câu chuyện hoàn toàn trái ngược nhau: khi là biểu tượng của một vị trung thần, khi lại bị xem là hình tượng của kẻ phản diện trong một vở tuồng cổ.'
       },
       {
-        speaker: 'LỜI DẪN • NGUỒN GỐC BỎ NGỎ',
-        text: 'Tuy nhiên, khi được hỏi về nguồn gốc cụ thể của từng tác phẩm, ban tổ chức chỉ đưa ra những thông tin sơ lược, viện dẫn lý do quyền riêng tư của người hiến tặng và quá trình xác minh vẫn chưa hoàn tất. Điều khiến giới chuyên môn xôn xao không chỉ là tuổi đời của bộ sưu tập, mà còn là những điểm bất thường xuất hiện trên một số hiện vật.'
+        speaker: 'LỜI DẪN • BƯỚC VÀO PHÒNG TRIỂN LÃM',
+        text: 'Cậu bước qua cánh cửa phòng triển lãm. Những bước chân nối tiếp nhau trên nền đá, tiếng máy ảnh xen lẫn những lời trầm trồ và bàn luận về các tác phẩm. Dọc theo những bức tường phủ màu trầm là hàng loạt tranh cổ, hiện vật và những dấu tích của các dòng nghệ thuật dân gian Việt Nam.'
       },
       {
-        speaker: 'LỜI DẪN • NHỮNG DỊ BẢN MÂU THUẪN',
-        text: 'Phía góc trái phòng trưng bày, một chiếc mặt nạ được đặt trang trọng bên trong tủ kính, kèm theo tấm biển thông tin về nguồn gốc và lịch sử lưu truyền. Thay vì cung cấp một xuất xứ rõ ràng như thông lệ, hồ sơ của chiếc mặt nạ lại dẫn đến ba nguồn tư liệu với những lời giải thích mâu thuẫn nhau: khi là biểu tượng của một vị trung thần, khi lại gắn liền với hình ảnh kẻ bị cả làng buộc tội, thậm chí được xếp vào nhóm nhân vật phản diện trong một vở tuồng cổ.'
+        speaker: 'LỜI DẪN • KHUNG TRANH BÍ ẨN',
+        text: 'Ở cuối phòng triển lãm, một khung tranh lớn được đặt chính giữa bức tường. Khung gỗ đã ngả màu theo thời gian, phần nền bên trong được phủ một lớp giấy dó nhạt màu, nhưng hoàn toàn không có hình vẽ. Bên dưới chỉ có một tấm biển nhỏ với dòng chữ: “Tác phẩm trung tâm. Tạm thời chưa công bố.”'
       },
       {
-        speaker: 'LỜI DẪN • HỌA TIẾT CHƯA TỪNG GHI NHẬN',
-        text: 'Bên cạnh đó, một số sản phẩm gốm cổ Bát Tràng cũng thu hút sự chú ý bởi những hoa văn chạm khắc khó lý giải. Những đường nét tưởng chừng chỉ mang tính trang trí lại ẩn chứa các hình thù kỳ lạ, không xuất hiện trong những bản ghi chép hay hình ảnh lưu trữ mà giới nghiên cứu từng biết đến.'
-      },
-      {
-        speaker: 'LỜI DẪN • MẬT MÃ GIỮA CÁC DI VẬT',
-        text: 'Dù vậy, tất cả những chi tiết này vẫn chỉ được xem là những dị bản chưa được giải thích, hoặc dấu vết của những lần phục chế trong quá khứ. Với phần lớn khách tham quan, chúng đơn giản khiến bộ sưu tập trở nên hấp dẫn hơn. Nhưng với những người thực sự am hiểu tác phẩm dân gian, các tác phẩm dường như đang chứa đựng một hệ thống hình ảnh có chủ ý, như thể ai đó đã cài vào chúng những thông điệp chỉ có thể được giải mã khi đặt các tác phẩm cạnh nhau.'
+        speaker: 'LỜI DẪN • DẤU TÍCH ẨN MÌNH',
+        text: 'Không ai biết tác phẩm thực sự có tồn tại hay không. Nhưng đôi khi, khi quan sát từ những góc độ khác nhau, trên nền giấy tưởng chừng trống rỗng ấy lại xuất hiện những đường nét mờ nhạt. Chúng lấp ló trong khoảnh khắc, giống như những nét mực đã phai màu, rồi biến mất ngay khi người xem tiến lại gần.'
       },
       {
         speaker: 'HƯỚNG DẪN THƯỞNG LÃM & TƯƠNG TÁC',
