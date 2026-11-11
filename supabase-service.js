@@ -71,6 +71,7 @@ class SupabaseService {
           this.currentUser = session.user;
           this.isGuest = false;
           this.fetchUserProfile(session.user.id);
+          this.fetchUnlockedPacks(session.user.id);
           this.triggerAuthChange();
           return;
         }
@@ -116,6 +117,7 @@ class SupabaseService {
           this.currentUser = data.user;
           this.isGuest = false;
           await this.fetchUserProfile(data.user.id);
+          await this.fetchUnlockedPacks(data.user.id);
           this.triggerAuthChange();
           return { success: true, user: this.currentUser, profile: this.profile, source: 'supabase' };
         }
@@ -411,6 +413,56 @@ class SupabaseService {
         };
       }
     } catch (e) {}
+  }
+
+  // Tải danh sách gói mở rộng đã mua từ Supabase
+  async fetchUnlockedPacks(userId) {
+    if (!this.client || !this.isConnected || !userId) return;
+    try {
+      const { data, error } = await this.client
+        .from('vt_unlocked_packs')
+        .select('pack_type')
+        .eq('user_id', userId);
+      if (!error && Array.isArray(data)) {
+        const packs = data.map(p => p.pack_type);
+        if (packs.includes('combo_all')) {
+          localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(['ceramic', 'flute', 'all']));
+        } else {
+          localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(packs));
+        }
+      }
+    } catch (e) {
+      console.warn('[Vạn Tượng] Chưa tải được gói từ Cõi Mây, dùng bộ nhớ cục bộ:', e);
+    }
+  }
+
+  // Ghi nhận mở khóa gói lên Supabase
+  async unlockPack(packType, amount = 0, paymentRef = null) {
+    // 1. Luôn cập nhật LocalStorage ngay lập tức
+    try {
+      const raw = localStorage.getItem('VT_UNLOCKED_PACKS');
+      const current = raw ? JSON.parse(raw) : [];
+      if (!current.includes(packType)) {
+        current.push(packType);
+        if (packType === 'combo_all') {
+          current.push('ceramic', 'flute', 'all');
+        }
+        localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(current));
+      }
+    } catch (e) {}
+
+    // 2. Ghi lên Supabase nếu có đăng nhập
+    if (this.client && this.isConnected && this.currentUser && !this.isGuest) {
+      try {
+        await this.client.from('vt_unlocked_packs').upsert({
+          user_id: this.currentUser.id,
+          pack_type: packType,
+          amount,
+          payment_ref: paymentRef,
+          unlocked_at: new Date().toISOString()
+        }, { onConflict: 'user_id, pack_type' });
+      } catch (e) {}
+    }
   }
 
   // Kích hoạt sự kiện đổi trạng thái đăng nhập
