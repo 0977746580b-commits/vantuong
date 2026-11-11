@@ -9862,7 +9862,7 @@
       </div>
 
       <!-- Thanh chọn Tabs -->
-      <div class="auth-tabs-bar">
+      <div class="auth-tabs-bar" style="grid-template-columns: repeat(3, 1fr);">
         <button class="auth-tab-btn active" data-tab="tabLogin" type="button">
           <span>🔑 ĐĂNG NHẬP</span>
         </button>
@@ -9871,9 +9871,6 @@
         </button>
         <button class="auth-tab-btn" data-tab="tabGuest" type="button">
           <span>🎭 KHÁCH TỰ DO</span>
-        </button>
-        <button class="auth-tab-btn" data-tab="tabSupabase" type="button">
-          <span>☁️ SUPABASE</span>
         </button>
       </div>
 
@@ -9960,24 +9957,6 @@
         </button>
       </div>
 
-      <!-- TAB 4: SUPABASE CLOUD -->
-      <div id="tabSupabase" class="auth-tab-pane" style="display:none; padding-top:1rem;">
-        <div class="supabase-pill-status">
-          <span>Kết nối Supabase Cloud:</span>
-          <strong id="supaStatusBadge" style="color:#48bb78;">● Đã sẵn sàng kết nối</strong>
-        </div>
-        <div class="auth-form-group">
-          <label for="supaUrl">Project URL</label>
-          <input type="text" id="supaUrl" class="auth-input" value="https://jhelfkonsofctmgpoocu.supabase.co" />
-        </div>
-        <div class="auth-form-group">
-          <label for="supaKey">Public Anon API Key</label>
-          <input type="text" id="supaKey" class="auth-input" value="sb_publishable_3Znh_753KpHqpaPyJAP66g_gXMnMXNK" />
-        </div>
-        <button id="saveSupaConfigBtn" class="auth-secondary-btn" style="width:100%; justify-content:center;" type="button">
-          <span>LƯU & ĐỒNG BỘ CỔNG MÂY</span>
-        </button>
-      </div>
 
       <!-- TAB 5: HỒ SƠ NGƯỜI DÙNG KHI ĐÃ ĐĂNG NHẬP -->
       <div id="tabUserProfile" class="auth-tab-pane" style="display:none; padding-top:1rem;">
