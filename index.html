@@ -2325,6 +2325,546 @@
       margin-bottom: 1rem;
     }
 
+    /* ===================================================================
+       GIAO DIỆN CHUẨN SẠCH: MODAL ĐĂNG NHẬP / ĐĂNG KÝ / CHẾ ĐỘ KHÁCH
+       =================================================================== */
+    .auth-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 22, 0.88);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      box-sizing: border-box;
+      z-index: 100005;
+      opacity: 1;
+      visibility: visible;
+      transition: all 0.25s ease;
+    }
+    .auth-modal-backdrop.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .auth-modal-card-clean {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: #151821;
+      border: 1px solid #2d3446;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(245, 168, 35, 0.15);
+      border-radius: 12px;
+      padding: 2rem 2.2rem;
+      color: #e2e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .auth-modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.2rem 0.5rem;
+      transition: color 0.2s;
+    }
+    .auth-modal-close-btn:hover {
+      color: #f5a823;
+    }
+    .auth-brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245, 168, 35, 0.12);
+      border: 1px solid rgba(245, 168, 35, 0.35);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: #f5a823;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+    }
+    .auth-brand-seal-icon {
+      font-family: serif;
+      font-size: 0.95rem;
+    }
+    .auth-modal-main-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 0.4rem 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .auth-modal-sub-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin: 0 0 1.2rem 0;
+    }
+    .auth-guest-banner-clean {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(30, 64, 175, 0.25));
+      border: 1.5px solid #3b82f6;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .auth-guest-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .guest-banner-icon {
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+    .auth-guest-info strong {
+      display: block;
+      color: #93c5fd;
+      font-size: 0.92rem;
+      margin-bottom: 0.2rem;
+    }
+    .auth-guest-info p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+    .btn-guest-launch-primary {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+    .btn-guest-launch-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    }
+    .auth-secondary-btn {
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 0.7rem 1rem;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .auth-secondary-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      border-color: #64748b;
+      color: #fff;
+    }
+    .auth-demo-divider {
+      text-align: center;
+      position: relative;
+      margin: 1.2rem 0 0.8rem;
+    }
+    .auth-demo-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #334155;
+    }
+    .auth-demo-divider span {
+      position: relative;
+      background: #151821;
+      padding: 0 0.8rem;
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .guest-desc-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+    }
+    .auth-profile-box {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .profile-seal-large {
+      width: 52px;
+      height: 52px;
+      background: radial-gradient(circle at 35% 35%, #c0392b, #851c14);
+      color: #fff;
+      border: 2px solid #f5a823;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .profile-info-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .profile-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+    .profile-title-tag {
+      font-size: 0.78rem;
+      color: #f5a823;
+      font-weight: 600;
+    }
+    .profile-email-tag {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .profile-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .profile-action-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .profile-action-btn:hover {
+      background: #334155;
+      border-color: #475569;
+    }
+    .profile-signout-btn {
+      width: 100%;
+      background: rgba(220, 38, 38, 0.15);
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      color: #fca5a5;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .profile-signout-btn:hover {
+      background: rgba(220, 38, 38, 0.3);
+      color: #fff;
+    }
+    .vt-nav-auth-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245, 168, 35, 0.12);
+      border: 1px solid rgba(245, 168, 35, 0.4);
+      color: #fff;
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-family: var(--font-sans-viet);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .vt-nav-auth-btn:hover {
+      background: rgba(245, 168, 35, 0.25);
+      border-color: #f5a823;
+      transform: translateY(-1px);
+    }
+    .auth-btn-seal {
+      color: #f5a823;
+      font-size: 1rem;
+    }
+
+    /* ===================================================================
+       MỤC GÓI MỞ RỘNG (EXPANSION PACKS) TRÊN TRANG CHỦ & MODAL KHÓA THẾ GIỚI
+       =================================================================== */
+    .sec-expansion-packs {
+      position: relative;
+      width: 100%;
+      padding: 6rem 2rem;
+      box-sizing: border-box;
+      background: radial-gradient(circle at 50% 25%, #18110e 0%, #0d0806 85%);
+      color: #f7f1e6;
+      border-top: 1px solid rgba(245, 168, 35, 0.2);
+      border-bottom: 1px solid rgba(245, 168, 35, 0.2);
+    }
+    .packs-container {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .packs-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .packs-eyebrow {
+      font-family: var(--font-sans-viet);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: #f5a823;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .packs-title {
+      font-family: var(--font-serif-viet);
+      font-size: 2.3rem;
+      color: #fffdf5;
+      margin: 0 0 1rem;
+      font-weight: 700;
+    }
+    .packs-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: rgba(242, 229, 207, 0.85);
+      line-height: 1.6;
+    }
+    .packs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .pack-card {
+      background: rgba(26, 18, 14, 0.95);
+      border: 1.5px solid rgba(139, 115, 85, 0.35);
+      border-radius: 12px;
+      padding: 2.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    }
+    .pack-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 168, 35, 0.7);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(245, 168, 35, 0.2);
+    }
+    .pack-card.featured {
+      border: 2px solid #f5a823;
+      background: linear-gradient(180deg, rgba(46, 28, 18, 0.98), rgba(24, 15, 11, 0.98));
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 168, 35, 0.3);
+    }
+    .pack-badge-featured {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #e03c1b, #f5a823);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(224, 60, 27, 0.6);
+      white-space: nowrap;
+    }
+    .pack-type-tag {
+      font-family: var(--font-sans-viet);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #f5a823;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .pack-title {
+      font-family: var(--font-serif-viet);
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 0 0 0.8rem;
+    }
+    .pack-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(245, 168, 35, 0.2);
+    }
+    .pack-price {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #f5a823;
+      font-family: var(--font-serif-viet);
+    }
+    .pack-price-sub {
+      font-size: 0.85rem;
+      color: rgba(242, 229, 207, 0.7);
+    }
+    .pack-price-original {
+      font-size: 1.1rem;
+      text-decoration: line-through;
+      color: #888;
+      margin-left: 0.4rem;
+    }
+    .pack-features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      flex-grow: 1;
+    }
+    .pack-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: #e5d8c5;
+    }
+    .pack-feature-item.locked {
+      color: #887a6d;
+    }
+    .pack-feature-icon {
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+    .pack-cta-btn {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-family: var(--font-sans-viet);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      border: 1.5px solid transparent;
+    }
+    .pack-cta-btn.primary {
+      background: linear-gradient(135deg, #e03c1b, #b32a10);
+      color: #fff;
+      border-color: #f5a823;
+      box-shadow: 0 6px 20px rgba(224, 60, 27, 0.5);
+    }
+    .pack-cta-btn.primary:hover {
+      background: linear-gradient(135deg, #f55030, #d03015);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(224, 60, 27, 0.7);
+    }
+    .pack-cta-btn.secondary {
+      background: rgba(245, 168, 35, 0.15);
+      border-color: rgba(245, 168, 35, 0.45);
+      color: #f5a823;
+    }
+    .pack-cta-btn.secondary:hover {
+      background: rgba(245, 168, 35, 0.28);
+      border-color: #f5a823;
+      color: #fff;
+    }
+    .pack-cta-btn.active-tier {
+      background: rgba(46, 204, 113, 0.15);
+      border-color: #2ecc71;
+      color: #2ecc71;
+      cursor: default;
+    }
+
+    /* Modal Thông Báo Gói Mở Rộng Khi Bấm Hiện Vật Bị Khóa Trong Bảo Tàng */
+    .expansion-modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      background: #17110e;
+      border: 1.5px solid #f5a823;
+      border-radius: 12px;
+      padding: 2.2rem;
+      color: #f7f1e6;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 35px rgba(245, 168, 35, 0.3);
+      text-align: center;
+    }
+    .expansion-modal-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+    .expansion-modal-title {
+      font-family: var(--font-serif-viet);
+      font-size: 1.6rem;
+      color: #fff;
+      margin: 0 0 0.8rem;
+    }
+    .expansion-modal-body {
+      font-size: 0.95rem;
+      color: rgba(242, 229, 207, 0.9);
+      line-height: 1.6;
+      margin-bottom: 1.8rem;
+    }
+    .expansion-options-box {
+      background: rgba(30, 20, 16, 0.8);
+      border: 1px solid rgba(245, 168, 35, 0.3);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.6rem;
+      text-align: left;
+    }
+    .expansion-option-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(245, 168, 35, 0.15);
+    }
+    .expansion-option-row:last-child {
+      border-bottom: none;
+    }
+    .expansion-modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
     /* Nút Lưu Mây trong Game HUD */
     .hud-cloud-btn {
       background: rgba(36, 25, 16, 0.92);
@@ -7813,7 +8353,13 @@
         <a href="#secLostCollection" class="vt-nav-item">Thất Truyền</a>
         <a href="#secExhibitionHall" class="vt-nav-item">Triển Lãm</a>
         <a href="#secEmptyMasterpiece" class="vt-nav-item">Tác Phẩm</a>
+        <a href="#secExpansionPacks" class="vt-nav-item" style="color: #f5a823; font-weight: 700;">Gói Mở Rộng</a>
         <a href="javascript:void(0)" id="navFoundersBtn" class="vt-nav-item" title="Xem thông tin Tác Giả & Ban Sáng Lập">Tác Giả & Sáng Lập</a>
+        <button id="navAuthBtn" class="vt-nav-auth-btn" type="button" title="Đăng nhập / Đăng ký / Chế độ Khách">
+          <span id="navAuthSeal" class="auth-btn-seal">🏮</span>
+          <span id="navAuthLabel" class="auth-btn-label">Tài Khoản</span>
+          <span id="navCloudDot" class="nav-cloud-dot" title="Trạng thái kết nối Supabase"></span>
+        </button>
       </nav>
     </header>
 
@@ -7999,6 +8545,134 @@
 
           <div class="masterpiece-brass-tag">
             <span>DẤU TÍCH VẠN TƯỢNG • BÍ ẨN CHỜ NGƯỜI VÉN MÀN</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         MỤC GÓI MỞ RỘNG (EXPANSION PACKS): BẢN DÙNG THỬ & CÁC GÓI MỞ KHÓA
+         =============================================================== -->
+    <section id="secExpansionPacks" class="sec-expansion-packs">
+      <div class="packs-container">
+        <div class="packs-header">
+          <div class="packs-eyebrow">BẢN QUYỀN TRẢI NGHIỆM • GÓI MỞ RỘNG DI SẢN</div>
+          <h2 class="packs-title">Khám Phá Chiều Sâu Cõi Di Sản Vạn Tượng</h2>
+          <p class="packs-desc">
+            Trải nghiệm miễn phí trọn vẹn không gian Bảo Tàng 3D và thế giới Mặt Nạ (HỌA DIỆN). Nâng cấp các gói mở rộng để khám phá những bí mật cổ truyền sâu thẳm nhất.
+          </p>
+        </div>
+
+        <div class="packs-grid">
+          <!-- GÓI 1: BẢN DÙNG THỬ (FREE) -->
+          <div class="pack-card">
+            <span class="pack-type-tag">BẢN DÙNG THỬ</span>
+            <h3 class="pack-title">Trải Nghiệm Miễn Phí</h3>
+            <div class="pack-price-wrap">
+              <span class="pack-price">0đ</span>
+              <span class="pack-price-sub">/ Miễn phí trọn đời</span>
+            </div>
+            <ul class="pack-features-list">
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Khám phá tự do sảnh vòm <strong>Bảo Tàng 3D Cung Đình</strong></span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Xoay 360° & khảo cứu chi tiết cả 3 cổ vật thất truyền</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span><strong>Toàn quyền bước vào Thế Giới Mặt Nạ</strong> (Trò chơi trinh thám pixel 2D <strong>HỌA DIỆN</strong> trọn vẹn 3 hồi kết)</span>
+              </li>
+              <li class="pack-feature-item locked">
+                <span class="pack-feature-icon" style="color:#e74c3c;">🔒</span>
+                <span>Ải II (Bình Gốm Bát Tràng): Khóa thế giới</span>
+              </li>
+              <li class="pack-feature-item locked">
+                <span class="pack-feature-icon" style="color:#e74c3c;">🔒</span>
+                <span>Ải III (Tranh Ngũ Hổ Hàng Trống): Khóa thế giới</span>
+              </li>
+              <li class="pack-feature-item locked">
+                <span class="pack-feature-icon" style="color:#e74c3c;">🔒</span>
+                <span>Hậu Cung Điện Thờ Tiền Nhân: Khóa phong ấn</span>
+              </li>
+            </ul>
+            <button class="pack-cta-btn active-tier" id="btnTierFreeCurrent" type="button">
+              ĐANG KÍCH HOẠT • BẢN DÙNG THỬ
+            </button>
+          </div>
+
+          <!-- GÓI 2: GÓI LẺ TỪNG CỔ VẬT -->
+          <div class="pack-card">
+            <span class="pack-type-tag">GÓI LẺ • TỰ CHỌN</span>
+            <h3 class="pack-title">Khám Phá Riêng Từng Ải</h3>
+            <div class="pack-price-wrap">
+              <span class="pack-price">39.000đ</span>
+              <span class="pack-price-sub">/ một cổ vật</span>
+            </div>
+            <ul class="pack-features-list">
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Bao gồm toàn bộ quyền lợi của <strong>Bản Dùng Thử</strong></span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#f5a823;">❖</span>
+                <span>Mở khóa riêng <strong>Ải II: Mật Thất Bình Gốm Bát Tràng</strong> (Giải đố men ngọc, tái sinh men rạn)</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#f5a823;">❖</span>
+                <span><em>HOẶC</em> mở riêng <strong>Ải III: Cõi Mực Tranh Ngũ Hổ</strong> (Hóa giải tà niệm, phục hồi bản mộc Thăng Long)</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Lưu trữ tiến trình vĩnh viễn trên tài khoản Lữ Khách</span>
+              </li>
+              <li class="pack-feature-item locked">
+                <span class="pack-feature-icon" style="color:#e74c3c;">🔒</span>
+                <span>Chỉ mở ải đã chọn mua</span>
+              </li>
+            </ul>
+            <button class="pack-cta-btn secondary" id="btnBuyIndividualPack" type="button">
+              CHỌN MUA GÓI LẺ
+            </button>
+          </div>
+
+          <!-- GÓI 3: GÓI TRỌN BỘ COMBO (FEATURED) -->
+          <div class="pack-card featured">
+            <div class="pack-badge-featured">KHUYÊN DÙNG • TIẾT KIỆM 25%</div>
+            <span class="pack-type-tag" style="color:#ffc107;">GÓI TRỌN BỘ • COMBO</span>
+            <h3 class="pack-title">Trọn Bộ Di Sản Cõi Mực</h3>
+            <div class="pack-price-wrap">
+              <span class="pack-price">59.000đ</span>
+              <span class="pack-price-original">78.000đ</span>
+              <span class="pack-price-sub">/ trọn gói</span>
+            </div>
+            <ul class="pack-features-list">
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span><strong>Mở khóa TOÀN BỘ 3 ải cổ vật</strong> (Mặt Nạ Tuồng, Bình Gốm Bát Tràng, Tranh Ngũ Hổ)</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#f5a823;">✨</span>
+                <span><strong>Khai mở HẬU CUNG: Điện Thờ Tiền Nhân</strong> diện kiến Cụ Tổ Nghề Tranh</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#f5a823;">✨</span>
+                <span>Tiếp nhận <strong>Bút Lông Đuôi Chồn & Mực Chu Sa</strong> mở khóa đại kết cục bí ẩn</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Đồng bộ <strong>Cloud Save Supabase</strong> vĩnh viễn trên mọi thiết bị</span>
+              </li>
+              <li class="pack-feature-item">
+                <span class="pack-feature-icon" style="color:#2ecc71;">✓</span>
+                <span>Huy hiệu triện son độc quyền trong hồ sơ lữ khách</span>
+              </li>
+            </ul>
+            <button class="pack-cta-btn primary" id="btnBuyComboPack" type="button">
+              SỞ HỮU GÓI TRỌN BỘ ➔
+            </button>
           </div>
         </div>
       </div>
@@ -8536,6 +9210,10 @@
         <button id="museumMapBtn" class="hud-pill-btn" title="Mở Cổ Đồ Vạn Tượng">
           <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
           <span class="pill-text">Cổ Đồ</span>
+        </button>
+        <button id="hudAuthBtn" class="hud-pill-btn" style="border-color: rgba(245, 168, 35, 0.6); color: #f5a823;" title="Tài Khoản / Đăng Nhập / Chế độ Khách">
+          <span id="hudAuthSeal">🏮</span>
+          <span id="hudAuthName" class="pill-text">Lữ Khách</span>
         </button>
         <button id="museumAudioToggleBtn" class="hud-icon-btn" title="Bật/Tắt Âm Lượng">🔊</button>
       </div>
@@ -9148,6 +9826,221 @@
           <span class="status-dot"></span>
           <span id="relicsCollectedCount">Tiến độ khảo cứu: 0 / 3 Di Vật</span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL XÁC THỰC LỮ KHÁCH (ĐĂNG NHẬP / ĐĂNG KÝ / CHẾ ĐỘ KHÁCH)
+       Giao diện chuẩn sạch, trực quan, hỗ trợ Chế độ Khách trải nghiệm tức thì
+       =================================================================== -->
+  <div id="authModal" class="auth-modal-backdrop hidden" style="z-index: 100005;">
+    <div class="auth-modal-card-clean">
+      <button id="closeAuthModalX" class="auth-modal-close-btn" type="button" title="Đóng cửa sổ">&times;</button>
+
+      <div class="auth-modal-header-clean">
+        <div class="auth-brand-pill">
+          <span class="auth-brand-seal-icon">象</span>
+          <span class="auth-brand-title-text">VẠN TƯỢNG • TÀI KHOẢN LỮ KHÁCH</span>
+        </div>
+        <h3 class="auth-modal-main-title">Đăng Nhập Hoặc Trải Nghiệm Ngay</h3>
+        <p class="auth-modal-sub-desc">Đăng nhập để đồng bộ tiến trình lên Supabase Cloud, hoặc bắt đầu ngay với Chế độ Khách không cần tài khoản.</p>
+      </div>
+
+      <!-- Quick Guest Action Highlight Bar -->
+      <div class="auth-guest-banner-clean">
+        <div class="auth-guest-info">
+          <span class="guest-banner-icon">⚡</span>
+          <div>
+            <strong>Chế độ Khách (Guest Mode) — Không cần tài khoản</strong>
+            <p>Trải nghiệm ngay toàn bộ Bảo tàng 3D và tựa game HỌA DIỆN hoàn toàn miễn phí.</p>
+          </div>
+        </div>
+        <button id="quickGuestLaunchBtn" class="btn-guest-launch-primary" type="button">
+          CHƠI NGAY VỚI CHẾ ĐỘ KHÁCH ➔
+        </button>
+      </div>
+
+      <!-- Thanh chọn Tabs -->
+      <div class="auth-tabs-bar">
+        <button class="auth-tab-btn active" data-tab="tabLogin" type="button">
+          <span>🔑 ĐĂNG NHẬP</span>
+        </button>
+        <button class="auth-tab-btn" data-tab="tabRegister" type="button">
+          <span>📝 ĐĂNG KÝ</span>
+        </button>
+        <button class="auth-tab-btn" data-tab="tabGuest" type="button">
+          <span>🎭 KHÁCH TỰ DO</span>
+        </button>
+        <button class="auth-tab-btn" data-tab="tabSupabase" type="button">
+          <span>☁️ SUPABASE</span>
+        </button>
+      </div>
+
+      <!-- Thông báo trạng thái -->
+      <div id="authStatusAlert" class="auth-status-alert"></div>
+
+      <!-- TAB 1: ĐĂNG NHẬP -->
+      <div id="tabLogin" class="auth-tab-pane active" style="padding-top:1rem;">
+        <div class="auth-form-group">
+          <label for="loginEmail">Email đăng nhập</label>
+          <input type="email" id="loginEmail" class="auth-input" placeholder="vidu@email.com" autocomplete="email" />
+        </div>
+        <div class="auth-form-group">
+          <label for="loginPassword">Mật khẩu</label>
+          <input type="password" id="loginPassword" class="auth-input" placeholder="Nhập mật khẩu..." autocomplete="current-password" />
+        </div>
+        <button id="submitLoginBtn" class="auth-submit-btn" type="button">
+          <span>ĐĂNG NHẬP TÀI KHOẢN</span>
+          <span>➔</span>
+        </button>
+
+        <div class="auth-demo-divider">
+          <span>hoặc trải nghiệm nhanh</span>
+        </div>
+        <button id="quickDemoBtn" class="auth-secondary-btn" style="width:100%; justify-content:center;" type="button">
+          <span>👤 Thử tài khoản mẫu: <strong>admin@vantuong.vn</strong></span>
+        </button>
+      </div>
+
+      <!-- TAB 2: ĐĂNG KÝ -->
+      <div id="tabRegister" class="auth-tab-pane" style="display:none; padding-top:1rem;">
+        <div class="auth-form-group">
+          <label for="regName">Tên hiển thị / Họ tên lữ khách</label>
+          <input type="text" id="regName" class="auth-input" placeholder="Ví dụ: Nguyễn Văn A" />
+        </div>
+        <div class="auth-form-group">
+          <label for="regEmail">Email đăng ký</label>
+          <input type="email" id="regEmail" class="auth-input" placeholder="vidu@email.com" autocomplete="email" />
+        </div>
+        <div class="auth-form-group">
+          <label for="regPassword">Mật khẩu (tối thiểu 6 ký tự)</label>
+          <input type="password" id="regPassword" class="auth-input" placeholder="Tạo mật khẩu an toàn..." autocomplete="new-password" />
+        </div>
+        <div class="auth-form-group">
+          <label>Chọn Ấn Triện Hộ Thân (Biểu tượng):</label>
+          <div class="seal-selector-grid">
+            <div class="seal-option-card selected" data-seal="象">
+              <span class="seal-glyph">象</span>
+              <span class="seal-title">Vạn Tượng</span>
+            </div>
+            <div class="seal-option-card" data-seal="鳳">
+              <span class="seal-glyph">鳳</span>
+              <span class="seal-title">Phượng Vũ</span>
+            </div>
+            <div class="seal-option-card" data-seal="龍">
+              <span class="seal-glyph">龍</span>
+              <span class="seal-title">Bạch Long</span>
+            </div>
+            <div class="seal-option-card" data-seal="墨">
+              <span class="seal-glyph">墨</span>
+              <span class="seal-title">Hắc Mặc</span>
+            </div>
+          </div>
+        </div>
+        <button id="submitRegisterBtn" class="auth-submit-btn" type="button">
+          <span>ĐĂNG KÝ TÀI KHOẢN MỚI</span>
+          <span>✓</span>
+        </button>
+      </div>
+
+      <!-- TAB 3: CHẾ ĐỘ KHÁCH TỰ DO -->
+      <div id="tabGuest" class="auth-tab-pane" style="display:none; padding-top:1rem;">
+        <div class="guest-desc-card">
+          <p><strong>Chế độ Khách (Guest Mode)</strong> cho phép bạn trải nghiệm đầy đủ Bảo tàng 3D Cung Đình và trò chơi trinh thám HỌA DIỆN mà không cần khai báo email hay mật khẩu.</p>
+          <p style="font-size:0.83rem; color:#94a3b8; margin:0.4rem 0 0;">Tiến trình khảo cứu và các cổ vật sẽ được lưu trữ tự động trên trình duyệt thiết bị này.</p>
+        </div>
+        <div class="auth-form-group" style="margin-top:1rem;">
+          <label for="guestNick">Tên hoặc Biệt danh (Để xưng hô trong game):</label>
+          <input type="text" id="guestNick" class="auth-input" placeholder="Lữ Khách Ẩn Danh" value="Lữ Khách Ẩn Danh" />
+        </div>
+        <button id="submitGuestBtn" class="auth-submit-btn" style="background: linear-gradient(135deg, #2563eb, #1e40af);" type="button">
+          <span>BẮT ĐẦU TRẢI NGHIỆM VỚI TƯ CÁCH KHÁCH</span>
+          <span>➔</span>
+        </button>
+      </div>
+
+      <!-- TAB 4: SUPABASE CLOUD -->
+      <div id="tabSupabase" class="auth-tab-pane" style="display:none; padding-top:1rem;">
+        <div class="supabase-pill-status">
+          <span>Kết nối Supabase Cloud:</span>
+          <strong id="supaStatusBadge" style="color:#48bb78;">● Đã sẵn sàng kết nối</strong>
+        </div>
+        <div class="auth-form-group">
+          <label for="supaUrl">Project URL</label>
+          <input type="text" id="supaUrl" class="auth-input" value="https://jhelfkonsofctmgpoocu.supabase.co" />
+        </div>
+        <div class="auth-form-group">
+          <label for="supaKey">Public Anon API Key</label>
+          <input type="text" id="supaKey" class="auth-input" value="sb_publishable_3Znh_753KpHqpaPyJAP66g_gXMnMXNK" />
+        </div>
+        <button id="saveSupaConfigBtn" class="auth-secondary-btn" style="width:100%; justify-content:center;" type="button">
+          <span>LƯU & ĐỒNG BỘ CỔNG MÂY</span>
+        </button>
+      </div>
+
+      <!-- TAB 5: HỒ SƠ NGƯỜI DÙNG KHI ĐÃ ĐĂNG NHẬP -->
+      <div id="tabUserProfile" class="auth-tab-pane" style="display:none; padding-top:1rem;">
+        <div class="auth-profile-box">
+          <div id="profileSealLarge" class="profile-seal-large">象</div>
+          <div class="profile-info-text">
+            <h4 id="profileDisplayName" class="profile-name">Lữ Khách</h4>
+            <span id="profileUserTitle" class="profile-title-tag">Lữ Khách Cõi Mực</span>
+            <span id="profileEmailTag" class="profile-email-tag">email@vidu.com</span>
+          </div>
+        </div>
+        <div class="profile-actions-grid">
+          <button id="profileSaveNowBtn" class="profile-action-btn" type="button">
+            <span>☁️ Lưu Mây Supabase</span>
+          </button>
+          <button id="profileLoadSaveBtn" class="profile-action-btn" type="button">
+            <span>📥 Tải Tiến Trình Cũ</span>
+          </button>
+        </div>
+        <button id="profileSignOutBtn" class="profile-signout-btn" type="button">
+          <span>🚪 Đăng Xuất Khỏi Tài Khoản</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL THÔNG BÁO GÓI MỞ RỘNG (KHI NHẤP VÀO HIỆN VẬT BỊ KHÓA THẾ GIỚI)
+       =================================================================== -->
+  <div id="expansionPackModal" class="auth-modal-backdrop hidden" style="z-index: 100006;">
+    <div class="expansion-modal-card">
+      <button id="closeExpansionModalBtn" class="auth-modal-close-btn" type="button" title="Đóng">&times;</button>
+      <span class="expansion-modal-icon">🔒</span>
+      <h3 id="expansionModalTitle" class="expansion-modal-title">Ải Thuộc Gói Mở Rộng Di Sản</h3>
+      <p id="expansionModalDesc" class="expansion-modal-body">
+        Bạn đang trải nghiệm <strong>Bản Dùng Thử miễn phí</strong>. Bản này cho phép bạn tham quan toàn bộ bảo tàng 3D và bước vào thế giới Mặt Nạ (<strong>HỌA DIỆN</strong>).
+        Để bước vào thế giới của cổ vật này, vui lòng chọn mở khóa gói mở rộng:
+      </p>
+
+      <div class="expansion-options-box">
+        <div class="expansion-option-row">
+          <div>
+            <strong style="color:#f5a823;">Gói Lẻ: Mở riêng ải này</strong>
+            <p style="margin:0.2rem 0 0; font-size:0.8rem; color:#94a3b8;">Khám phá toàn bộ cốt truyện và câu đố riêng của cổ vật này</p>
+          </div>
+          <span style="font-weight:700; color:#fff; font-size:1.1rem;">39.000đ</span>
+        </div>
+        <div class="expansion-option-row">
+          <div>
+            <strong style="color:#2ecc71;">Gói Trọn Bộ: Mở cả 2 ải + Hậu Cung</strong>
+            <p style="margin:0.2rem 0 0; font-size:0.8rem; color:#94a3b8;">Tiết kiệm 25%, mở cả Bình Gốm Bát Tràng và Tranh Ngũ Hổ</p>
+          </div>
+          <span style="font-weight:700; color:#2ecc71; font-size:1.1rem;">59.000đ</span>
+        </div>
+      </div>
+
+      <div class="expansion-modal-actions">
+        <button id="btnExpModalViewPricing" class="pack-cta-btn primary" type="button">
+          XEM THÔNG TIN CÁC GÓI MỞ RỘNG ➔
+        </button>
+        <button id="btnExpModalPlayMask" class="pack-cta-btn secondary" type="button">
+          🎭 CHƠI THẾ GIỚI MẶT NẠ (HỌA DIỆN - MIỄN PHÍ)
+        </button>
       </div>
     </div>
   </div>
@@ -11218,9 +12111,17 @@
               }
             } else {
               if (this.dom.btnEnterRelicWorld) {
-                this.dom.btnEnterRelicWorld.innerHTML = `<span>BƯỚC VÀO THẾ GIỚI NÀY ➔</span>`;
-                this.dom.btnEnterRelicWorld.style.borderColor = '';
-                this.dom.btnEnterRelicWorld.style.background = '';
+                const isPaid = (stationId === 'ceramic' || stationId === 'flute');
+                const isUnlocked = this.isArtifactUnlocked(stationId);
+                if (isPaid && !isUnlocked) {
+                  this.dom.btnEnterRelicWorld.innerHTML = `<span>🔒 BƯỚC VÀO THẾ GIỚI (GÓI MỞ RỘNG)</span>`;
+                  this.dom.btnEnterRelicWorld.style.borderColor = 'rgba(245, 168, 35, 0.7)';
+                  this.dom.btnEnterRelicWorld.style.background = 'rgba(245, 168, 35, 0.16)';
+                } else {
+                  this.dom.btnEnterRelicWorld.innerHTML = `<span>BƯỚC VÀO THẾ GIỚI NÀY ➔</span>`;
+                  this.dom.btnEnterRelicWorld.style.borderColor = '';
+                  this.dom.btnEnterRelicWorld.style.background = '';
+                }
               }
             }
 
@@ -11383,6 +12284,16 @@
               audio.init();
               audio.playDrum();
               this.toast(`🔒 Điện Thờ Tiền Nhân còn phong ấn! Cần giải mã cả 3 di vật ở Tiền Sảnh (${solvedCount}/3) trước khi bước vào Hậu Cung.`);
+              return;
+            }
+
+            // Kiểm tra phân quyền Gói Mở Rộng:
+            const isPaid = (st === 'ceramic' || st === 'flute');
+            const isUnlocked = this.isArtifactUnlocked(st);
+            if (isPaid && !isUnlocked) {
+              audio.init();
+              audio.playDrum();
+              this.showExpansionPackModal(st);
               return;
             }
 
@@ -12119,6 +13030,15 @@
               'song-duong': 'flute'
             };
             const targetStation = stationMap[chamber] || 'mask';
+            const isPaid = (targetStation === 'ceramic' || targetStation === 'flute');
+            const isUnlocked = this.isArtifactUnlocked(targetStation);
+            if (isPaid && !isUnlocked) {
+              this.toggleRelicsUnlock(false);
+              audio.init();
+              audio.playDrum();
+              this.showExpansionPackModal(targetStation);
+              return;
+            }
             this.toggleRelicsUnlock(false);
             audio.init();
             audio.playBell();
@@ -12288,6 +13208,70 @@
           });
         }
 
+        // Nút Khởi động nhanh Chế độ Khách (Guest Mode) nổi bật trên đầu Modal
+        const quickGuestLaunchBtn = document.getElementById('quickGuestLaunchBtn');
+        if (quickGuestLaunchBtn) {
+          quickGuestLaunchBtn.addEventListener('click', () => {
+            window.vtSupabase.playAsGuest('Lữ Khách Tự Do', '墨');
+            audio.playPaper();
+            closeAuth();
+            this.toast('🏮 Đã kích hoạt Chế độ Khách! Bạn có thể khám phá tự do.');
+          });
+        }
+
+        // Các nút điều khiển trong Modal Gói Mở Rộng
+        const closeExpBtn = document.getElementById('closeExpansionModalBtn');
+        if (closeExpBtn) {
+          closeExpBtn.addEventListener('click', () => {
+            const expModal = document.getElementById('expansionPackModal');
+            if (expModal) expModal.classList.add('hidden');
+          });
+        }
+        const btnExpPricing = document.getElementById('btnExpModalViewPricing');
+        if (btnExpPricing) {
+          btnExpPricing.addEventListener('click', () => {
+            const expModal = document.getElementById('expansionPackModal');
+            if (expModal) expModal.classList.add('hidden');
+            this.switchView('home');
+            setTimeout(() => {
+              const sec = document.getElementById('secExpansionPacks');
+              if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+          });
+        }
+        const btnExpMask = document.getElementById('btnExpModalPlayMask');
+        if (btnExpMask) {
+          btnExpMask.addEventListener('click', () => {
+            const expModal = document.getElementById('expansionPackModal');
+            if (expModal) expModal.classList.add('hidden');
+            if (window.vtMuseum3D && typeof window.vtMuseum3D.navigateToStation === 'function') {
+              window.vtMuseum3D.navigateToStation('mask');
+            }
+            if (window.vtPixelGame && typeof window.vtPixelGame.openArtifactWorld === 'function') {
+              window.vtPixelGame.openArtifactWorld('mask');
+            }
+          });
+        }
+        const btnBuyIndiv = document.getElementById('btnBuyIndividualPack');
+        if (btnBuyIndiv) {
+          btnBuyIndiv.addEventListener('click', () => {
+            this.toast('⚡ Cổng thanh toán trực tuyến SePay/VietQR đang chuẩn bị kết nối! Hiện tại bạn có thể đăng ký tài khoản hoặc chơi thử thế giới Mặt Nạ miễn phí.');
+          });
+        }
+        const btnBuyCombo = document.getElementById('btnBuyComboPack');
+        if (btnBuyCombo) {
+          btnBuyCombo.addEventListener('click', () => {
+            this.toast('⚡ Cổng thanh toán trực tuyến SePay/VietQR đang chuẩn bị kết nối! Hiện tại bạn có thể đăng ký tài khoản hoặc chơi thử thế giới Mặt Nạ miễn phí.');
+          });
+        }
+        const btnTierFree = document.getElementById('btnTierFreeCurrent');
+        if (btnTierFree) {
+          btnTierFree.addEventListener('click', () => {
+            const startBtn = document.getElementById('btnEnterMuseumHero') || document.getElementById('btnEnterMuseumFinal');
+            if (startBtn) startBtn.click();
+          });
+        }
+
         // Xử lý Cấu hình Supabase
         const saveSupaConfigBtn = document.getElementById('saveSupaConfigBtn');
         if (saveSupaConfigBtn) {
@@ -12412,14 +13396,50 @@
         });
       }
 
-      // Kiểm tra người chơi đã đăng ký chính thức hay chưa (Mở khóa toàn bộ theo yêu cầu)
+      // Kiểm tra quyền mở khóa cổ vật (Bản dùng thử chỉ mở thế giới Mặt Nạ HỌA DIỆN)
+      isArtifactUnlocked(artifactKey) {
+        if (!artifactKey || artifactKey === 'mask' || artifactKey === 'tuong') return true;
+        try {
+          const raw = localStorage.getItem('VT_UNLOCKED_PACKS');
+          if (!raw) return false;
+          const unlocked = JSON.parse(raw);
+          return Array.isArray(unlocked) && (unlocked.includes(artifactKey) || unlocked.includes('all'));
+        } catch(e) {
+          return false;
+        }
+      }
+
+      // Mở modal thông báo Gói Mở Rộng khi người dùng bấm vào ải bị khóa
+      showExpansionPackModal(stationId) {
+        const names = {
+          ceramic: 'Bình Gốm Men Rạn Bát Tràng (Ải II)',
+          flute: 'Tranh Dân Gian Ngũ Hổ Hàng Trống (Ải III)',
+          brush: 'Điện Thờ Tiền Nhân (Hậu Cung)'
+        };
+        const name = names[stationId] || 'Cổ Vật Này';
+        const modal = document.getElementById('expansionPackModal');
+        const title = document.getElementById('expansionModalTitle');
+        const desc = document.getElementById('expansionModalDesc');
+        if (title) title.textContent = `Thế Giới ${name} Thuộc Gói Mở Rộng`;
+        if (desc) {
+          desc.innerHTML = `Bạn đang trải nghiệm <strong>Bản Dùng Thử miễn phí</strong>. Bản này cho phép bạn tham quan toàn bộ bảo tàng 3D và bước vào thế giới Mặt Nạ (<strong>HỌA DIỆN</strong>).<br><br>Để bước vào thế giới của <strong>${name}</strong>, vui lòng chọn mở khóa Gói Lẻ hoặc Gói Trọn Bộ bên dưới:`;
+        }
+        if (modal) modal.classList.remove('hidden');
+      }
+
+      // Kiểm tra người chơi đã đăng ký chính thức hay chưa
       isUserRegistered() {
-        return true;
+        return !!(window.vtSupabase && (window.vtSupabase.currentUser || window.vtSupabase.isGuest));
       }
 
       // Mở Auth Modal với tab cụ thể (tabLogin, tabRegister, v.v.)
       openAuthModalWithTab(tabId) {
-        return;
+        const modal = this.dom.authModal || document.getElementById('authModal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        this.refreshAuthModalView();
+        const tabBtn = document.querySelector(`.auth-tab-btn[data-tab="${tabId}"]`);
+        if (tabBtn) tabBtn.click();
       }
 
       // Mở Popup Cổng Niêm Phong khi chưa đăng ký (Vô hiệu hóa theo yêu cầu)

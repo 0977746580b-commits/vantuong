@@ -13,8 +13,8 @@ class SupabaseService {
     this.saveKey = 'VT_CLOUD_SAVE_FALLBACK';
 
     const savedConfig = this.loadStoredConfig();
-    this.url = savedConfig.url || 'https://vantuong-heritage.supabase.co';
-    this.anonKey = savedConfig.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_anon_key_for_offline_fallback';
+    this.url = savedConfig.url || 'https://jhelfkonsofctmgpoocu.supabase.co';
+    this.anonKey = savedConfig.anonKey || 'sb_publishable_3Znh_753KpHqpaPyJAP66g_gXMnMXNK';
 
     this.client = null;
     this.currentUser = null;
