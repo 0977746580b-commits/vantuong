@@ -173,7 +173,9 @@ window.AltarMode = (function () {
     ctx.fillStyle = '#ecc554';
     ctx.font = `bold 11px serif`;
     ctx.textAlign = 'center';
-    ctx.fillText('THẦN TRUYỀN CHÁNH KHÍ', cx, 59);
+    ctx.textBaseline = 'middle';
+    ctx.fillText('THẦN TRUYỀN CHÁNH KHÍ', cx, 55);
+    ctx.textBaseline = 'alphabetic';
     ctx.textAlign = 'left';
 
     if (isPlaqueHover) {
@@ -183,34 +185,44 @@ window.AltarMode = (function () {
     }
 
     // 4. Ba Bài Vị Tam Vị Thánh Tổ Sơn Son Thếp Vàng
-    const isTabletsHover = (mx >= cx - 62 && mx <= cx + 62 && my >= 72 && my <= 120);
     const tablets = [
-      { x: cx - 44, label: 'TIỀN HIỀN\nKHAI SÁNG' },
+      { x: cx - 48, label: 'TIỀN HIỀN\nKHAI SÁNG' },
       { x: cx,      label: 'THẬP NHỊ\nBAN TỔ' },
-      { x: cx + 44, label: 'HẬU TẤN\nTÔN SƯ' }
+      { x: cx + 48, label: 'HẬU TẤN\nTÔN SƯ' }
     ];
+    const isTabletsHover = (mx >= cx - 72 && mx <= cx + 72 && my >= 70 && my <= 122);
 
     tablets.forEach(t => {
-      // Wooden Tablet
+      const tabW = 40;
+      const tabH = 44;
+      const tabX = t.x - tabW / 2;
+      const tabY = 74;
+
+      // Wooden Tablet Body
       ctx.fillStyle = isTabletsHover ? '#9e2222' : '#8a1c1c';
-      ctx.fillRect(t.x - 14, 76, 28, 42);
+      ctx.fillRect(tabX, tabY, tabW, tabH);
       ctx.strokeStyle = isTabletsHover ? '#fff' : '#ecc554';
       ctx.lineWidth = isTabletsHover ? 2 : 1.5;
-      ctx.strokeRect(t.x - 14, 76, 28, 42);
+      ctx.strokeRect(tabX, tabY, tabW, tabH);
+
+      // Inner subtle gold border
+      ctx.strokeStyle = 'rgba(236, 197, 84, 0.45)';
+      ctx.lineWidth = 0.8;
+      ctx.strokeRect(tabX + 2, tabY + 2, tabW - 4, tabH - 4);
 
       // Gold lotus crown atop tablet
       ctx.fillStyle = '#ecc554';
       ctx.beginPath();
-      ctx.arc(t.x, 76, 5, Math.PI, 0);
+      ctx.arc(t.x, tabY, 5.5, Math.PI, 0);
       ctx.fill();
 
-      // Tablet Text
+      // Tablet Text - centered, bold, fitted with maxWidth so it never overflows
       ctx.fillStyle = '#ecc554';
-      ctx.font = `bold 6.5px ${FONT_SANS}`;
+      ctx.font = `bold 5.2px ${FONT_SANS}`;
       ctx.textAlign = 'center';
       const lines = t.label.split('\n');
-      ctx.fillText(lines[0], t.x, 93);
-      ctx.fillText(lines[1], t.x, 103);
+      ctx.fillText(lines[0], t.x, tabY + 18, tabW - 6);
+      ctx.fillText(lines[1], t.x, tabY + 30, tabW - 6);
       ctx.textAlign = 'left';
     });
 
@@ -291,10 +303,10 @@ window.AltarMode = (function () {
     ctx.arc(cx + 24, 144, 5, 0, Math.PI * 2);
     ctx.stroke();
 
-    // 8. Slot 1: Đĩa Trầu Cau Ngũ Phương (bên trái: cx - 48 = 192, y = 145)
-    const betelX = cx - 48;
+    // 8. Slot 1: Đĩa Trầu Cau Ngũ Phương (bên trái: cx - 62 = 178, y = 145)
+    const betelX = cx - 62;
     const betelY = 145;
-    const isBetelHover = (mx >= 164 && mx <= 220 && my >= 122 && my <= 168);
+    const isBetelHover = (mx >= betelX - 26 && mx <= betelX + 26 && my >= 122 && my <= 168);
 
     if (state.placedBetel || state.completed) {
       // Blue-and-white porcelain dish
@@ -323,9 +335,9 @@ window.AltarMode = (function () {
       ctx.fill();
 
       ctx.fillStyle = '#58d68d';
-      ctx.font = `bold 6.5px ${FONT_SANS}`;
+      ctx.font = `bold 5.5px ${FONT_SANS}`;
       ctx.textAlign = 'center';
-      ctx.fillText('✓ ĐĨA TRẦU CAU', betelX, betelY + 22);
+      ctx.fillText('✓ ĐĨA TRẦU CAU', betelX - 2, betelY + 23);
       ctx.textAlign = 'left';
     } else {
       // Dotted slot for Betel Dish with active hover highlight
@@ -377,9 +389,9 @@ window.AltarMode = (function () {
       });
 
       ctx.fillStyle = '#58d68d';
-      ctx.font = `bold 6.5px ${FONT_SANS}`;
+      ctx.font = `bold 5.5px ${FONT_SANS}`;
       ctx.textAlign = 'center';
-      ctx.fillText('✓ BA NÉN TÂM NHANG', cx, 172);
+      ctx.fillText('✓ BA NÉN TÂM NHANG', cx + 10, 172);
       ctx.textAlign = 'left';
     } else {
       ctx.strokeStyle = isIncenseHover ? '#ffffff' : 'rgba(236, 197, 84, 0.7)';
@@ -486,8 +498,8 @@ window.AltarMode = (function () {
       return true;
     }
 
-    // Direct Physical Target 2: Ba Bài Vị Tam Vị Thánh Tổ (x: 178..302, y: 72..118)
-    if (x >= 178 && x <= 302 && y >= 72 && y <= 118) {
+    // Direct Physical Target 2: Ba Bài Vị Tam Vị Thánh Tổ (x: 170..310, y: 70..122)
+    if (x >= 170 && x <= 310 && y >= 70 && y <= 122) {
       if (onDialogue) {
         onDialogue(
           'An',
@@ -510,8 +522,8 @@ window.AltarMode = (function () {
     }
 
     // Direct Physical Target 4 & Button 1: Dâng Đĩa Trầu Cau
-    // Physical slot & plate target: x: 164..220, y: 122..168 | Control Button: x: 26..122, y: 188..226
-    if ((x >= 164 && x <= 220 && y >= 122 && y <= 168) ||
+    // Physical slot & plate target: x: 154..210, y: 122..170 | Control Button: x: 26..122, y: 188..226
+    if ((x >= 154 && x <= 210 && y >= 122 && y <= 170) ||
         (x >= 26 && x <= 122 && y >= 188 && y <= 226)) {
       if (state.placedBetel) {
         if (onDialogue) onDialogue('An', 'Đĩa trầu cau ngũ phương têm cánh phượng đã được đặt ngay ngắn trên án gian thờ Tổ.');

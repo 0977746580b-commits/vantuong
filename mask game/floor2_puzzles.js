@@ -543,8 +543,8 @@ window.Floor2Puzzles = (function () {
               Bước 1: Chọn lọ hóa chất bên dưới và đổ vào đúng khay men (Quy trình: <b>Hiện hình ➔ Dừng ➔ Hãm</b>):
             </div>
             <div class="f2-bottles-picker">
-              <button class="f2-btn-bottle" data-bot="B" id="btnPickB">Lọ B (Hiện hình)</button>
               <button class="f2-btn-bottle" data-bot="A" id="btnPickA">Lọ A (Dừng giấm)</button>
+              <button class="f2-btn-bottle" data-bot="B" id="btnPickB">Lọ B (Hiện hình)</button>
               <button class="f2-btn-bottle" data-bot="C" id="btnPickC">Lọ C (Hãm nhớt)</button>
             </div>
           </div>
