@@ -16,6 +16,11 @@ class SupabaseService {
     this.url = savedConfig.url || 'https://jhelfkonsofctmgpoocu.supabase.co';
     this.anonKey = savedConfig.anonKey || 'sb_publishable_3Znh_753KpHqpaPyJAP66g_gXMnMXNK';
 
+    // Đảm bảo không bao giờ dùng key dummy cũ
+    if (!this.anonKey || this.anonKey === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.dummy_anon_key_for_offline_fallback') {
+      this.anonKey = 'sb_publishable_3Znh_753KpHqpaPyJAP66g_gXMnMXNK';
+    }
+
     this.client = null;
     this.currentUser = null;
     this.profile = null;
@@ -111,15 +116,17 @@ class SupabaseService {
     // 1. Thử qua Supabase Cloud Client thật nếu có
     if (this.client && this.isConnected) {
       try {
-        const { data, error } = await this.client.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        if (data && data.user) {
+        const { data, error } = await this.client.auth.signInWithPassword({ email: email.trim().toLowerCase(), password });
+        if (!error && data && data.user) {
           this.currentUser = data.user;
           this.isGuest = false;
           await this.fetchUserProfile(data.user.id);
           await this.fetchUnlockedPacks(data.user.id);
           this.triggerAuthChange();
           return { success: true, user: this.currentUser, profile: this.profile, source: 'supabase' };
+        }
+        if (error && email.toLowerCase() !== 'admin@vantuong.vn') {
+          return { success: false, message: error.message || 'Sai thông tin đăng nhập hoặc tài khoản chưa đăng ký!' };
         }
       } catch (err) {
         console.warn('[Vạn Tượng] Supabase Cloud login failed, kiểm tra tài khoản cục bộ:', err);
@@ -171,27 +178,32 @@ class SupabaseService {
     if (!email || !password || !displayName) {
       return { success: false, message: 'Vui lòng điền đầy đủ Email, Mật khẩu và Tên Lữ Khách!' };
     }
+    if (password.length < 6) {
+      return { success: false, message: 'Mật khẩu phải có ít nhất 6 ký tự để bảo mật trên Supabase!' };
+    }
 
-    // 1. Nếu có Supabase Client thật
+    // 1. Đăng ký trực tiếp lên Supabase Cloud
     if (this.client && this.isConnected) {
       try {
         const { data, error } = await this.client.auth.signUp({
-          email,
+          email: email.trim().toLowerCase(),
           password,
           options: {
             data: {
-              display_name: displayName,
+              display_name: displayName.trim(),
               avatar_seal: seal,
               title: 'Tân Lữ Khách Cõi Mực'
             }
           }
         });
-        if (error) throw error;
+        if (error) {
+          return { success: false, message: error.message || 'Lỗi đăng ký từ Supabase Cloud' };
+        }
         if (data && data.user) {
           this.currentUser = data.user;
           this.isGuest = false;
           this.profile = {
-            displayName,
+            displayName: displayName.trim(),
             seal,
             title: 'Tân Lữ Khách Cõi Mực',
             role: 'lu_khach'
@@ -201,7 +213,8 @@ class SupabaseService {
           return { success: true, user: this.currentUser, profile: this.profile, source: 'supabase' };
         }
       } catch (err) {
-        console.warn('[Vạn Tượng] Supabase Cloud signup failed, lưu cục bộ mộc bản:', err);
+        console.error('[Vạn Tượng] Supabase Cloud signup failed:', err);
+        return { success: false, message: err.message || 'Không thể kết nối tới Supabase Cloud.' };
       }
     }
 

@@ -698,26 +698,7 @@ class VanTuongMuseum3D {
           desc: 'Xương đất phù sa sông Hồng khử chì, nung củi gỗ trong lò bầu trên 1200°C tạo độ đanh chắc ngân vang như chuông đồng.'
         }
       ],
-      flute: [
-        {
-          id: 'flute_diep_paper',
-          pos: [0, 0.32, 0.08],
-          title: 'Hoàng Hổ Trung Tâm',
-          desc: 'Chúa sơn lâm sắc vàng ngự chính giữa thuộc hành Thổ (Trung ương), chân đạp bệ ấn phù chú trấn trạch, ánh mắt uy nghiêm cai quản bốn phương trời đất.'
-        },
-        {
-          id: 'flute_mineral_colors',
-          pos: [-0.24, 0.45, 0.08],
-          title: 'Ngũ Hành Tứ Phương',
-          desc: 'Bốn vị thần hổ chầu bốn góc ứng với Thanh Hổ (Đông - Mộc), Bạch Hổ (Tây - Kim), Xích Hổ (Nam - Hỏa) và Hắc Hổ (Bắc - Thủy) quy tụ giữa vòm mây cổ.'
-        },
-        {
-          id: 'flute_woodblock_carve',
-          pos: [0.22, -0.22, 0.08],
-          title: 'Kỹ Thuật Cản Màu Hàng Trống',
-          desc: 'In nét đen từ ván khắc gỗ rồi dùng cọ mềm vờn chuyển sắc độ (cản màu) bằng tay trên giấy dó bồi, tạo thần thái sống động uy linh độc bản.'
-        }
-      ],
+      flute: [],
       brush: [
         {
           id: 'brush_tip',
