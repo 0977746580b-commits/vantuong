@@ -126,6 +126,13 @@ class SupabaseService {
           return { success: true, user: this.currentUser, profile: this.profile, source: 'supabase' };
         }
         if (error && email.toLowerCase() !== 'admin@vantuong.vn') {
+          const errMsg = (error.message || '').toLowerCase();
+          if (errMsg.includes('email not confirmed')) {
+            return {
+              success: false,
+              message: 'Tài khoản chưa được xác nhận email. Hãy vào Supabase Dashboard > Authentication > Providers > Email và TẮT (disable) mục "Confirm email" rồi đăng nhập lại!'
+            };
+          }
           return { success: false, message: error.message || 'Sai thông tin đăng nhập hoặc tài khoản chưa đăng ký!' };
         }
       } catch (err) {
@@ -197,6 +204,13 @@ class SupabaseService {
           }
         });
         if (error) {
+          const errMsg = (error.message || '').toLowerCase();
+          if (errMsg.includes('rate limit') || errMsg.includes('limit exceeded') || error.status === 429) {
+            return {
+              success: false,
+              message: 'Lỗi Supabase Email Rate Limit (quá 3 email/giờ). Hãy vào Supabase Dashboard > Authentication > Providers > Email và TẮT mục "Confirm email" để mở đăng ký tự do không giới hạn!'
+            };
+          }
           return { success: false, message: error.message || 'Lỗi đăng ký từ Supabase Cloud' };
         }
         if (data && data.user) {
@@ -208,6 +222,20 @@ class SupabaseService {
             title: 'Tân Lữ Khách Cõi Mực',
             role: 'lu_khach'
           };
+
+          // Nếu chưa có session (do Supabase đang bật xác thực email), thử đăng nhập ngay
+          if (!data.session) {
+            try {
+              const loginAttempt = await this.client.auth.signInWithPassword({
+                email: email.trim().toLowerCase(),
+                password
+              });
+              if (loginAttempt.data && loginAttempt.data.user) {
+                this.currentUser = loginAttempt.data.user;
+              }
+            } catch (e) {}
+          }
+
           await this.saveProfileToSupabase(data.user.id, this.profile);
           this.triggerAuthChange();
           return { success: true, user: this.currentUser, profile: this.profile, source: 'supabase' };
@@ -396,23 +424,28 @@ class SupabaseService {
 
   // Lưu hồ sơ người dùng vào Supabase
   async saveProfileToSupabase(userId, profile) {
-    if (!this.client || !this.isConnected) return;
+    if (!this.client || !this.isConnected || !userId) return;
     try {
-      await this.client.from('vt_profiles').upsert({
+      const { error } = await this.client.from('vt_profiles').upsert({
         user_id: userId,
-        display_name: profile.displayName,
-        avatar_seal: profile.seal,
-        title: profile.title,
+        display_name: profile.displayName || 'Tân Lữ Khách',
+        avatar_seal: profile.seal || '象',
+        title: profile.title || 'Tân Lữ Khách Cõi Mực',
         updated_at: new Date().toISOString()
       }, { onConflict: 'user_id' });
-    } catch (e) {}
+      if (error) {
+        console.warn('[Vạn Tượng] Lỗi lưu hồ sơ vào vt_profiles:', error.message);
+      }
+    } catch (e) {
+      console.warn('[Vạn Tượng] Ngoại lệ khi lưu vt_profiles:', e);
+    }
   }
 
   // Tải hồ sơ người dùng từ Supabase
   async fetchUserProfile(userId) {
-    if (!this.client || !this.isConnected) return;
+    if (!this.client || !this.isConnected || !userId) return;
     try {
-      const { data } = await this.client
+      const { data, error } = await this.client
         .from('vt_profiles')
         .select('*')
         .eq('user_id', userId)
@@ -422,10 +455,28 @@ class SupabaseService {
           displayName: data.display_name,
           seal: data.avatar_seal || '象',
           title: data.title || 'Lữ Khách Cõi Mực',
+          role: data.role || 'lu_khach'
+        };
+      } else {
+        // Tự động khôi phục từ user_metadata nếu chưa có dòng trong vt_profiles
+        const meta = (this.currentUser && this.currentUser.user_metadata) ? this.currentUser.user_metadata : {};
+        this.profile = {
+          displayName: meta.display_name || 'Tân Lữ Khách',
+          seal: meta.avatar_seal || '象',
+          title: meta.title || 'Tân Lữ Khách Cõi Mực',
           role: 'lu_khach'
         };
+        await this.saveProfileToSupabase(userId, this.profile);
       }
-    } catch (e) {}
+    } catch (e) {
+      const meta = (this.currentUser && this.currentUser.user_metadata) ? this.currentUser.user_metadata : {};
+      this.profile = {
+        displayName: meta.display_name || 'Tân Lữ Khách',
+        seal: meta.avatar_seal || '象',
+        title: meta.title || 'Tân Lữ Khách Cõi Mực',
+        role: 'lu_khach'
+      };
+    }
   }
 
   // Tải danh sách gói mở rộng đã mua từ Supabase

@@ -13,7 +13,7 @@
   <!-- Supabase JS Client v2 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Quản lý đồng bộ dữ liệu người dùng Supabase -->
-  <script src="supabase-service.js?v=20261111-live"></script>
+  <script src="supabase-service.js?v=20261111-v3"></script>
 
   <!-- Three.js WebGL 3D Engine CDN & GLTFLoader -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -3707,25 +3707,44 @@
     .museum-rail-nav {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
-      background: rgba(18, 11, 7, 0.75);
-      padding: 0.25rem 0.5rem;
-      border-radius: 30px;
+      gap: 0.4rem;
+      background: rgba(18, 11, 7, 0.88);
+      padding: 0.25rem 0.6rem 0.4rem 0.6rem;
+      border-radius: 16px;
       border: 1px solid var(--border-bronze);
       overflow-x: auto;
       white-space: nowrap;
-      scrollbar-width: none;
+      max-width: 480px;
+      flex: 0 1 380px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-bright) rgba(14, 8, 4, 0.9);
+      scroll-behavior: smooth;
     }
-    .museum-rail-nav::-webkit-scrollbar { display: none; }
+    .museum-rail-nav::-webkit-scrollbar {
+      height: 5px;
+    }
+    .museum-rail-nav::-webkit-scrollbar-track {
+      background: rgba(14, 8, 4, 0.9);
+      border-radius: 4px;
+      margin: 0 4px;
+    }
+    .museum-rail-nav::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #b8860b, #fcd55c, #b8860b);
+      border-radius: 4px;
+      box-shadow: 0 0 6px rgba(252, 213, 92, 0.5);
+    }
+    .museum-rail-nav::-webkit-scrollbar-thumb:hover {
+      background: #fcd55c;
+    }
 
     .rail-nav-btn {
       background: transparent;
       border: 1px solid transparent;
       color: var(--paper-dim);
       font-family: var(--font-ui);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      padding: 0.35rem 0.65rem;
+      padding: 0.28rem 0.6rem;
       border-radius: 20px;
       cursor: pointer;
       display: flex;
@@ -3757,9 +3776,9 @@
       border: 1px solid var(--border-bronze);
       color: var(--paper-cream);
       font-family: var(--font-ui);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      padding: 0.4rem 0.75rem;
+      padding: 0.35rem 0.62rem;
       border-radius: 20px;
       cursor: pointer;
       white-space: nowrap !important;
@@ -4831,12 +4850,15 @@
     .hud-brand {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.65rem;
+      flex-shrink: 0;
+      min-width: 0;
+      white-space: nowrap;
     }
 
     .hud-seal {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       background: radial-gradient(circle at 35% 35%, var(--accent-cinnabar-bright), var(--accent-cinnabar));
       color: #fff;
       border: 1.5px solid var(--border-imperial-gold);
@@ -4845,7 +4867,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--font-title);
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 900;
       box-shadow: 0 0 18px rgba(168, 28, 34, 0.7);
       flex-shrink: 0;
@@ -4855,24 +4877,31 @@
     .hud-title-text {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+      white-space: nowrap;
+      min-width: 0;
     }
 
     .main-game-title {
-      font-family: var(--font-title);
-      font-size: 1.2rem;
+      font-family: 'Be Vietnam Pro', 'Lora', sans-serif;
+      font-size: 1.05rem;
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.08em;
       color: var(--gold-bright);
       text-shadow: 0 0 15px rgba(252, 213, 92, 0.5);
-      line-height: 1.2;
+      line-height: 1.25;
+      white-space: nowrap;
+      margin: 0;
     }
 
     .sub-game-title {
-      font-family: var(--font-ui);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.64rem;
+      letter-spacing: 0.06em;
       color: var(--paper-dim);
       text-transform: uppercase;
+      white-space: nowrap;
+      line-height: 1.2;
     }
 
     .hud-center {
@@ -9147,8 +9176,8 @@
         <div class="hud-brand" style="margin-left: 0.2rem;">
           <div class="hud-seal">象</div>
           <div class="hud-title-text">
-            <h1 class="main-game-title" style="font-size:1.15rem;">BẢO TÀNG VẠN TƯỢNG</h1>
-            <span class="sub-game-title" style="font-size:0.68rem;">Không Gian Trưng Bày 3D • Đại Việt Cổ Phong</span>
+            <h1 class="main-game-title">BẢO TÀNG VẠN TƯỢNG</h1>
+            <span class="sub-game-title">Không Gian Trưng Bày 3D • Đại Việt Cổ Phong</span>
           </div>
         </div>
       </div>
@@ -12125,13 +12154,26 @@
           }
         };
 
-        // 2. Nhấn nút trên thanh Rail Navigation
+        // 2. Nhấn nút trên thanh Rail Navigation & Cuộn mượt thanh trượt
+        const railNavEl = document.querySelector('.museum-rail-nav');
+        if (railNavEl) {
+          railNavEl.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+              e.preventDefault();
+              railNavEl.scrollLeft += (e.deltaY > 0 ? 70 : -70);
+            }
+          }, { passive: false });
+        }
+
         document.querySelectorAll('.rail-nav-btn').forEach(btn => {
           btn.addEventListener('click', () => {
             const st = btn.dataset.station;
             if (st && window.vtMuseum3D) {
               window.vtMuseum3D.navigateToStation(st);
             }
+            try {
+              btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            } catch (e) {}
           });
         });
 

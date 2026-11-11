@@ -46,7 +46,11 @@ BEGIN
     COALESCE(NEW.raw_user_meta_data->>'avatar_seal', '象'),
     COALESCE(NEW.raw_user_meta_data->>'title', 'Tân Lữ Khách Cõi Mực')
   )
-  ON CONFLICT (user_id) DO NOTHING;
+  ON CONFLICT (user_id) DO UPDATE SET
+    display_name = COALESCE(EXCLUDED.display_name, public.vt_profiles.display_name),
+    avatar_seal = COALESCE(EXCLUDED.avatar_seal, public.vt_profiles.avatar_seal),
+    title = COALESCE(EXCLUDED.title, public.vt_profiles.title),
+    updated_at = timezone('utc'::text, now());
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
