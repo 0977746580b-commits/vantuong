@@ -8382,6 +8382,7 @@
         <a href="#secLostCollection" class="vt-nav-item">Thất Truyền</a>
         <a href="#secExhibitionHall" class="vt-nav-item">Triển Lãm</a>
         <a href="#secEmptyMasterpiece" class="vt-nav-item">Tác Phẩm</a>
+        <a href="#secEnterMuseum" class="vt-nav-item">Vào Bảo Tàng</a>
         <a href="#secExpansionPacks" class="vt-nav-item" style="color: #f5a823; font-weight: 700;">Gói Mở Rộng</a>
         <a href="javascript:void(0)" id="navFoundersBtn" class="vt-nav-item" title="Xem thông tin Tác Giả & Ban Sáng Lập">Tác Giả & Sáng Lập</a>
         <button id="navAuthBtn" class="vt-nav-auth-btn" type="button" title="Đăng nhập / Đăng ký / Chế độ Khách">
@@ -8556,14 +8557,112 @@
           <p style="font-size:1.15rem; font-style:italic; line-height:1.85; color:rgba(242,229,207,0.92); margin:0 auto 1.8rem; max-width:700px;">
             “Bởi lẽ, mỗi di vật đều mang trong mình một ký ức đáng được lưu giữ, vậy nên chúng không chỉ lặng im trong quá khứ, mà còn âm thầm chờ đợi người hữu duyên tìm đến ở hiện tại — để lắng nghe, giải mã và tiếp nối những giá trị chưa bao giờ thực sự phai tàn.”
           </p>
+        </div>
+      </div>
+    </section>
 
-          <!-- Đoạn dẫn nhập Hồi Thứ Ba -->
+    <!-- ===============================================================
+         DẢI NỐI CHUYỂN TIẾP 2: ẢNH 4 (VÒM MÂY CHIAROSCURO GIẤY DÓ KHỞI NGUYÊN)
+         Nối mượt mà giữa Section 04 (The Empty Masterpiece) và Section 05 (Enter The Museum)
+         =============================================================== -->
+    <div class="vt-transition-junction vt-junction-4-5" aria-hidden="true">
+      <div class="vt-transition-junction-art"></div>
+    </div>
+
+    <!-- SECTION 05: ENTER THE MUSEUM — CÁNH CỬA KHỞI NGUYÊN (REFINED VECTOR PORTAL) -->
+    <section id="secEnterMuseum" class="vt-section-editorial sec-enter-museum-gate">
+      <!-- 2D Background Painting từ 13.png (Thuyền nan, non nước thủy mặc trên nền giấy dó ngà) -->
+      <div class="sec-gate-bg-painting" id="gateBgPainting"></div>
+      <!-- Khung mây vector sắc nét (Hoàn toàn bằng SVG, không vỡ ở bất kỳ độ phân giải nào) -->
+      <div class="sec-gate-flanks-vector">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+          <defs>
+            <linearGradient id="roseCloudLeftGate" x1="0%" y1="0%" x2="100%" y2="80%">
+              <stop offset="0%" stop-color="#C9958B" stop-opacity="0.9"/>
+              <stop offset="50%" stop-color="#B86C59" stop-opacity="0.75"/>
+              <stop offset="100%" stop-color="#C9958B" stop-opacity="0.25"/>
+            </linearGradient>
+            <linearGradient id="roseCloudRightGate" x1="100%" y1="0%" x2="0%" y2="80%">
+              <stop offset="0%" stop-color="#C9958B" stop-opacity="0.9"/>
+              <stop offset="50%" stop-color="#B86C59" stop-opacity="0.75"/>
+              <stop offset="100%" stop-color="#C9958B" stop-opacity="0.25"/>
+            </linearGradient>
+            <linearGradient id="mountainIvoryGate" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FBF6EC"/>
+              <stop offset="50%" stop-color="#EAD9BD"/>
+              <stop offset="100%" stop-color="#C9958B"/>
+            </linearGradient>
+            <linearGradient id="gateGoldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FCEBB6"/>
+              <stop offset="50%" stop-color="#C2A064"/>
+              <stop offset="100%" stop-color="#842F31"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Left Flank: Mây Cuộn Hoàng Gia & Núi Ngà Vàng -->
+          <g class="flank-left">
+            <path d="M -50 650 L -50 220 Q 80 180 180 250 Q 280 320 380 280 Q 450 250 520 340 L 520 650 Z"
+                  fill="url(#mountainIvoryGate)" stroke="#C2A064" stroke-width="1.8"/>
+            <path d="M -50 650 L -50 340 C 40 310, 80 240, 150 260 C 210 275, 240 210, 310 225 C 380 240, 400 320, 480 310 C 530 305, 570 360, 600 420 C 620 460, 610 540, 580 650 Z"
+                  fill="url(#roseCloudLeftGate)" stroke="url(#gateGoldLine)" stroke-width="2.2"/>
+            <path d="M 160 290 A 28 28 0 1 0 185 260 A 15 15 0 1 0 172 250" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+            <path d="M 320 250 A 30 30 0 1 0 345 220 A 16 16 0 1 0 332 212" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+            <path d="M 480 340 A 32 32 0 1 0 505 310 A 18 18 0 1 0 492 300" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+          </g>
+
+          <!-- Right Flank: Đối Xứng Mây Cuộn & Núi Ngà Vàng -->
+          <g class="flank-right">
+            <path d="M 1490 650 L 1490 220 Q 1360 180 1260 250 Q 1160 320 1060 280 Q 990 250 920 340 L 920 650 Z"
+                  fill="url(#mountainIvoryGate)" stroke="#C2A064" stroke-width="1.8"/>
+            <path d="M 1490 650 L 1490 340 C 1400 310, 1360 240, 1290 260 C 1230 275, 1200 210, 1130 225 C 1060 240, 1040 320, 960 310 C 910 305, 870 360, 840 420 C 820 460, 830 540, 860 650 Z"
+                  fill="url(#roseCloudRightGate)" stroke="url(#gateGoldLine)" stroke-width="2.2"/>
+            <path d="M 1280 290 A 28 28 0 1 1 1255 260 A 15 15 0 1 1 1268 250" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+            <path d="M 1120 250 A 30 30 0 1 1 1095 220 A 16 16 0 1 1 1108 212" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+            <path d="M 960 340 A 32 32 0 1 1 935 310 A 18 18 0 1 1 948 300" fill="none" stroke="#FCEBB6" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Khung Nội Dung Hoàng Gia Cung Đình -->
+      <div class="sec-gate-content">
+        <div class="sec-gate-crest-header">
+          <div class="sec-gate-seal-stamp" title="Vạn Tượng Ấn Triện">象</div>
+          <!-- Hoa văn mây cuộn hoàng gia mạ vàng vector -->
+          <svg class="sec-gate-cloud-ornament-svg" viewBox="0 0 240 60" fill="none">
+            <path d="M 120 40 C 105 40 95 30 95 22 C 95 12 108 6 120 6 C 135 6 148 15 145 28 C 142 38 128 42 120 42 C 108 42 98 34 100 24 C 102 16 112 14 118 16 C 122 18 122 24 118 25 C 114 26 112 22 115 20" stroke="var(--vt-antique-gold)" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M 95 24 Q 60 22 35 34 Q 15 42 0 40 Q 25 30 55 20 Q 85 14 105 18" stroke="var(--vt-antique-gold)" stroke-width="1.4" stroke-linecap="round" opacity="0.85" />
+            <path d="M 145 26 Q 175 22 205 34 Q 225 42 240 40 Q 215 30 185 20 Q 155 14 135 18" stroke="var(--vt-antique-gold)" stroke-width="1.4" stroke-linecap="round" opacity="0.85" />
+            <circle cx="120" cy="22" r="2.5" fill="var(--vt-vermilion)" />
+          </svg>
+        </div>
+
+        <div class="vt-chapter-eyebrow" style="color:var(--vt-deep-crimson); font-weight:700;">HỒI KẾT • CÁNH CỬA KHỞI NGUYÊN</div>
+
+        <h2 class="sec-gate-title">
+          Mọi Câu Chuyện Đều Bắt Đầu<br>Từ Một Cánh Cửa
+        </h2>
+
+        <p class="sec-gate-philosophical-quote">
+          “Và đêm nay, có thể bạn sẽ là người được chọn.”
+        </p>
+
+        <p class="sec-gate-subtext">
+          Cánh cửa Vạn Tượng đã hé mở. Hãy bước vào không gian bảo tàng số để tiếp nối những giá trị chưa bao giờ phai tàn.
+        </p>
+
+        <div style="margin-bottom: 0.5rem;">
+          <button id="btnEnterMuseumFinal" class="vt-btn-grand-portal">
+            <span class="vt-btn-icon-rhombus">❖</span>
+            <span>BƯỚC VÀO BẢO TÀNG</span>
+            <span class="vt-btn-icon-rhombus">❖</span>
+          </button>
         </div>
       </div>
     </section>
 
     <!-- ===============================================================
          MỤC GÓI MỞ RỘNG (EXPANSION PACKS): BẢN DÙNG THỬ & CÁC GÓI MỞ KHÓA
+         Nằm ở cuối trang web, sau phần "Mọi câu chuyện đều bắt đầu..."
          =============================================================== -->
     <section id="secExpansionPacks" class="sec-expansion-packs">
       <div class="packs-container">
@@ -8686,105 +8785,6 @@
               SỞ HỮU GÓI TRỌN BỘ ➔
             </button>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===============================================================
-         DẢI NỐI CHUYỂN TIẾP 2: ẢNH 4 (VÒM MÂY CHIAROSCURO GIẤY DÓ KHỞI NGUYÊN)
-         Nối mượt mà giữa Section 04 (The Empty Masterpiece) và Section 05 (Enter The Museum)
-         =============================================================== -->
-    <div class="vt-transition-junction vt-junction-4-5" aria-hidden="true">
-      <div class="vt-transition-junction-art"></div>
-    </div>
-
-    <!-- SECTION 05: ENTER THE MUSEUM — CÁNH CỬA KHỞI NGUYÊN (REFINED VECTOR PORTAL) -->
-    <section id="secEnterMuseum" class="vt-section-editorial sec-enter-museum-gate">
-      <!-- 2D Background Painting từ 13.png (Thuyền nan, non nước thủy mặc trên nền giấy dó ngà) -->
-      <div class="sec-gate-bg-painting" id="gateBgPainting"></div>
-      <!-- Khung mây vector sắc nét (Hoàn toàn bằng SVG, không vỡ ở bất kỳ độ phân giải nào) -->
-      <div class="sec-gate-flanks-vector">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
-          <defs>
-            <linearGradient id="roseCloudLeftGate" x1="0%" y1="0%" x2="100%" y2="80%">
-              <stop offset="0%" stop-color="#C9958B" stop-opacity="0.9"/>
-              <stop offset="50%" stop-color="#B86C59" stop-opacity="0.75"/>
-              <stop offset="100%" stop-color="#C9958B" stop-opacity="0.25"/>
-            </linearGradient>
-            <linearGradient id="roseCloudRightGate" x1="100%" y1="0%" x2="0%" y2="80%">
-              <stop offset="0%" stop-color="#C9958B" stop-opacity="0.9"/>
-              <stop offset="50%" stop-color="#B86C59" stop-opacity="0.75"/>
-              <stop offset="100%" stop-color="#C9958B" stop-opacity="0.25"/>
-            </linearGradient>
-            <linearGradient id="mountainIvoryGate" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#FBF6EC"/>
-              <stop offset="50%" stop-color="#EAD9BD"/>
-              <stop offset="100%" stop-color="#C9958B"/>
-            </linearGradient>
-            <linearGradient id="gateGoldLine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#FCEBB6"/>
-              <stop offset="50%" stop-color="#C2A064"/>
-              <stop offset="100%" stop-color="#842F31"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Left Flank: Mây Cuộn Hoàng Gia & Núi Ngà Vàng -->
-          <g class="flank-left">
-            <path d="M -50 650 L -50 220 Q 80 180 180 250 Q 280 320 380 280 Q 450 250 520 340 L 520 650 Z"
-                  fill="url(#mountainIvoryGate)" stroke="#C2A064" stroke-width="1.8"/>
-            <path d="M -50 650 L -50 340 C 40 310, 80 240, 150 260 C 210 275, 240 210, 310 225 C 380 240, 400 320, 480 310 C 530 305, 570 360, 600 420 C 620 460, 610 540, 580 650 Z"
-                  fill="url(#roseCloudLeftGate)" stroke="url(#gateGoldLine)" stroke-width="2.2"/>
-            <path d="M 160 290 A 28 28 0 1 0 185 260 A 15 15 0 1 0 172 250" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-            <path d="M 320 250 A 30 30 0 1 0 345 220 A 16 16 0 1 0 332 212" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-            <path d="M 480 340 A 32 32 0 1 0 505 310 A 18 18 0 1 0 492 300" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-          </g>
-
-          <!-- Right Flank: Đối Xứng Mây Cuộn & Núi Ngà Vàng -->
-          <g class="flank-right">
-            <path d="M 1490 650 L 1490 220 Q 1360 180 1260 250 Q 1160 320 1060 280 Q 990 250 920 340 L 920 650 Z"
-                  fill="url(#mountainIvoryGate)" stroke="#C2A064" stroke-width="1.8"/>
-            <path d="M 1490 650 L 1490 340 C 1400 310, 1360 240, 1290 260 C 1230 275, 1200 210, 1130 225 C 1060 240, 1040 320, 960 310 C 910 305, 870 360, 840 420 C 820 460, 830 540, 860 650 Z"
-                  fill="url(#roseCloudRightGate)" stroke="url(#gateGoldLine)" stroke-width="2.2"/>
-            <path d="M 1280 290 A 28 28 0 1 1 1255 260 A 15 15 0 1 1 1268 250" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-            <path d="M 1120 250 A 30 30 0 1 1 1095 220 A 16 16 0 1 1 1108 212" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-            <path d="M 960 340 A 32 32 0 1 1 935 310 A 18 18 0 1 1 948 300" fill="none" stroke="#FCEBB6" stroke-width="2"/>
-          </g>
-        </svg>
-      </div>
-
-      <!-- Khung Nội Dung Hoàng Gia Cung Đình -->
-      <div class="sec-gate-content">
-        <div class="sec-gate-crest-header">
-          <div class="sec-gate-seal-stamp" title="Vạn Tượng Ấn Triện">象</div>
-          <!-- Hoa văn mây cuộn hoàng gia mạ vàng vector -->
-          <svg class="sec-gate-cloud-ornament-svg" viewBox="0 0 240 60" fill="none">
-            <path d="M 120 40 C 105 40 95 30 95 22 C 95 12 108 6 120 6 C 135 6 148 15 145 28 C 142 38 128 42 120 42 C 108 42 98 34 100 24 C 102 16 112 14 118 16 C 122 18 122 24 118 25 C 114 26 112 22 115 20" stroke="var(--vt-antique-gold)" stroke-width="1.8" stroke-linecap="round" />
-            <path d="M 95 24 Q 60 22 35 34 Q 15 42 0 40 Q 25 30 55 20 Q 85 14 105 18" stroke="var(--vt-antique-gold)" stroke-width="1.4" stroke-linecap="round" opacity="0.85" />
-            <path d="M 145 26 Q 175 22 205 34 Q 225 42 240 40 Q 215 30 185 20 Q 155 14 135 18" stroke="var(--vt-antique-gold)" stroke-width="1.4" stroke-linecap="round" opacity="0.85" />
-            <circle cx="120" cy="22" r="2.5" fill="var(--vt-vermilion)" />
-          </svg>
-        </div>
-
-        <div class="vt-chapter-eyebrow" style="color:var(--vt-deep-crimson); font-weight:700;">HỒI KẾT • CÁNH CỬA KHỞI NGUYÊN</div>
-
-        <h2 class="sec-gate-title">
-          Mọi Câu Chuyện Đều Bắt Đầu<br>Từ Một Cánh Cửa
-        </h2>
-
-        <p class="sec-gate-philosophical-quote">
-          “Và đêm nay, có thể bạn sẽ là người được chọn.”
-        </p>
-
-        <p class="sec-gate-subtext">
-          Cánh cửa Vạn Tượng đã hé mở. Hãy bước vào không gian bảo tàng số để tiếp nối những giá trị chưa bao giờ phai tàn.
-        </p>
-
-        <div style="margin-bottom: 0.5rem;">
-          <button id="btnEnterMuseumFinal" class="vt-btn-grand-portal">
-            <span class="vt-btn-icon-rhombus">❖</span>
-            <span>BƯỚC VÀO BẢO TÀNG</span>
-            <span class="vt-btn-icon-rhombus">❖</span>
-          </button>
         </div>
       </div>
     </section>
