@@ -11755,6 +11755,11 @@
         };
 
         this.startAmbientCanvas();
+
+        // Chế độ Trình Diễn / Ban Giám Khảo: Nạp sẵn quyền mở khóa toàn bộ gói trải nghiệm
+        try {
+          localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(['mask', 'ceramic', 'flute', 'brush', 'all', 'combo_all']));
+        } catch(e) {}
       }
 
       // Hiệu ứng chuyển cảnh loang mực tàu phong cách "The Boat" (Sumi-e Ink Bleed Wipe)
@@ -13259,13 +13264,13 @@
         const btnBuyIndiv = document.getElementById('btnBuyIndividualPack');
         if (btnBuyIndiv) {
           btnBuyIndiv.addEventListener('click', () => {
-            this.toast('⚡ Cổng thanh toán trực tuyến SePay/VietQR đang chuẩn bị kết nối! Hiện tại bạn có thể đăng ký tài khoản hoặc chơi thử thế giới Mặt Nạ miễn phí.');
+            this.toast('⚡ Chế độ Khảo Thí / Triển Lãm: Toàn bộ thế giới cổ vật và tính năng đã được MỞ KHÓA TRỌN VẸN để Ban Giám Khảo trải nghiệm tự do!');
           });
         }
         const btnBuyCombo = document.getElementById('btnBuyComboPack');
         if (btnBuyCombo) {
           btnBuyCombo.addEventListener('click', () => {
-            this.toast('⚡ Cổng thanh toán trực tuyến SePay/VietQR đang chuẩn bị kết nối! Hiện tại bạn có thể đăng ký tài khoản hoặc chơi thử thế giới Mặt Nạ miễn phí.');
+            this.toast('⚡ Chế độ Khảo Thí / Triển Lãm: Toàn bộ thế giới cổ vật và tính năng đã được MỞ KHÓA TRỌN VẸN để Ban Giám Khảo trải nghiệm tự do!');
           });
         }
         const btnTierFree = document.getElementById('btnTierFreeCurrent');
@@ -13400,17 +13405,9 @@
         });
       }
 
-      // Kiểm tra quyền mở khóa cổ vật (Bản dùng thử chỉ mở thế giới Mặt Nạ HỌA DIỆN)
+      // Kiểm tra quyền mở khóa cổ vật (Chế độ Trình Diễn / Khảo Thí: Mở toàn bộ trải nghiệm cho Ban Giám Khảo)
       isArtifactUnlocked(artifactKey) {
-        if (!artifactKey || artifactKey === 'mask' || artifactKey === 'tuong') return true;
-        try {
-          const raw = localStorage.getItem('VT_UNLOCKED_PACKS');
-          if (!raw) return false;
-          const unlocked = JSON.parse(raw);
-          return Array.isArray(unlocked) && (unlocked.includes(artifactKey) || unlocked.includes('all'));
-        } catch(e) {
-          return false;
-        }
+        return true;
       }
 
       // Mở modal thông báo Gói Mở Rộng khi người dùng bấm vào ải bị khóa

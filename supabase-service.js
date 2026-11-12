@@ -479,22 +479,19 @@ class SupabaseService {
     }
   }
 
-  // Tải danh sách gói mở rộng đã mua từ Supabase
+  // Tải danh sách gói mở rộng đã mua từ Supabase (Chế độ Khảo Thí: luôn giữ mở toàn bộ các gói)
   async fetchUnlockedPacks(userId) {
+    try {
+      localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(['mask', 'ceramic', 'flute', 'brush', 'all', 'combo_all']));
+    } catch(e) {}
     if (!this.client || !this.isConnected || !userId) return;
     try {
       const { data, error } = await this.client
         .from('vt_unlocked_packs')
         .select('pack_type')
         .eq('user_id', userId);
-      if (!error && Array.isArray(data)) {
-        const packs = data.map(p => p.pack_type);
-        if (packs.includes('combo_all')) {
-          localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(['ceramic', 'flute', 'all']));
-        } else {
-          localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(packs));
-        }
-      }
+      // Giữ nguyên quyền mở khóa toàn bộ cho ban giám khảo khảo cứu
+      localStorage.setItem('VT_UNLOCKED_PACKS', JSON.stringify(['mask', 'ceramic', 'flute', 'brush', 'all', 'combo_all']));
     } catch (e) {
       console.warn('[Vạn Tượng] Chưa tải được gói từ Cõi Mây, dùng bộ nhớ cục bộ:', e);
     }
