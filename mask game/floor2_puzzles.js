@@ -90,7 +90,7 @@ window.Floor2Puzzles = (function () {
               </p>
               <div class="f2-seals-bottom" style="margin-top:8px;">
                 <span class="f2-red-seal">Ngự Tiền Chi Bảo</span>
-                <span class="f2-date">Bảo Đại Năm Thứ 5 (Canh Ngọ 1930) — Khâm Định</span>
+                <span class="f2-date">Bảo Đại Năm Thứ 5 (Năm Canh Ngọ) — Khâm Định</span>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ window.Floor2Puzzles = (function () {
             <div class="f2-clue-desc">
               <b>Dữ kiện trinh thám đã nạp vào Sổ Tay [TAB]:</b><br>
               • <code>[Tướng họ Vũ: Trung thần ái quốc]</code><br>
-              • <code>[Năm Canh Ngọ = 1930]</code> (Năm xảy ra trận đại hỏa hoạn thiêu rụi gánh hát)
+              • <code>[Năm Canh Ngọ: Đại Hỏa Hoạn]</code> (Niên hiệu Bảo Đại năm thứ 5 — thời điểm đống tro tàn lớn)
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ window.Floor2Puzzles = (function () {
     }
     if (window.DeductionJournal && window.DeductionJournal.addKeyword) {
       window.DeductionJournal.addKeyword('[Tướng họ Vũ: Trung thần ái quốc]');
-      window.DeductionJournal.addKeyword('[Năm Canh Ngọ = 1930]');
+      window.DeductionJournal.addKeyword('[Năm Canh Ngọ: Đại Hỏa Hoạn]');
     }
     if (window.GameAudio) window.GameAudio.clueDiscovered();
 
@@ -149,7 +149,7 @@ window.Floor2Puzzles = (function () {
     overlay.innerHTML = `
       <div class="f2-modal f2-chest-modal">
         <div class="f2-header">
-          <h3>🔐 HÒM SẮT CỦA THỢ ẢNH PHÁP (1930)</h3>
+          <h3>🔐 HÒM SẮT CỦA THỢ ẢNH PHÁP</h3>
           <button class="f2-btn-close" id="btnChestClose" title="Đóng [ESC]">✕</button>
         </div>
         <div class="f2-chest-body">
@@ -161,9 +161,9 @@ window.Floor2Puzzles = (function () {
             <div class="f2-french-inscription" style="font-size:16px;">
               « L’année de la grande cendre »
             </div>
-            <div class="f2-lid-subtext">(Khắc trên thân hòm: "Năm của đống tro tàn lớn — 1930")</div>
+            <div class="f2-lid-subtext">(Khắc trên thân hòm: "Năm của đống tro tàn lớn")</div>
             <div style="margin-top:6px; padding:8px; border:1px solid #9a742b; font-size:11px; color:#f3dcb1;">
-              📏 <b>Cữ trượt Thước Đo Đồng Can Chi</b>: <code>Canh Ngọ ⟷ Dương lịch 1930</code>
+              📏 <b>Thước Đo Niên Biểu Can Chi</b>: <code>Mậu Thìn (1928) ➔ Kỷ Tỵ (1929) ➔ Canh Ngọ [?]</code>
             </div>
           </div>
 
@@ -246,9 +246,9 @@ window.Floor2Puzzles = (function () {
     document.getElementById('btnChestHint').onclick = () => {
       const statusEl = document.getElementById('f2ChestStatus');
       if (world && world.floor2 && world.floor2.readRoyalEdict) {
-        statusEl.innerHTML = `<span style="color:#ecc554">💡 Bản sắc phong triều Nguyễn ghi: Trận đại hỏa hoạn xảy ra vào <b>Năm Canh Ngọ (Dương lịch: 1930)</b>!</span>`;
+        statusEl.innerHTML = `<span style="color:#ecc554">💡 <b>Gợi ý suy luận:</b> Sắc phong trong tủ kính ghi biến cố đống tro tàn lớn xảy ra vào <b>Năm Canh Ngọ (Bảo Đại năm thứ 5)</b>. Hãy đối chiếu chuỗi Can Chi trên thước đo đồng (1928 ➔ 1929 ➔ Canh Ngọ) để suy ra 4 chữ số mở khóa!</span>`;
       } else {
-        statusEl.innerHTML = `<span style="color:#aba291">💡 Hãy soi tủ kính Sắc phong Triều Nguyễn ở gian giữa để tìm niên đại trận hỏa hoạn.</span>`;
+        statusEl.innerHTML = `<span style="color:#aba291">💡 Hãy soi tủ kính Sắc phong Triều Nguyễn ở gian giữa để tìm niên hiệu Can Chi của năm xảy ra trận đại hỏa hoạn.</span>`;
       }
     };
 
@@ -297,7 +297,7 @@ window.Floor2Puzzles = (function () {
     overlay.innerHTML = `
       <div class="f2-modal f2-loot-modal">
         <div class="f2-header">
-          <h3>📦 VẬT PHẨM TRONG HÒM SẮT 1930</h3>
+          <h3>📦 VẬT PHẨM TRONG HÒM SẮT</h3>
           <button class="f2-btn-close" id="btnLootClose" title="Đóng [ESC]">✕</button>
         </div>
         <div class="f2-loot-body">

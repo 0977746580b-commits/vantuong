@@ -906,7 +906,56 @@
     .f2-modal { max-height: calc(100dvh - 32px); }
     .f2-modal > div:not(.f2-header):not(.f2-footer) { min-height: 0; overflow-y: auto; }
     .f2-header, .f2-footer { flex-shrink: 0; }
-    #btnMute { min-height: 32px; white-space: nowrap; }
+    #btnMute, #btnFullscreen { min-height: 32px; white-space: nowrap; }
+    #btnFullscreen {
+      background: #2b2135;
+      color: #ecc554;
+      border: 1px solid #d4af37;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 600;
+    }
+    #btnFullscreen:hover {
+      background: #471822;
+      border-color: #f5a823;
+      color: #fff;
+    }
+    body.is-fullscreen {
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      overflow: hidden !important;
+      background: #050308 !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+    body.is-fullscreen header {
+      display: none !important;
+    }
+    body.is-fullscreen .workspace {
+      max-width: 100vw !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      justify-content: space-between !important;
+    }
+    body.is-fullscreen .viewport-card {
+      max-width: 100vw !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      justify-content: space-between !important;
+    }
+    body.is-fullscreen #gameCanvas {
+      flex: 1 1 auto !important;
+      width: 100% !important;
+      height: calc(100vh - 46px) !important;
+      max-height: calc(100vh - 46px) !important;
+      object-fit: contain !important;
+    }
     @media (max-width: 600px) {
       body { padding: 8px; }
       .controls-bar { gap: 8px; }
@@ -923,7 +972,10 @@
         <div><span class="key-badge">E</span> Tương tác / Thoại</div>
         <div><span class="key-badge">TAB</span> Sổ tay Suy luận</div>
         <div><span class="key-badge">ESC</span> Đóng</div>
-        <button id="btnMute" type="button" aria-label="Tắt tiếng game" aria-pressed="false">🔊 Tắt tiếng</button>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button id="btnMute" type="button" aria-label="Tắt tiếng game" aria-pressed="false">🔊 Tắt tiếng</button>
+          <button id="btnFullscreen" type="button" aria-label="Toàn màn hình" title="Phóng to / thu nhỏ toàn màn hình">⛶ Toàn màn hình</button>
+        </div>
       </div>
     </div>
   </div>

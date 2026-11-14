@@ -936,14 +936,6 @@
           <span>📋</span>
           <span class="pill-text">Thẻ Hiện Vật</span>
         </button>
-        <button id="museumRelicsBtn" class="hud-pill-btn" style="border-color: rgba(224, 109, 40, 0.55); color: #f5a823;" title="Tam Đại Cổ Vật • Khảo Cứu & Mở Khóa Ải (image4.png)">
-          <span>🏺</span>
-          <span class="pill-text">3 Đại Di Khí</span>
-        </button>
-        <button id="museumMapBtn" class="hud-pill-btn" title="Mở Cổ Đồ Vạn Tượng">
-          <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          <span class="pill-text">Cổ Đồ</span>
-        </button>
         <button id="hudAuthBtn" class="hud-pill-btn" style="border-color: rgba(245, 168, 35, 0.6); color: #f5a823;" title="Tài Khoản / Đăng Nhập / Chế độ Khách">
           <span id="hudAuthSeal">🏮</span>
           <span id="hudAuthName" class="pill-text">Lữ Khách</span>
@@ -1092,6 +1084,10 @@
       </div>
 
       <div class="pixel-hud-actions">
+        <button id="btnPixelFullscreen" class="pixel-hud-btn" type="button" title="Bật / Tắt Toàn Màn Hình">
+          <span>⛶</span>
+          <span>Toàn Màn Hình</span>
+        </button>
         <button id="btnPixelQuickComplete" class="pixel-hud-btn" type="button" title="Mở khóa thử nghiệm ấn ký di vật">
           <span>⭐</span>
           <span>Hoàn Thành Ải (Test)</span>
@@ -1196,11 +1192,6 @@
           <span>🏛️</span>
           <span>Bảo Tàng</span>
         </button>
-        <button id="ancientMapBtn" class="hud-action-btn hud-map-btn" title="Mở Cổ Đồ Vạn Tượng (Tiến độ hành trình)">
-          <span>🗺️</span>
-          <span>Cổ Đồ</span>
-          <span id="mapProgressBadge" class="badge-num">0/4</span>
-        </button>
         <button id="journalModalBtn" class="hud-action-btn" title="Mở Sổ tay & Cổ vật">
           <span>📜</span>
           <span>Cổ Vật</span>
@@ -1287,281 +1278,7 @@
     </div>
   </div>
 
-  <!-- ===================================================================
-       CỔ ĐỒ VẠN TƯỢNG (INTERACTIVE ANCIENT QUEST MAP & ATLAS MODAL)
-       =================================================================== -->
-  <div id="ancientMapModal" class="ancient-map-modal hidden">
-    <div class="ancient-map-frame">
-      <!-- 4 Góc Đồng Chạm Trổ Triều Đại -->
-      <div class="map-corner-brass tl"></div>
-      <div class="map-corner-brass tr"></div>
-      <div class="map-corner-brass bl"></div>
-      <div class="map-corner-brass br"></div>
 
-      <!-- Tiêu Đề Cổ Đồ & Nút Đóng -->
-      <div class="ancient-map-header">
-        <div class="map-header-title-box">
-          <h2><span>🗺️</span> CỔ ĐỒ VẠN TƯỢNG • ĐẠI NAM DỊ VẬT CHÍ</h2>
-          <p>Tấm bản đồ giấy Dó vẽ bằng mực chu sa và khoáng thạch, dẫn lối qua 4 vùng di sản để tìm bức tranh thất truyền</p>
-        </div>
-        <div style="display:flex; gap:0.6rem; align-items:center;">
-          <button id="mapSwitchToRelicsBtn" class="map-close-btn" style="background:rgba(136, 48, 27, 0.7); border-color:#e06d28; color:#f5a823;" title="Xem Màn Hình 3 Đại Di Khí (image4.png)">
-            <span>🏺</span> 3 ĐẠI DI KHÍ
-          </button>
-          <button id="closeAncientMapBtn" class="map-close-btn">
-            <span>✕</span> ĐÓNG CỔ ĐỒ
-          </button>
-        </div>
-      </div>
-
-      <!-- Thanh Tiến Trình Thu Thập Cổ Vật -->
-      <div class="map-progress-banner">
-        <div class="map-progress-text">
-          <span>TIẾN ĐỘ THU THẬP DI KHÍ: </span>
-          <strong id="mapProgressCount" style="color:var(--gold-bright);">0 / 4</strong>
-        </div>
-        <div class="map-relics-strip">
-          <div class="map-relic-badge" id="mapBadgeMask">
-            <span>🎭</span> Mặt Nạ Tuồng
-          </div>
-          <div class="map-relic-badge" id="mapBadgeVase">
-            <span>🏺</span> Bình Men Rạn
-          </div>
-          <div class="map-relic-badge" id="mapBadgeFlute">
-            <span>🖼️</span> Tranh Dân Gian
-          </div>
-          <div class="map-relic-badge" id="mapBadgeBrush">
-            <span>🖌️</span> Bút Chu Sa
-          </div>
-        </div>
-      </div>
-
-      <!-- Không Gian Tọa Độ Bản Đồ Cổ & Tuyến Mực Chu Sa -->
-      <div class="ancient-map-canvas-wrap">
-        <!-- SVG Vẽ Tuyến Đường Nối Mực Tàu & Chu Sa -->
-        <svg class="map-svg-routes" viewBox="0 0 1000 420" preserveAspectRatio="none">
-          <!-- Đường nét đứt nền -->
-          <path id="routeTlToMask" class="map-route-line" d="M 180,210 Q 320,120 440,110" />
-          <path id="routeTlToFlute" class="map-route-line" d="M 180,210 Q 300,310 440,320" />
-          <path id="routeMaskToVase" class="map-route-line" d="M 440,110 Q 600,80 760,130" />
-          <path id="routeFluteToBrush" class="map-route-line" d="M 440,320 Q 580,350 760,310" />
-          <path id="routeVaseToCenter" class="map-route-line" d="M 760,130 Q 860,170 910,210" />
-          <path id="routeBrushToCenter" class="map-route-line" d="M 760,310 Q 860,260 910,210" />
-        </svg>
-
-        <!-- Hoa Gió / La Bàn Bát Quái Cổ Phong -->
-        <div class="map-compass-rose">
-          <svg viewBox="0 0 100 100" width="100%" height="100%">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-dasharray="3,3" />
-            <circle cx="50" cy="50" r="38" fill="none" stroke="#d4af37" stroke-width="1" />
-            <path d="M 50,4 L 54,46 L 96,50 L 54,54 L 50,96 L 46,54 L 4,50 L 46,46 Z" fill="rgba(212,175,55,0.25)" stroke="#d4af37" stroke-width="1.2" />
-            <text x="50" y="16" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle" font-weight="bold">BẮC</text>
-            <text x="50" y="90" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">NAM</text>
-            <text x="88" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">ĐÔNG</text>
-            <text x="14" y="54" fill="#fcd55c" font-size="10" font-family="serif" text-anchor="middle">TÂY</text>
-          </svg>
-        </div>
-
-        <!-- 6 Địa Danh Cổ Trên Bản Đồ -->
-        <!-- 1. Thăng Long Cổ Phố -->
-        <div class="map-node active-current" id="mapNodeTL" style="left: 18%; top: 50%;" data-chamber="prologue" title="Thăng Long Cổ Phố - Khởi đầu hành trình">
-          <div class="map-node-icon">🏛️</div>
-          <div class="map-node-label">Thăng Long Cổ Phố</div>
-        </div>
-
-        <!-- 2. Chiếu Tuồng Đặng Gia -->
-        <div class="map-node" id="mapNodeMask" style="left: 44%; top: 26%;" data-chamber="tuong" title="Màn 1: Chiếu Tuồng Đặng Gia">
-          <div class="map-node-icon">🎭</div>
-          <div class="map-node-label">Chiếu Tuồng Đặng Gia</div>
-        </div>
-
-        <!-- 3. Lò Bầu Bát Tràng -->
-        <div class="map-node" id="mapNodeVase" style="left: 76%; top: 31%;" data-chamber="bat-trang" title="Màn 2: Lò Bầu Bát Tràng">
-          <div class="map-node-icon">🏺</div>
-          <div class="map-node-label">Lò Bầu Bát Tràng</div>
-        </div>
-
-        <!-- 4. Phố Hàng Trống • Tranh Ngũ Hổ -->
-        <div class="map-node" id="mapNodeFlute" style="left: 44%; top: 76%;" data-chamber="song-duong" title="Màn 3: Tranh Dân Gian Ngũ Hổ Hàng Trống">
-          <div class="map-node-icon">🖼️</div>
-          <div class="map-node-label">Tranh Ngũ Hổ Hàng Trống</div>
-        </div>
-
-        <!-- 5. Điện Thờ Tiền Nhân -->
-        <div class="map-node" id="mapNodeBrush" style="left: 76%; top: 74%;" data-chamber="dien-tho" title="Màn 4: Điện Thờ Tiền Nhân">
-          <div class="map-node-icon">🖌️</div>
-          <div class="map-node-label">Điện Thờ Tiền Nhân</div>
-        </div>
-
-        <!-- 6. Bức Tranh Trung Tâm -->
-        <div class="map-node" id="mapNodeCenter" style="left: 91%; top: 50%;" data-chamber="final" title="Đại Mật Khải - Bức Tranh Vạn Tượng">
-          <div class="map-node-icon">📜</div>
-          <div class="map-node-label">Bức Tranh Trung Tâm</div>
-        </div>
-      </div>
-
-      <!-- Chỉ Dẫn Phía Dưới Bản Đồ -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem; font-size:0.82rem; color:var(--paper-dim);">
-        <div>💡 <em>Nhấn vào một địa danh đã mở để phiêu lưu tới cõi ấy hoặc mở lại ký ức di vật</em></div>
-        <div style="display:flex; gap:1.2rem;">
-          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--gold-bright);">●</span> Vị trí hiện tại</span>
-          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--jade-glow);">●</span> Đã thu phục</span>
-          <span style="display:flex; align-items:center; gap:0.35rem;"><span style="color:var(--paper-dim);">○</span> Mật tích niêm phong</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================================================================
-       MÀN HÌNH 3 ĐẠI DI KHÍ (UNLOCK ẢI CỔ VẬT THEO REF IMAGE4 VỚI BẢNG MÀU DMC)
-       =================================================================== -->
-  <div id="relicsUnlockModal" class="relics-unlock-modal hidden">
-    <!-- Nền khói sương mờ ảo cuộn sóng dập dềnh ở đáy -->
-    <div class="relics-mist-overlay"></div>
-    <div class="relics-cloud-wave-strip"></div>
-
-    <!-- 4 Góc hoa văn hoàng gia thếp vàng khảm sứ -->
-    <div class="relics-corner-ornament tl"></div>
-    <div class="relics-corner-ornament tr"></div>
-    <div class="relics-corner-ornament bl"></div>
-    <div class="relics-corner-ornament br"></div>
-
-    <!-- Khung nội dung chính -->
-    <div class="relics-unlock-container">
-      <!-- Header -->
-      <div class="relics-unlock-header">
-        <div class="relics-header-badge">
-          <img src="assets/patterns/royal-medallion.svg" alt="Huy chương triện" class="relics-royal-badge" />
-          <div class="relics-header-text">
-            <span class="relics-header-tag">ĐẠI NAM DỊ VẬT CHÍ • TAM ĐẠI DI KHÍ</span>
-            <h2 class="relics-header-title">KHẢO CỨU & MỞ KHÓA CỔ VẬT HOÀNG GIA</h2>
-            <p class="relics-header-desc">Hệ thống cổ vật ngàn năm kết tụ tinh hoa mỹ nghệ Đại Việt • Nhấp vào từng bảo vật để khảo cứu chi tiết hoặc phiêu lưu trực tiếp tới bệ trưng bày 3D</p>
-          </div>
-        </div>
-        <div class="relics-header-actions">
-          <button id="relicsSwitchToMapBtn" class="relics-btn-secondary" title="Mở Cổ Đồ Tọa Độ Tuyến Mực">
-            <span>🗺️</span> CỔ ĐỒ TUYẾN ĐƯỜNG
-          </button>
-          <button id="btnCloseRelicsUnlock" class="relics-btn-close" title="Đóng bảng Di Khí">
-            <span>✕</span> ĐÓNG
-          </button>
-        </div>
-      </div>
-
-      <!-- Lưới 3 Thẻ Bài Cổ Vật Nổi trên Bục Trưng Bày và Sương Khói (image4.png style) -->
-      <div class="relics-cards-showcase">
-        <!-- CARD 1: MẶT NẠ TUỒNG TAM DIỆN -->
-        <div class="relic-showcase-card" data-station="mask" data-chamber="tuong">
-          <div class="card-corner-decor tl"></div>
-          <div class="card-corner-decor tr"></div>
-          <div class="card-corner-decor bl"></div>
-          <div class="card-corner-decor br"></div>
-
-          <div class="relic-spotlight-halo"></div>
-
-          <div class="relic-visual-stage">
-            <img src="assets/relics/relic-mask-ai.png" alt="Mặt Nạ Tuồng Tam Diện" class="relic-visual-img" />
-          </div>
-
-          <div class="relic-card-meta">
-            <div class="relic-category-pill">
-              <span>CHIẾU TUỒNG • ẢI I</span>
-            </div>
-            <h3 class="relic-name-primary">MẶT NẠ TUỒNG</h3>
-            <h4 class="relic-name-secondary">TAM DIỆN KHÓC CƯỜI</h4>
-            <div class="relic-era-tag">CHIẾU TUỒNG ĐẶNG GIA • THẾ KỶ XVIII</div>
-            <p class="relic-card-quote">"Mặt nạ gỗ mít bồi giấy bản, ba khuôn mặt khóc - cười - phẫn nộ đan xen nét vẽ chu sa Cung Đình."</p>
-
-            <div class="relic-card-actions">
-              <button class="btn-relic-teleport" data-station="mask" title="Di chuyển camera vào bệ trưng bày 3D">
-                <span>❖</span> VÀO BỆ 3D
-              </button>
-              <button class="btn-relic-quest" data-chamber="tuong" title="Mở thử thách khảo cứu">
-                <span>📜</span> KHẢO CỨU ẢI
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 2: BÌNH GỐM MEN RẠN BÁT TRÀNG -->
-        <div class="relic-showcase-card" data-station="ceramic" data-chamber="bat-trang">
-          <div class="card-corner-decor tl"></div>
-          <div class="card-corner-decor tr"></div>
-          <div class="card-corner-decor bl"></div>
-          <div class="card-corner-decor br"></div>
-
-          <div class="relic-spotlight-halo"></div>
-
-          <div class="relic-visual-stage">
-            <img src="assets/relics/relic-vase-ai.png" alt="Bình Gốm Men Rạn Bát Tràng" class="relic-visual-img" />
-          </div>
-
-          <div class="relic-card-meta">
-            <div class="relic-category-pill">
-              <span>GỐM MEN CỔ • ẢI II</span>
-            </div>
-            <h3 class="relic-name-primary">BÌNH GỐM</h3>
-            <h4 class="relic-name-secondary">MEN RẠN BÁT TRÀNG</h4>
-            <div class="relic-era-tag">LÒ BẦU BÁT TRÀNG • THẾ KỶ XVII</div>
-            <p class="relic-card-quote">"Nước men tro trấu rạn tự nhiên như mai rùa, họa tiết rồng cuộn ẩn hiện giữa làn mây ngũ sắc thời Hậu Lê."</p>
-
-            <div class="relic-card-actions">
-              <button class="btn-relic-teleport" data-station="ceramic" title="Di chuyển camera vào bệ trưng bày 3D">
-                <span>❖</span> VÀO BỆ 3D
-              </button>
-              <button class="btn-relic-quest" data-chamber="bat-trang" title="Mở thử thách khảo cứu">
-                <span>📜</span> KHẢO CỨU ẢI
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 3: TRANH DÂN GIAN NGŨ HỔ -->
-        <div class="relic-showcase-card" data-station="flute" data-chamber="song-duong">
-          <div class="card-corner-decor tl"></div>
-          <div class="card-corner-decor tr"></div>
-          <div class="card-corner-decor bl"></div>
-          <div class="card-corner-decor br"></div>
-
-          <div class="relic-spotlight-halo"></div>
-
-          <div class="relic-visual-stage">
-            <img src="assets/van_tuong/folk-art/tranh_ngu_ho_hang_trong.webp" alt="Tranh Dân Gian Ngũ Hổ Hàng Trống" class="relic-visual-img" />
-          </div>
-
-          <div class="relic-card-meta">
-            <div class="relic-category-pill">
-              <span>TRANH THỜ CỔ • ẢI III</span>
-            </div>
-            <h3 class="relic-name-primary">TRANH DÂN GIAN</h3>
-            <h4 class="relic-name-secondary">NGŨ HỔ HÀNG TRỐNG</h4>
-            <div class="relic-era-tag">HÀNG TRỐNG • THĂNG LONG</div>
-            <p class="relic-card-quote">"Năm vị Thần Hổ uy linh trấn trạch ngũ phương, đỉnh cao kỹ thuật cản màu tay và mộc bản phố cổ Hà Nội."</p>
-
-            <div class="relic-card-actions">
-              <button class="btn-relic-teleport" data-station="flute" title="Di chuyển camera vào bệ trưng bày 3D">
-                <span>❖</span> VÀO BỆ 3D
-              </button>
-              <button class="btn-relic-quest" data-chamber="song-duong" title="Mở thử thách khảo cứu">
-                <span>📜</span> KHẢO CỨU ẢI
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer Bar -->
-      <div class="relics-unlock-footer">
-        <div class="relics-footer-tip">
-          <span>💡 <em>Mẹo: Bấm "VÀO BỆ 3D" để camera tự động lướt đến tủ kính trong sảnh Rotunda và xoay ngắm 360 độ</em></span>
-        </div>
-        <div class="relics-footer-status">
-          <span class="status-dot"></span>
-          <span id="relicsCollectedCount">Tiến độ khảo cứu: 0 / 3 Di Vật</span>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ===================================================================
        MODAL XÁC THỰC LỮ KHÁCH (ĐĂNG NHẬP / ĐĂNG KÝ / CHẾ ĐỘ KHÁCH)

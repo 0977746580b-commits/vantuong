@@ -246,6 +246,7 @@
         btnBackMuseum: document.getElementById('btnPixelBackMuseum'),
         btnResetStage: document.getElementById('btnPixelResetStage'),
         btnQuickClear: document.getElementById('btnPixelQuickComplete'),
+        btnFullscreen: document.getElementById('btnPixelFullscreen'),
         mobileLeft: document.getElementById('btnPixelTouchLeft'),
         mobileRight: document.getElementById('btnPixelTouchRight'),
         mobileJump: document.getElementById('btnPixelTouchJump')
@@ -302,6 +303,31 @@
         this.dom.btnQuickClear.addEventListener('click', () => {
           this.completeCurrentStage();
         });
+      }
+
+      if (this.dom.btnFullscreen) {
+        this.dom.btnFullscreen.addEventListener('click', () => {
+          const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+          if (!isFs) {
+            const target = this.dom.view || document.documentElement;
+            if (target.requestFullscreen) target.requestFullscreen();
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+          } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          }
+        });
+
+        const syncFsState = () => {
+          const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+          if (this.dom.btnFullscreen) {
+            this.dom.btnFullscreen.innerHTML = isFs
+              ? '<span>🗗</span><span>Thu Nhỏ</span>'
+              : '<span>⛶</span><span>Toàn Màn Hình</span>';
+          }
+        };
+        document.addEventListener('fullscreenchange', syncFsState);
+        document.addEventListener('webkitfullscreenchange', syncFsState);
       }
 
       // Nút cảm ứng trên điện thoại / chuột
