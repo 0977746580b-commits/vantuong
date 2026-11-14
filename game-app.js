@@ -16,7 +16,6 @@
 
         this.dom = {
           viewHome: document.getElementById('viewHome'),
-          viewFounders: document.getElementById('viewFounders'),
           viewInvitation: document.getElementById('viewInvitation'),
           viewRules: document.getElementById('viewRules'),
           viewGame: document.getElementById('viewGame'),
@@ -357,14 +356,6 @@
           } else if (viewName === 'rules') {
             if (this.stopAmbientCanvas) this.stopAmbientCanvas();
             if (this.dom.viewRules) this.dom.viewRules.classList.add('active');
-          } else if (viewName === 'founders') {
-            if (this.stopAmbientCanvas) this.stopAmbientCanvas();
-            if (window.vtMuseum3D) window.vtMuseum3D.stop();
-            const vf = document.getElementById('viewFounders');
-            if (vf) {
-              vf.classList.add('active');
-              vf.scrollTop = 0;
-            }
           }
           if (onDone) onDone();
         };
@@ -394,8 +385,6 @@
         audio.init();
         audio.playPaper();
         if (stage === 'invitation') {
-          const vf = document.getElementById('viewFounders');
-          if (vf) vf.classList.remove('active');
           if (this.dom.viewHome) this.dom.viewHome.classList.add('active');
           if (this.dom.viewInvitation) {
             this.dom.viewInvitation.classList.add('active');
@@ -420,8 +409,6 @@
           this.dom.viewRules.classList.remove('active');
           this.dom.viewRules.classList.remove('mode-review');
         }
-        const vf = document.getElementById('viewFounders');
-        if (vf) vf.classList.remove('active');
         if (this.dom.viewHome) this.dom.viewHome.classList.add('active');
       }
 

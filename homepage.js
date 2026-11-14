@@ -58,9 +58,6 @@
       const startJourneyAction = (e) => {
         if (e && e.preventDefault) e.preventDefault();
 
-        // Ẩn trang Sáng Lập nếu đang mở để hiển thị sạch sẽ Thư Mời
-        const viewFounders = document.getElementById('viewFounders');
-        if (viewFounders) viewFounders.classList.remove('active');
         const viewHome = document.getElementById('viewHome');
         if (viewHome) viewHome.classList.add('active');
 
@@ -95,51 +92,6 @@
       if (btnHeroEnter) btnHeroEnter.addEventListener('click', startJourneyAction);
       if (btnFinalEnter) btnFinalEnter.addEventListener('click', startJourneyAction);
       if (navStart) navStart.addEventListener('click', startJourneyAction);
-
-      // 3.1. Chuyển sang trang Tác Giả & Sáng Lập (Tách biệt khỏi Homepage)
-      const navFounders = document.getElementById('navFoundersBtn');
-      const goToFounders = (e) => {
-        if (e) e.preventDefault();
-        if (window.game && typeof window.game.switchView === 'function') {
-          window.game.switchView('founders', null, 'dissolve');
-        } else {
-          document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
-          const vf = document.getElementById('viewFounders');
-          if (vf) {
-            vf.classList.add('active');
-            vf.scrollTop = 0;
-          }
-        }
-      };
-
-      const backToHome = (e) => {
-        if (e) e.preventDefault();
-        if (window.game && typeof window.game.switchView === 'function') {
-          window.game.switchView('home', null, 'dissolve');
-        } else {
-          document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
-          const vh = document.getElementById('viewHome');
-          if (vh) {
-            vh.classList.add('active');
-            vh.scrollTop = 0;
-          }
-        }
-      };
-
-      if (navFounders) navFounders.addEventListener('click', goToFounders);
-
-      const btnBackFounders = document.getElementById('btnBackHomeFromFounders');
-      const btnBackFoundersBottom = document.getElementById('btnBackHomeFromFoundersBottom');
-      const foundersBrandBack = document.getElementById('foundersBrandBack');
-
-      if (btnBackFounders) btnBackFounders.addEventListener('click', backToHome);
-      if (btnBackFoundersBottom) btnBackFoundersBottom.addEventListener('click', backToHome);
-      if (foundersBrandBack) foundersBrandBack.addEventListener('click', backToHome);
-
-      const btnMuseumFounders = document.getElementById('btnEnterMuseumFromFounders');
-      const btnMuseumFoundersBottom = document.getElementById('btnEnterMuseumFromFoundersBottom');
-      if (btnMuseumFounders) btnMuseumFounders.addEventListener('click', startJourneyAction);
-      if (btnMuseumFoundersBottom) btnMuseumFoundersBottom.addEventListener('click', startJourneyAction);
 
       // 4. Smooth Anchor Scrolling inside #viewHome
       document.querySelectorAll('#viewHome a[href^="#"]').forEach(anchor => {
