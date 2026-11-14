@@ -1,0 +1,25 @@
+﻿HIỆU PHỤC SỨC MÃ VĨ
+VỞ DIỄN CHƯA HẠ MÀN
+
+
+Xích Hổ - Hỏa | Vật phẩm: Mực Tàu
+Phân cảnh 1: Cửa hiệu phục sức
+Tôi dừng chân trước một cửa hiệu nhỏ nằm sâu trong con phố. Bên trong, những bộ trang phục sân khấu được treo thành từng hàng. Có áo giáp, mũ mão, cờ lệnh và vô số món phụ kiện mà tôi không thể gọi tên.
+Ở cuối căn phòng là một tấm gương lớn. Trước gương đặt ba bộ trang phục chưa hoàn thiện. Một số món đồ bị vứt lẫn lộn trên sàn, như thể vừa có ai đó vội vàng rời khỏi đây.
+Phía sau tấm bình phong, tôi nghe thấy tiếng một người phụ nữ đang lật giở những trang giấy.
+Lời thoại nghe được:
+“Không thể nào... bộ này rõ ràng thuộc về vai trung thần, tại sao trong sổ lại ghi là phản tướng?”
+Tôi bước đến gần cuốn sổ. Trên trang giấy là ba bản phác họa nhân vật, nhưng những ghi chú bên cạnh dường như đã bị đảo lộn. Có lẽ, những vai diễn đã bị hoán đổi theo thứ tự không phù hợp.
+Phân cảnh 2: NHIỆM VỤ
+Tương tác:
+* Tôi có thể quan sát ba bộ trang phục.
+* Nhấp vào từng món phụ kiện để xem chi tiết.
+* Đọc các ghi chú trong cuốn sổ.
+* Kéo thả trang phục và phụ kiện vào đúng nhân vật.
+Ba nhân vật được phác họa trong sổ gồm một vị quan, một viên tướng và một nhân vật đeo mặt nạ. Mỗi người đều có những đặc điểm riêng được thể hiện qua trang phục, màu sắc và phụ kiện.
+Tôi cần đối chiếu những chi tiết ấy để tìm ra bộ trang phục nào đã bị đặt nhầm.
+Phân cảnh 3: Nhận mực Tàu
+Người phụ nữ phía sau bình phong bất chợt đóng cuốn sổ lại. Cô lấy từ chiếc hộp gỗ một thỏi mực Tàu được bọc trong giấy.
+Tôi nhìn thỏi mực trên bàn. Bên cạnh nó lại là một bản phác thảo Ngũ Hổ. Bản phác thảo ấy như đeo bám tôi, xuất hiện ở mọi ngóc ngách nơi tôi đi qua. Ở góc dưới bức vẽ có hình một chiếc dao cắt. (hint cho địa điểm thứ 3)
+Tôi lấy thỏi mực Tàu.
+THU THẬP THÀNH CÔNG. Vật phẩm #2: Mực Tàu

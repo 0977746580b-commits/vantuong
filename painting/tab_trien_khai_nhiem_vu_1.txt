@@ -1,0 +1,9 @@
+﻿Trang hướng dẫn nhiệm vụ 1
+(hoàn thành thoại sẽ hiện sang trang phổ biến nhiệm vụ như thế này)
+NHIỆM VỤ 01: DẤU VẾT NGŨ HỔ
+Mục tiêu: Hãy đến năm địa điểm được ẩn giấu trên bản đồ và tìm ra những manh mối đang chờ đợi tại đó.
+Mười ký hiệu nằm rải rác trên tấm bản đồ cũ, nhưng không phải tất cả đều dẫn đến nơi cần tìm. 
+Để tìm ra vị trí cần đến, hãy quan sát thật kỹ bức tranh Ngũ Hổ. 
+Không phải mọi dấu vết đều đáng tin. Hãy quan sát cẩn thận trước khi đưa ra lựa chọn. Một sai sót nhỏ cũng có thể khiến đi ta chệch khỏi dấu vết ban đầu.
+_________________________________________
+ảnh sẽ generate sau

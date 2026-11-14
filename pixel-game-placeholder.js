@@ -27,7 +27,7 @@
   const EXTERNAL_GAME_URLS = {
     mask: 'mask%20game/index.html?v=20261110-integrated',
     ceramic: null, // Ví dụ sau này: 'games/bat-trang-pixel/index.html'
-    flute: null    // Ví dụ sau này: 'games/dong-ho-pixel/index.html'
+    flute: 'painting/dist/index.html?v=20261115-integrated'
   };
 
   // ===================================================================
@@ -142,10 +142,10 @@
 
     flute: {
       id: 'flute',
-      actTag: 'ẢI III • THẾ GIỚI CỔ VẬT PIXEL 2D',
-      title: 'THẦN ĐỒ NGŨ HỔ HÀNG TRỐNG',
+      actTag: 'ẢI III • THẾ GIỚI TRANH HÀNG TRỐNG',
+      title: 'TRANH HÀNG TRỐNG: DẤU VẾT NGŨ HỔ',
       artifactName: 'Tranh Dân Gian Ngũ Hổ',
-      subtitle: 'Hành trình xuyên qua bức họa Ngũ Hổ trấn trạch • Khôi phục Ấn Phù Chú, Sắc Cản Màu & Hồn Ngũ Hành',
+      subtitle: 'Phố Cổ Thăng Long • Hành trình phục dựng bản mộc bản và sắc màu Ngũ Hổ Hàng Trống',
       rewardItem: {
         id: 'flute',
         name: 'Tranh Dân Gian Ngũ Hổ',
@@ -438,9 +438,10 @@
     }
 
     mountExternalGame(url) {
+      const gameTitle = (this.worldConfig && this.worldConfig.title) || 'Trò chơi';
       const frame = document.createElement('iframe');
       frame.src = url;
-      frame.title = this.activeStation === 'mask' ? 'HỌA DIỆN — The Dual Mask' : this.worldConfig.title;
+      frame.title = this.activeStation === 'mask' ? 'HỌA DIỆN — The Dual Mask' : gameTitle;
       frame.allow = 'autoplay; fullscreen; gamepad';
       frame.setAttribute('allowfullscreen', '');
       this.externalFrame = frame;
@@ -448,7 +449,7 @@
       status.className = 'pixel-external-status';
       this.externalStatus = status;
       this.dom.externalMount.replaceChildren(frame, status);
-      this.setExternalStatus('Đang tải HỌA DIỆN…');
+      this.setExternalStatus(`Đang tải ${gameTitle}…`);
       this.externalLoadTimer = setTimeout(() => {
         if (this.externalFrame === frame) {
           this.setExternalStatus('Game đang tải lâu hơn dự kiến. Hãy kiểm tra kết nối hoặc quay lại thử lại.', true);
@@ -492,8 +493,9 @@
     openArtifactWorld(stationId) {
       this.initDOM();
       const st = PIXEL_WORLDS[stationId] ? stationId : 'mask';
+      const curTitle = (this.worldConfig && this.worldConfig.title) || 'Trò chơi';
       if (this.externalMode && this.isRunning && !this.stageCompleted &&
-          !window.confirm('HỌA DIỆN chưa lưu tiến trình câu đố. Rời lượt chơi này để mở thế giới khác?')) return;
+          !window.confirm(`${curTitle} chưa lưu tiến trình câu đố. Rời lượt chơi này để mở thế giới khác?`)) return;
       if (document.getElementById('viewMuseum3D')?.classList.contains('active') && window.vtMuseum3D?.saveMuseumSnapshot) {
         window.vtMuseum3D.saveMuseumSnapshot();
       }
@@ -984,8 +986,9 @@
     }
 
     exitToMuseum() {
+      const curTitle = (this.worldConfig && this.worldConfig.title) || 'Game';
       if (this.externalMode && !this.stageCompleted &&
-          !window.confirm('Quay về bảo tàng? Game chưa có lưu tiến trình câu đố; lượt chơi này sẽ bắt đầu lại khi vào lại.')) return;
+          !window.confirm(`Quay về bảo tàng? ${curTitle} chưa có lưu tiến trình câu đố; lượt chơi này sẽ bắt đầu lại khi vào lại.`)) return;
       this.stopGameLoop();
       if (window.game && typeof window.game.switchView === 'function') {
         window.game.switchView('museum', null, 'dissolve');

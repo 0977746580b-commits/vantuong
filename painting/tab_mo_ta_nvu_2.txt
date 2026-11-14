@@ -1,0 +1,49 @@
+﻿SAU KHI HOÀN THÀNH HINT 1
+Sau khi hoàn thành quá trình phục dựng tranh Ngũ Hổ, người chơi sẽ nhận được một bài thơ chứa mật mã dẫn đến địa điểm tiếp theo trong hành trình.
+
+
+Bước 1. Giải mã từ khóa phương hướng
+Trong bài thơ có 4 từ khóa bí mật, mỗi từ khóa đại diện cho một hướng trên bản đồ:
+- Bắc
+- Nam
+- Đông
+- Tây
+Người chơi cần dựa vào ngữ cảnh và các gợi ý để xác định từ khóa tương ứng với từng hướng.
+Bước 2. Nhận diện từ khóa tương ứng với phương hướng Đông - Tây - Nam - Bắc 
+Sau khi xác định được 4 từ khóa, người chơi nhận diện từ khóa trong bài thơ
+Bước 3. Xác định tọa độ
+Mỗi lần gặp từ khóa là một lần người chơi cần di chuyển qua một hướng mà từ khóa đó đại diện
+Bước 4. Tìm địa điểm bí mật
+Người chơi bắt đầu từ một vị trí xuất phát cố định trên bản đồ, lần lượt di chuyển theo các hướng và số bước đã giải mã. Vị trí cuối cùng chính là địa điểm cần tìm để tiếp tục tuyến truyện.
+Trên mái đình xưa, áng mây bạc lững lờ,
+Tiếng sáo ai đưa theo ngọn gió bơ vơ.
+Dòng sông in bóng trăng, nước trôi về bến cũ,
+Trong đêm tàn, ánh lửa vẫn âm thầm chờ.
+Hiên nhà vắng, tiếng gió luồn qua khe cửa,
+Rêu phủ mái ngói, mây trắng khuất lưng đồi.
+Khi canh khuya buông xuống, vạn vật chìm trong tĩnh lặng,
+Cá chép ngước nhìn trăng, bóng nguyệt tròn in đáy nước.
+
+
+Thứ tự
+	Từ khóa được nhắc đến
+	Hướng di chuyển
+	1
+	Mây
+	Bắc ↑
+	2
+	Gió
+	Đông →
+	3
+	Nước
+	Tây ←
+	4
+	Lửa
+	Nam ↓
+	5
+	Gió
+	Đông →
+	6
+	Mây
+	Bắc ↑
+	Chuỗi di chuyển: Bắc → Đông → Tây → Nam → Đông → Bắc.

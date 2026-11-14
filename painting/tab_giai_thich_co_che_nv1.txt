@@ -1,0 +1,109 @@
+﻿1. tranh Ngũ Hổ:
+1. Thanh Hổ (màu xanh). vị trí: Đông Nam. 
+2. Xích Hổ (màu đỏ). vị trí: Tây Nam
+3. Bạch Hổ (màu trắng). vị trí: Tây Bắc
+4. Hắc Hổ (màu đen). vị trí: Đông Bắc
+5. Hoàng Hổ (màu vàng). vị trí: Trung tâm bản đồ
+
+
+2. Bộ đạo cụ cần thu thập
+Có một điểm quan trọng về tính chính xác lịch sử: tranh Hàng Trống sử dụng kỹ thuật nửa in, nửa vẽ. Nghệ nhân thường in đường nét chính bằng một bản khắc gỗ và mực đen, sau đó mới tô màu thủ công bằng bút lông. 
+
+
+01. Ván khắc gỗ – The Printing Block
+Đạo cụ cốt lõi
+Bản khắc chứa đường nét của bức tranh. Đây cũng có thể là nơi cất giấu bài thơ dưới dạng những đường nét được khắc bí mật.
+
+
+02. Mực Tàu – The Ink
+Mực đen dùng để in đường nét từ bản khắc lên giấy. Có thể thiết kế một câu đố liên quan đến việc nhận diện loại mực hoặc tìm hộp mực thất lạc.
+
+
+03. Giấy dó – The Paper
+Vật liệu để in tranh. Người chơi cần tìm đúng loại giấy và kích thước phù hợp với bản khắc.
+
+
+04. Bút lông – The Brush
+Dùng trong công đoạn tô màu thủ công sau khi in nét. Đây là một trong những dụng cụ thể hiện rõ nét đặc trưng của tranh Hàng Trống.
+
+
+05. Phẩm màu – The Pigments
+Nguyên liệu phục vụ công đoạn tô màu và vờn màu. Có thể sử dụng để tạo một puzzle liên quan đến việc nhận diện và phối hợp màu sắc.
+
+
+3. Địa điểm nhận hint
+Địa điểm                        Puzzle chính                                Không khí
+Xưởng tranh Hàng Trống        Quan sát, đối chiếu hình ảnh                Nghệ thuật
+Đình Đông Hương                Giải mã biểu tượng, kiến trúc                Tâm linh
+Hiệu tơ lụa Hàng Gai                Ghép hoa văn, tìm thông điệp                Thương mại
+Đình Xuân Phiến Thị                Sắp xếp, giải mã hình ảnh                        Nghề thủ công
+Hiệu phục sức Mã Vĩ                Nhận diện nhân vật, trang phục                Sân khấu
+
+
+
+
+4. Phân bổ 10 địa điểm trên bản đồ
+STT        Địa điểm                        Vai trò trên bản đồ
+1        Xưởng tranh Hàng Trống        Có hint
+2        Đình Đông Hương                Có hint
+3        Đình Nam Hương                Đánh lạc hướng
+4        Hiệu tơ lụa Hàng Gai                Có hint
+5        Đình Xuân Phiến Thị                Có hint
+6        Đình Hà Vĩ                        Đánh lạc hướng
+7        Hiệu quạt Hàng Quạt                Đánh lạc hướng
+8        Hiệu đồ sơn Hàng Hòm                Đánh lạc hướng
+9        Hiệu phục sức Mã Vĩ                Có hint
+10        Quán trà                        Đánh lạc hướng
+
+
+
+
+Con hổ
+	Ngũ hành
+	Địa điểm tương ứng
+	Cơ sở liên kết
+	Thanh Hổ (xanh)
+	Mộc
+	Đình Xuân Phiến Thị - giấy dó
+	Mộc gợi liên tưởng đến tre, gỗ và nghề làm quạt truyền thống.
+	Xích Hổ (đỏ)
+	Hỏa
+	Hiệu phục sức Mã Vĩ - mực tàu
+	Hỏa tượng trưng cho ánh sáng, sự sôi động và sân khấu tuồng, chèo.
+	Bạch Hổ (trắng)
+	Kim
+	Xưởng tranh Hàng Trống - ván khắc gỗ
+	Kim gợi liên tưởng đến dụng cụ và công đoạn chế tác, khắc ván in.
+	Hắc Hổ (đen)
+	Thủy
+	Hiệu tơ lụa Hàng Gai - phẩm màu
+	Thủy gợi sự mềm mại, uyển chuyển, tương đồng với những dải lụa.
+	Hoàng Hổ (vàng)
+	Thổ
+	Đình Đông Hương - bút lông
+	Thổ tượng trưng cho đất, sự ổn định và không gian tín ngưỡng cộng đồng.
+	5. Cách cài hint vào bức tranh Ngũ Hổ
+Để người chơi không được chỉ dẫn trực tiếp, mỗi con hổ có thể mang một chi tiết bất thường liên quan đến địa điểm tương ứng.
+Con hổ
+	Chi tiết ẩn trong tranh
+	Cách người chơi suy luận
+	Thanh Hổ
+	Một chiếc quạt nhỏ hoặc họa tiết nan quạt
+	Liên tưởng đến nghề làm quạt tại Hàng Quạt.
+	Xích Hổ
+	Họa tiết mặt nạ hoặc một dải phục trang
+	Liên tưởng đến trang phục biểu diễn tại Mã Vĩ.
+	Bạch Hổ
+	Hình ảnh dao khắc hoặc những đường nét giống vân gỗ
+	Liên tưởng đến xưởng tranh và kỹ thuật khắc ván.
+	Hắc Hổ
+	Một dải hoa văn mềm mại như dòng nước
+	Liên tưởng đến hiệu tơ lụa Hàng Gai.
+	Hoàng Hổ
+	Họa tiết mái đình, nền đất hoặc hình ảnh kiến trúc cổ
+	Liên tưởng đến đình Đông Hương.
+	3. Cách triển khai trong game
+1. Quan sát tranh Ngũ Hổ: Người chơi phát hiện 5 chi tiết bất thường trên bức tranh.
+2. Giải mã biểu tượng: Đối chiếu màu sắc, ngũ hành và các chi tiết ẩn để xác định 5 địa điểm.
+3. Đối chiếu bản đồ: Người chơi lựa chọn 5 trong số 10 địa điểm được đánh dấu.
+4. Khám phá địa điểm: Mỗi địa điểm có một puzzle riêng, sau khi hoàn thành sẽ nhận được một vật liệu hoặc dụng cụ làm tranh.

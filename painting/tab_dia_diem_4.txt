@@ -1,0 +1,24 @@
+﻿HIỆU TƠ LỤA HÀNG GAI
+DẤU VẾT TRÊN LỤA
+
+
+Hắc Hổ - Thủy | Vật phẩm: Phẩm màu
+Phân cảnh 1: Cửa hiệu tơ lụa
+Tôi bước vào một cửa hiệu nằm khuất giữa con phố. Bên trong, những cuộn lụa được xếp thành từng chồng, từ đỏ thẫm, xanh ngọc đến vàng nhạt. Ánh sáng xuyên qua khung cửa sổ, chiếu lên những thớ vải tạo thành các sắc độ khác nhau.
+Cửa hiệu im lìm. Không có ai bên trong, chỉ có tiếng gió nhẹ luồn qua khe cửa và tiếng những cuộn lụa khẽ va vào nhau.
+Trên chiếc bàn gỗ giữa phòng là một cuốn sổ ghi chép đã ngả màu, bên cạnh có vài hộp màu mở nắp. Một số tấm lụa có hoa văn gần như giống hệt nhau, nhưng màu sắc lại hoàn toàn khác biệt.
+Tôi mở cuốn sổ. Những trang đầu ghi lại các công thức pha màu, nhưng một vài dòng đã bị nhòe, chỉ còn sót lại những ký hiệu khó hiểu.
+Phân cảnh 2: NHIỆM VỤ
+Tương tác:
+* Quan sát mẫu hoa văn và màu sắc trên tấm lụa có sẵn.
+* Kiểm tra ba hộp phẩm màu cơ bản được đặt trên bàn.
+* Pha trộn ba màu cơ bản để tạo ra những màu sắc cần thiết theo mẫu.
+* Sử dụng màu đã pha để tô lên tấm vải trắng, tái hiện chính xác hoa văn và bảng màu ban đầu.
+Nội dung nhiệm vụ:
+Người chơi được cung cấp một tấm vải trắng có in sẵn đường viền hoa văn và một mẫu lụa hoàn chỉnh để đối chiếu màu. Nhiệm vụ là pha đúng màu từ ba màu cơ bản, sau đó tô vào các vùng tương ứng trên vải trắng. Khi hoàn thành và màu sắc trùng khớp với mẫu, một ngăn bí mật sẽ được mở ra, để lộ vật phẩm Phẩ
+Sau khi hoàn thành việc sắp xếp và pha thử các màu theo ghi chép, tôi nhận thấy một tấm lụa ở cuối bàn khẽ trượt xuống, để lộ một ngăn kéo nhỏ bên dưới.
+Tôi mở ngăn kéo. Bên trong là một mảnh giấy cũ có hình vẽ chiếc bút lông. (hint cho địa điểm 5)
+Phân cảnh 3: Nhận phẩm màu
+Ở góc bàn, một chiếc hộp gỗ nhỏ bất ngờ bật mở. Bên trong là những gói phẩm màu được bọc cẩn thận, mỗi gói đều có một ký hiệu tương ứng với các màu sắc tôi vừa tìm được.
+Tôi thu thập chúng rồi nhìn lại mảnh giấy có hình chiếc bút lông. Có vẻ như manh mối tiếp theo đang nằm ở một nơi khác.
+THU THẬP THÀNH CÔNG. Vật phẩm #4: Phẩm màu
