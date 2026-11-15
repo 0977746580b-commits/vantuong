@@ -21,7 +21,7 @@
     .ornate-title-back {
       font-family: 'Cinzel Decorative', 'Cinzel', 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.10em;
       fill: #2A0905;
       stroke: #120402;
       stroke-width: 8px;
@@ -29,7 +29,7 @@
     .ornate-title-gold {
       font-family: 'Cinzel Decorative', 'Cinzel', 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.10em;
       fill: url(#goldRoyalGrad);
       stroke: #FFEFA3;
       stroke-width: 1.6px;
@@ -53,9 +53,9 @@
     <circle cx="120" cy="0" r="2.5" fill="url(#goldRoyalGrad)" />
   </g>
 
-  <!-- Main Grand Title: VẠN TƯỢNG (Layered for depth & sharp readability) -->
-  <text x="550" y="148" text-anchor="middle" font-size="98" class="ornate-title-back">VẠN TƯỢNG</text>
-  <text x="550" y="148" text-anchor="middle" font-size="98" class="ornate-title-gold">VẠN TƯỢNG</text>
+  <!-- Main Grand Title: VẠN CỔ HOÀI THANH (Layered for depth & sharp readability) -->
+  <text x="550" y="148" text-anchor="middle" font-size="62" class="ornate-title-back">VẠN CỔ HOÀI THANH</text>
+  <text x="550" y="148" text-anchor="middle" font-size="62" class="ornate-title-gold">VẠN CỔ HOÀI THANH</text>
 
   <!-- Calligraphic Underline Flourish with Lotus Motif -->
   <path d="M 160 182 Q 340 190 550 178 Q 760 190 940 182 Q 780 200 550 190 Q 320 200 160 182 Z" fill="url(#goldRoyalGrad)" opacity="0.95" filter="url(#goldEmbossHeavy)" />
