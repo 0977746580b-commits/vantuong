@@ -539,12 +539,13 @@
     }
     .vt-brand-name {
       font-family: var(--font-ornamental);
-      font-size: 1.35rem;
+      font-size: clamp(0.82rem, 1.15vw, 1.05rem);
       font-weight: 800;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.10em;
       color: #FFFDF5;
       text-transform: uppercase;
       line-height: 1.1;
+      white-space: nowrap;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     }
     .vt-brand-sub {
@@ -1549,7 +1550,7 @@
     @media (max-width: 600px) {
       .vt-nav-editorial { height: 60px; padding: 0 1rem; }
       .vt-brand-seal { width: 36px; height: 36px; font-size: 1.2rem; }
-      .vt-brand-name { font-size: 1.05rem; }
+      .vt-brand-name { font-size: 0.82rem; letter-spacing: 0.06em; }
       .vt-brand-sub { display: none; }
       .vt-btn-nav-museum { padding: 0.4rem 0.85rem; font-size: 0.8rem; }
       .sec-hero-badge { font-size: 0.62rem; padding: 0.45rem 0.9rem; letter-spacing: 0.12em; max-width: 90vw; }
